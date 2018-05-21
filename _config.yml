@@ -5,7 +5,7 @@ description: 旧时白鹿塘前月，飞入寻常百姓家。
 email: of19950402@gmail.com
 url: "https://pw1316.github.io"
 google_analytics:
-theme: jekyll-theme-midnight
+# theme: jekyll-theme-midnight
 
 # Sidebar settings
 sidebar: true
