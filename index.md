@@ -1,10 +1,4 @@
-# Joker Yough's Page
-
-## PSN: pw__1316
-
-## Steam ID: pw_1316
-
-<h2>{{ page.title }}</h2>
+<h1>{{ page.title }}</h1>
 <p>最新文章</p>
 <ul>
     {% for post in site.posts %}
