@@ -1,3 +1,7 @@
+---
+layout default
+---
+
 <h1>{{ page.title }}</h1>
 <p>最新文章</p>
 <ul>
