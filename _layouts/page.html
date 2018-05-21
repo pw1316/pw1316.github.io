@@ -25,21 +25,29 @@ layout: default
 
 <div class="inner mt20">
 <div class="main">
-{{ content }}
+    <div class="box">
+        <div class="pd10">
+            <h1>{{ page.title }}</h1>
+            <div class="meta"><span>{{ page.date | date_to_string }}</span></div>
+        </div>
+        <div class="content pd10">
+            {{ content }}
+        </div>
+    </div>
 </div>
 <div class="side">
-{% if site.sidebar-about-description %}
-<p class="hd3">{{site.sidebar-about-description}}</p>
-{% endif %}
-<!-- SNS Link -->
-<ul class="darklist pd10">
-{% if site.github_username %}
-<li><a target="_blank" href="https://github.com/{{ site.github_username }}">@github</a></li>
-{% endif %}
-</ul>
-{% if site.email %}
-<p class="hd3">{{site.email}}</p>
-{% endif %}
+    {% if site.sidebar-about-description %}
+    <p class="hd3">{{site.sidebar-about-description}}</p>
+    {% endif %}
+    <!-- SNS Link -->
+    <ul class="darklist pd10">
+    {% if site.github_username %}
+    <li><a target="_blank" href="https://github.com/{{ site.github_username }}">@github</a></li>
+    {% endif %}
+    </ul>
+    {% if site.email %}
+    <p class="hd3">{{site.email}}</p>
+    {% endif %}
 </div>
 </div>
 
