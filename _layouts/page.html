@@ -1,0 +1,51 @@
+---
+layout: default
+---
+
+<div class="header">
+<div class="inner">
+<a href="{{ site.baseurl }}" class="logo"></a>
+<ul id="pcmenu" class="ml64">
+<li><a href="{{ site.baseurl }}">header 1</a></li>
+<li><a href="{{ site.baseurl }}">header 2</a></li>
+<li><a href="{{ site.baseurl }}">header 3</a></li>
+</ul>
+</div>
+</div>
+
+{% if page.showbar != false %}
+<div class="showbar">
+<div class="inner">
+<a href="{{ site.baseurl }}">showbar 1</a>
+<a href="{{ site.baseurl }}">showbar 2</a>
+<a href="{{ site.baseurl }}">showbar 3</a>
+</div>
+</div>
+{% endif %}
+
+<div class="inner mt20">
+<div class="main">
+{{ content }}
+</div>
+<div class="side">
+{% if site.sidebar-about-description %}
+<p class="hd3">{{site.sidebar-about-description}}</p>
+{% endif %}
+<!-- SNS Link -->
+<ul class="darklist pd10">
+{% if site.github_username %}
+<li><a target="_blank" href="https://github.com/{{ site.github_username }}">@github</a></li>
+{% endif %}
+</ul>
+{% if site.email %}
+<p class="hd3">{{site.email}}</p>
+{% endif %}
+</div>
+</div>
+
+<div class="footer">
+<div class="inner">
+<label class="footinfo">Someone@<a href="https://github.com/pw1316">Me</a></label>
+<label class="footinfo">CopyRight(C) Joker Yough 2016-2018</label>
+</div>
+</div>
