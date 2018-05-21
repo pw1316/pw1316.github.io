@@ -28,7 +28,9 @@ layout: default
     <div class="box">
         <div class="pd10">
             <h1>{{ page.title }}</h1>
+            {% if page.date %}
             <div class="meta"><span>{{ page.date | date_to_string }}</span></div>
+            {% endif %}
         </div>
         <div class="content pd10">
             {{ content }}
