@@ -4,6 +4,14 @@
 
 ## Steam ID: pw_1316
 
+<h2>{{ page.title }}</h2>
+<p>最新文章</p>
+<ul>
+    {% for post in site.posts %}
+    <li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+    {% endfor %}
+</ul>
+
 ![My Trophy Card](http://psnine.com/card/pw__1316)
 
 | Trophies |
