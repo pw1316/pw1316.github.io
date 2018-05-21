@@ -4,6 +4,7 @@ SEOTitle: pw1316's coding life
 description: 旧时白鹿塘前月，飞入寻常百姓家。
 email: of19950402@gmail.com
 url: "https://pw1316.github.io"
+baseurl: ""
 google_analytics:
 # theme: jekyll-theme-midnight
 
