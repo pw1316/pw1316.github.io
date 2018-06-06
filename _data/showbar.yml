@@ -1,12 +1,12 @@
 # data that will show in the showbar in the main page
-- href: "{{ site.baseurl }}/psn-games/F1_2015.html"
+- href: /psn-games/F1_2015.html
   image: https://trophy01.np.community.playstation.net/trophy/np/NPWR06391_00_006A031FF1C8ED6335BE6A070F2D73F82ED40729DF/ECD9926A48B4D472ECF085806D35133DDFFDC8B7.PNG
   alt: F1 2015
 
-- href: "{{ site.baseurl }}/psn-games/F1_2016.html"
+- href: /psn-games/F1_2016.html
   image: https://trophy01.np.community.playstation.net/trophy/np/NPWR10618_00_0071F10F68FAC615A1B27D560BD998BD7F62915967/9A72EDDD564F74C63F4A81B12FAB97CEFFD17EA4.PNG
   alt: F1 2016
 
-- href: "{{ site.baseurl }}/psn-games/Furi.html"
+- href: /psn-games/Furi.html
   image: https://trophy01.np.community.playstation.net/trophy/np/NPWR10401_00_007C20195387A84D936B919235F2B34A3858E78229/43310068E849108477C4CC23450D859C15396CA7.PNG
   alt: Furi
