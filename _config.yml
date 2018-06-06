@@ -15,5 +15,6 @@ sidebar-about-description: "只有风暴才能击倒大树"
 # SNS settings
 github_username: pw1316
 
-# gems:
-#  - jekyll-mentions
+collections: 
+  cv:
+    output: true

@@ -41,3 +41,5 @@ div.to_top div.stick {
     -moz-border-radius: 1px;
     border-radius: 1px;
 }
+
+.header .pwlogo {display:block; background:url('/src/icon.png') no-repeat center; width:60px; height:58px; overflow:hidden; float:left;}

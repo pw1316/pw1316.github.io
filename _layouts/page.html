@@ -4,21 +4,22 @@ layout: default
 
 <div class="header">
 <div class="inner">
-<a href="{{ site.baseurl }}/" class="logo"></a>
+<a href="{{ site.baseurl }}/" class="pwlogo"></a>
 <ul id="pcmenu" class="ml64">
-<li><a href="{{ site.baseurl }}/">header 1</a></li>
-<li><a href="{{ site.baseurl }}/">header 2</a></li>
-<li><a href="{{ site.baseurl }}/">header 3</a></li>
+{% for cv in site.cv %}
+<li><a href="{{ cv.url }}">{{ cv.title }}</a></li>
+{% endfor %}
 </ul>
 </div>
 </div>
 
+<!-- Read showbar data -->
 {% if page.showbar != false %}
 <div class="showbar">
 <div class="inner">
-<a href="{{ site.baseurl }}/">showbar 1</a>
-<a href="{{ site.baseurl }}/">showbar 2</a>
-<a href="{{ site.baseurl }}/">showbar 3</a>
+{% for item in site.data.showbar %}
+<a href="{{ item.href }}"><img src="{{ item.image }}" alt="{{ item.alt }}"></a>
+{% endfor %}
 </div>
 </div>
 {% endif %}
