@@ -6,6 +6,34 @@ showbar: false
 
 ## 题外话
 
-C++11一万年前引入了*final*关键字，因此这已经是一个过期得不能再过期得内容了，但是还是记一笔，毕竟曾经也是个骚操作。
+虽然C++11早就引入了*final*关键字，但是还是记一笔，毕竟曾经也是个骚操作。
 
-## 摸了（暂时）
+## 结果
+
+```c++
+template<class T>
+class Base
+{
+    friend T;
+private:
+    Base() = default;
+    ~Base() = default;
+};
+
+class FinalClass : public virtual Base<FinalClass>
+{
+public:
+    FinalClass() = default;
+    ~FinalClass() = default;
+};
+
+/* Will not compile */
+// class Derived : public FinalClass
+// {
+// public:
+//     Derived() = default;
+//     ~Derived() = default;
+// };
+```
+
+## 解释（又摸了）
