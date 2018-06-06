@@ -11,7 +11,7 @@ wallpaperFile.write(b'    <link rel="stylesheet" type="text/css" href="/styleshe
 wallpaperFile.write(b'    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">\n')
 wallpaperFile.write(b'    <link rel="stylesheet" type="text/css" href="/stylesheets/stylesheet.css" media="screen">\n')
 wallpaperFile.write(b'    <link rel="stylesheet" type="text/css" href="/stylesheets/github-light.css" media="screen">\n')
-wallpaperFile.write(b'    <link rel="Shortcut Icon" href="/src/icon.png">\n')
+wallpaperFile.write(b'    <link rel="Shortcut Icon" href="/src/keyaki.png">\n')
 wallpaperFile.write(b'  </head>\n')
 wallpaperFile.write(b'  <body>\n')
 wallpaperFile.write(b'    <section class="page-header">\n')

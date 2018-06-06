@@ -74,7 +74,7 @@ def decorate_output_file(output_file_name, title, table_res):
     output_file.write('    <link rel="stylesheet" href="/stylesheets/p9/p9layer.css" ')
     output_file.write('id="layui_layer_p9layercss">\n')
     output_file.write('    <link rel="stylesheet" href="/stylesheets/pw-custom.css">\n')
-    output_file.write('    <link rel="Shortcut Icon" href="/src/icon.png">\n')
+    output_file.write('    <link rel="Shortcut Icon" href="/src/keyaki.png">\n')
     output_file.write('  </head>\n')
     output_file.write('  <body style="background-color:#4E5566">\n')
     output_file.write('    <div class="box main inner mt40">\n')

@@ -42,4 +42,4 @@ div.to_top div.stick {
     border-radius: 1px;
 }
 
-.header .pwlogo {display:block; background:url('/src/icon.png') no-repeat center; width:60px; height:58px; overflow:hidden; float:left;}
+.header .pwlogo {display:block; background:url('/src/keyaki.png') no-repeat center;background-size: 40px, 40px; width:60px; height:58px; overflow:hidden; float:left;}

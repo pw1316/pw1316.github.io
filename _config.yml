@@ -1,19 +1,14 @@
 # Site settings
 title: Joker Yough
 SEOTitle: pw1316's coding life
-description: 旧时白鹿塘前月，飞入寻常百姓家。
+description: 旧时白鹿塘前月，飞入寻常百姓家
 email: of19950402@gmail.com
 url: "https://pw1316.github.io"
 baseurl: ""
-google_analytics:
-# theme: jekyll-theme-midnight
 
 # Sidebar settings
 sidebar: true
-sidebar-about-description: "只有风暴才能击倒大树"
-
-# SNS settings
-github_username: pw1316
+sidebar-about-description: 只有风暴才能击倒大树
 
 collections: 
   cv:
