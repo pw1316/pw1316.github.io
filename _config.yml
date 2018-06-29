@@ -9,7 +9,3 @@ baseurl: ""
 # Sidebar settings
 sidebar: true
 sidebar-about-description: 只有风暴才能击倒大树
-
-collections: 
-  cv:
-    output: true
