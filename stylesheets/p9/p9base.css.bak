@@ -1,20 +1,18 @@
 @charset "utf-8";
 
-body,div,dl,ul,code,p,button,input,textarea	{margin:0; padding:0; list-style:none;}
-li	{margin:0; padding:0;}
+body,div,dl,ul,li,code,p,button,input,textarea	{margin:0; padding:0; list-style:none;}
 body	{font-size:14px; background-color:#E5E9EF; font-family:"Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
 	/***background-image:linear-gradient(to bottom,#0E6ECF 0%,#208CD7 27%,#5CCCE8 60%,#E7FDFD 100%);
 	background-attachment:fixed;***/
 }
 body.bg		{background:radial-gradient(at center,#F2F3F9,#89A7BF); background-size:cover; background-attachment:fixed; height:100%; background-position:left center;}
 img			{border:none; vertical-align:middle;}
-code		{background:#EEF0F4; color:#58544B; font-family: 'Courier New', Courier, monospace;}/* 对应md语法`code` */
-pre code	{display:block;}/* 对应md语法```code``` */
+code		{background:#1D2031; color:#FFF; padding:8px; display:block;}
 a			{text-decoration:none; color:#3498db;}
 a:hover		{text-decoration:underline; color:#333;}
-em			{font-size:12px; font-style:normal; color:#CB1B45; font-family: 'Courier New', Courier, monospace;}
+em			{font-size:12px; font-style:normal; color:#B8C4CE;}
 small		{font-size:10px; color:#AAA;}
-strong		{color:#000; font-weight: bold;}
+strong		{color:#000; font-weight:normal;}
 p			{padding-bottom:10px;}
 hr			{width:38%; height:1px; margin:20px auto; border:0; background-color:#e4e7ed;}
 label		{color:#9ba3af; margin-bottom:5px; display:block; line-height:180%;}
