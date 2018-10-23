@@ -126,12 +126,12 @@ def getImagesGen(start = 1, end = 0, pageIndex = 1, pageIndexMax = None):
                 file.close()
                 doc = re.sub(imgPattern, b"", doc, 1)
         
-        # 当前页成功爬完，生成器返回一条信息
+        # Yield a message when one iteration done
         s = "page {0} {1}/{2}({4}) | next page {3}"
         s = s.format(pageNumber, pageIndex, pageIndexMax, pageNumberNext, subNumber)
         yield s
 
-        # 下一轮迭代
+        # Next iteration
         pageIndex = pageIndex + 1
         if pageIndex > pageIndexMax:
             pageIndex = 1
