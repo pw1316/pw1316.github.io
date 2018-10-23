@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 body,div,dl,ul,code,p,button,input,textarea	{margin:0; padding:0; list-style:none;}
-li	{margin:0; padding:0;}
+li	{margin:0; padding:0;margin-left: 1em;}
 body	{font-size:14px; background-color:#E5E9EF; font-family:"Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
 	/***background-image:linear-gradient(to bottom,#0E6ECF 0%,#208CD7 27%,#5CCCE8 60%,#E7FDFD 100%);
 	background-attachment:fixed;***/
@@ -74,9 +74,9 @@ blockquote	{color:#58544B; background-color:#EBDFC6; padding:6px 10px; border-le
 .thumb		{height:124px; margin-bottom:10px; overflow:hidden;}
 .thumb img	{float:left; width:120px; height:120px; margin-right:10px; background-color:#333; border:2px solid #EFF3F5;}
 .thumb img.videocover	{width:213px;}
-.content	{line-height:180%; overflow:hidden;}
+.content	{line-height:1.8em; overflow:hidden;}
 .content img	{max-width:100%;}
-.repcontent		{line-height:180%; overflow:hidden; color:#333;}
+.repcontent		{line-height:1.8em; overflow:hidden; color:#333;}
 .repcontent img	{max-width:100%;}
 .post	{padding:12px; border-bottom:1px solid #EEE; word-break:break-all;}
 .psngame	{width:100px; padding:10px;}
