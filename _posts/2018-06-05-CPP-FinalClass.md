@@ -1,6 +1,8 @@
 ---
 layout: page
 title: c++定义不可被继承的类
+date: 2018-06-05 21:01:09 +0800
+mdate: 2018-10-23 20:50:57 +0800
 showbar: false
 ---
 

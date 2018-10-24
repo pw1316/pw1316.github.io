@@ -1,6 +1,8 @@
 ---
 layout: page
-title: Git作弊码
+title: Git Cheate Sheet
+date: 2018-10-23 11:35:53 +0800
+mdate: 2018-10-24 15:28:00 +0800
 showbar: false
 ---
 
@@ -229,7 +231,7 @@ http://rogerdudler.github.io/git-guide/
 http://www.git-scm.org/
 ```
 
-### CLEAR HISTORY
+### 清除提交历史
 
 本地删除
 
@@ -237,9 +239,9 @@ http://www.git-scm.org/
 
 提交到远端
 
-> $ git push origin --force --all
+> $ git push &lt;origin&gt; --force --all
 
-GC
+垃圾回收
 
 > $ git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin\\
 > $ git reflog expire --expire=now --all\\
