@@ -3,9 +3,10 @@
 # issues:
 # 57773/40 not exists
 # 57773/41 need manual download
+# 150343/41 not exists
 
 pageHeadHint = "1"
-pageTailHint = "80000"
+pageTailHint = "200000"
 
 import os
 import re
