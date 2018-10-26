@@ -16,7 +16,7 @@ layout: default
 <div class="showbar">
 <div class="inner">
 {% for item in site.data.showbar %}
-<a href="{{ site.baseurl }}{{ item.href }}"><img src="{{ item.image }}" alt="{{ item.alt }}"></a>
+<a href="{{ site.baseurl }}{{ item.href }}"><img src="{{ item.image }}" alt="{{ item.alt }}" title="{{ item.alt }}"></a>
 {% endfor %}
 </div>
 </div>
