@@ -15,8 +15,10 @@ layout: default
 {% if page.showbar != false %}
 <div class="showbar">
 <div class="inner">
-{% for item in site.data.showbar %}
-<a href="{{ site.baseurl }}{{ item.href }}"><img src="{{ item.image }}" alt="{{ item.alt }}" title="{{ item.alt }}"></a>
+{% for item in site.psn-games %}
+{% unless item.hide %}
+<a href="{{ site.baseurl }}{{ item.url }}"><img src="{{ item.image }}" alt="{{ item.alt }}" title="{{ item.alt }}"></a>
+{% endunless %}
 {% endfor %}
 </div>
 </div>

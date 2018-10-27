@@ -13,3 +13,7 @@ sidebar-about-description: 只有风暴才能击倒大树
 exclude:
 - docs/*
 - paper/*
+
+collections:
+    psn-games:
+        output: true

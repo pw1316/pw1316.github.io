@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
-    {% include head.html %}
-    <body class="bg">
-        {{ content }}
-    </body>
+{% include head.html %}
+<body class="bg">
+<div class="to_top" onclick="$('html, body').animate({ scrollTop: 0 }, 'slow');"><div class="arrow"></div><div class="stick"></div></div>
+{{ content }}
+</body>
 </html>

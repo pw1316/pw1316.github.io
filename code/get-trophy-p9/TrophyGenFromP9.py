@@ -51,7 +51,7 @@ def decorate_input_url(input_url):
 
 
 def decorate_output_file(output_file_name, title, table_res):
-    """Change gameId to actual URL
+    """Write output html file
 
     Args:
         output_file_name (str): The file name to write
@@ -59,7 +59,6 @@ def decorate_output_file(output_file_name, title, table_res):
         table_res (bytes): The trophy table
 
     Returns:
-        str: The actual URL of the game in P9
     """
 
     assert isinstance(output_file_name, str)
@@ -86,6 +85,22 @@ def decorate_output_file(output_file_name, title, table_res):
     output_file.write(b"</html>\n")
     output_file.close()
 
+
+def decorate_json_output_file(output_file_name, title, table_res):
+    """Write output json file
+
+    Args:
+        output_file_name (str): The file name to write
+        title (bytes): The title of the HTML doc
+        table_res (bytes): The trophy table
+
+    Returns:
+    """
+    
+    assert isinstance(output_file_name, str)
+    assert isinstance(title, bytes)
+    assert isinstance(table_res, bytes)
+    pass
 
 def delete_white_space(doc):
     """Delete white spaces between tags in a HTML doc
@@ -257,6 +272,7 @@ def main():
     for i in remote_type_list:
         output_name = output_name + "-" + i.decode("UTF-8")
     decorate_output_file(output_name + ".html", name, table_res)
+    decorate_json_output_file(output_name + ".json", name, table_res)
     print(args[1] + "...done Types: " + str(remote_type_list) + " Name: " + name.decode("UTF-8"))
     return True
 

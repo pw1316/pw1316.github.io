@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "type": "text-platinum",
+        "name": "黑暗靈魂",
+        "desc": "獲得所有獎盃"
+    },
+    {
+        "id": 2,
+        "type": "text-gold",
+        "name": "初始之火的继承者",
+        "desc": "达成'初始之火的继承者'结局"
+    },
+    {
+        "id": 3,
+        "type": "text-gold",
+        "name": "传火终结",
+        "desc": "达成\"传火终结\"结局"
+    }
+]
