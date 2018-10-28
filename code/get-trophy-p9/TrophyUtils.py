@@ -166,6 +166,6 @@ def parse(table_filter, output_writer):
     output_name = args[1] + "-" + name.decode("UTF-8")
     for i in remote_type_list:
         output_name = output_name + "-" + i.decode("UTF-8")
-    output_writer(output_name, name, table_res)
+    output_writer("Trophies", name, table_res)
     print(args[1] + "...done Types: " + str(remote_type_list) + " Name: " + name.decode("UTF-8"))
     return True

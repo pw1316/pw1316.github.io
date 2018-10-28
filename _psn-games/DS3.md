@@ -1,12 +1,12 @@
 ---
 layout: trophy
 title: "Dark Souls 3 wiki"
-image: https://trophy01.np.community.playstation.net/trophy/np/NPWR07897_00_00B1B88693A993473272413EDB83CC197E895B34D1/E1FA01E8C2DBAAEC2AF046BDE73D6E35DAA36DBA.PNG
-alt: DS3
+image: http://wx1.sinaimg.cn/thumb150/bfae17b6ly1ffyzgsk4czj20sg0sgx6p
+alt: "Dark Souls 3 wiki"
 ---
 
-<tr><td colspan="4"><p>{{ site.data.DarkSouls3.Trophies.name }}</p></td></tr>
+<tr><td colspan="4"><p>{{ site.data.DS3.Trophies.name }}</p></td></tr>
 
-{% for item in site.data.DarkSouls3.Trophies.trophy %}
+{% for item in site.data.DS3.Trophies.trophy %}
 {% include trophy_item.html %}
 {% endfor %}

@@ -51,12 +51,12 @@ def table_filter(table):
 
         match_res = re.search(br'<a.*?class[ ]*?=[ ]*?"(.+?)">(.*?)</a>', trophy_tr, re.S)
         trophy_type = match_res.group(1)
-        trophy_name = match_res.group(2)
+        trophy_name = match_res.group(2).replace(b"\"", b"'")
 
         trophy_tr = trophy_tr[:match_res.start()] + trophy_tr[match_res.end():]
         trophy_tr = re.sub(br"<p>.*?</p>", b"", trophy_tr, 1)
 
-        trophy_desc = re.search(br'<em class="text-gray">(.*?)</em>', trophy_tr, re.S).group(1)
+        trophy_desc = re.search(br'<em class="text-gray">(.*?)</em>', trophy_tr, re.S).group(1).replace(b"\"", b"'")
 
         table_res += b'{"id":%d,"type":"%s","name":"%s","desc":"%s"},'\
                      % (trophy_id, trophy_type, trophy_name, trophy_desc)
