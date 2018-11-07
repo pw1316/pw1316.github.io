@@ -2,7 +2,7 @@
 layout: page
 title: Leet Code笔记
 date: 2018-10-11 20:36:30 +0800
-mdate: 2018-10-11 20:36:30 +0800
+mdate: 2018-11-08 02:01:28 +0800
 showbar: false
 ---
 
@@ -97,3 +97,55 @@ P[i]=Expand(P[i])
 `MaxL=max{L[i]}`
 
 `MaxN=sum{N[i]},L[i]=MaxL`
+
+## P28字符串匹配
+
+求字串在原字符串中的位置，KMP
+
+```
+int n = //原串长度;
+int m = //子串长度;
+vector<int> next_table(m, -1);// 转移表，初始-1
+
+for(int i = 1; i < m; ++i)
+{
+    int tmp = i - 1;// 前一个位置
+    while(tmp > -1)
+    {
+        tmp = next_table[tmp];// 前缀的末位索引，-1表示不存在，保持语义一致
+        if(needle[tmp + 1] == needle[i])
+        {
+            /* 找到i对应的前缀末位索引 */
+            next_table[i] = tmp + 1;
+            break;
+        }
+    }
+}
+
+int k = 0;
+for(int i = 0; i < n;)
+{
+    /* 一直匹配上 */
+    while(needle[k] == haystack[i + k] && k < m)
+    {
+        ++k;
+    }
+    /* 直到末尾 */
+    if(k == m)
+    {
+        return i;
+    }
+    /* 如果不是末尾，找跳转表 */
+    if(k > 0)
+    {
+        i += k;
+        k = next_table[k - 1] + 1;
+        i -= k;
+    }
+    else
+    {
+        i += 1;
+    }
+}
+return -1;
+```
