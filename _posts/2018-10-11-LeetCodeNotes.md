@@ -2,7 +2,7 @@
 layout: page
 title: Leet Code笔记
 date: 2018-10-11 20:36:30 +0800
-mdate: 2018-11-12 12:10:45 +0800
+mdate: 2018-11-26 20:32:31 +0800
 showbar: false
 ---
 
@@ -10,10 +10,14 @@ showbar: false
     - [邪道](#%E9%82%AA%E9%81%93)
     - [浮点转整数](#%E6%B5%AE%E7%82%B9%E8%BD%AC%E6%95%B4%E6%95%B0)
 - [P1 TwoSum](#p1-twosum)
-- [P3 最长不重复子串](#p3-%E6%9C%80%E9%95%BF%E4%B8%8D%E9%87%8D%E5%A4%8D%E5%AD%90%E4%B8%B2)
+- [P3 Longest Substring Without Repeating Characters](#p3-longest-substring-without-repeating-characters)
+- [P4 Median of Two Sorted Arrays](#p4-median-of-two-sorted-arrays)
 - [P5 最长回文子串](#p5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2)
+- [P11 Container With Most Water](#p11-container-with-most-water)
 - [P28 字符串匹配](#p28-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D)
 - [P41 First Missing Positive](#p41-first-missing-positive)
+- [P84 Largest Rectangle in Histogram](#p84-largest-rectangle-in-histogram)
+- [P85 Maximal Rectangle](#p85-maximal-rectangle)
 - [P494 求目标和](#p494-%E6%B1%82%E7%9B%AE%E6%A0%87%E5%92%8C)
 - [P673 最长上升子序列个数](#p673-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%E4%B8%AA%E6%95%B0)
 
@@ -53,15 +57,45 @@ for all A in Array:
     Add A to hash table
 ```
 
-## P3 最长不重复子串
+## P3 Longest Substring Without Repeating Characters
 
-用一个Map记录访问过的字符的最新位置（反正字符就这么点，直接开数组比各种Hash快）
+数组$$A$$记录每个字符上一次出现的位置
 
-记录当前不重复子串的起始位置`start`
+记录当前不重复子串的起始位置$$l$$
 
-顺序访问字符串的每个字符，先访问Map查找上次出现的位置，如果没有出现过或者出现在当前子串之前，说明从`start`开始到当前字符都是不重复的；否则该字符重复，其上次出现的位置的下一个字符作为新的`start`。
+```
+l = 0
+for all character C in s:
+    if A[C] >= l:
+        l = A[C] + 1
+    Calculate length start from index l and ends at character C
+    Update max length
+```
 
-时间复杂度`O(n)`
+时间复杂度$$O(n)$$
+
+## P4 Median of Two Sorted Arrays
+
+中位数：所有小于等于中位数的个数和大于等于中位数的个数相等
+
+数组$$A_N$$和$$B_M$$，在$$A$$中找到分割点$$i$$，在$$B$$中找到分割点$$j$$，将整个数组分为两个部分$$L$$和$$H$$：
+
+```
+AL = A[:i]
+AH = A[i:]
+BL = B[:j]
+BH = B[j:]
+L = AL + BL
+H = AH + BH
+```
+
+如果能找到这样的$$i$$，$$j$$使得$$L$$正好是小于中位数的那一半，而$$H$$正好是大于中位数的那一半，那么就可以找到中位数。
+
+分成两半$$i+j=N-i+M-j$$，得到$$j=0.5*(N+M)-i$$。由于两个数组本生是排好序的，所以满足中位数的条件有两个：$$A_{i-1}\le B_j$$以及$$A_i\ge B_{j-1}$$。
+
+如果条件一不满足，说明$$i_{real}\lt i$$；如果条件二不满足，说明$$i_{real}\gt i$$；两个条件不可能同时不满足。
+
+二分即可
 
 ## P5 最长回文子串
 
@@ -74,7 +108,7 @@ for all A in Array:
 ^#b#a#b#c#b#a#b#c#b#a#c#c#b#a#$
 ```
 
-记`P[i]`为以`i`为中心，最大的回文长度（距中心的长度）
+记$$P_i$$为以$$i$$为中心，最大的回文长度（距中心的长度）
 
 ```
 0123456789ABCDEF...
@@ -82,20 +116,48 @@ for all A in Array:
 P010301070109010...
 ```
 
-定义已知回文串中心`C`，以及其右端点`R`
+定义已知回文串中心$$C$$，以及其右端点$$R$$
 
-对于字符串上的每一个位置`i`，如果`i<R`说明该中心位于已知回文串的内部，那么根据对称性，`P[i]=P[2*C-i]`，例如当`C=11`，`i=13`时，`P[11]=P[9]=1`；但当`i=15`时，如果用相同的方法，`P[15]=P[7]=7`，就会发现`i`为中心的子串的右端点`15+7=22`超过了`C`为中心的子串的右端点`R=20`，而`R`右侧的情况是未知的，所以最右只能取到`R`，之后要逐项判断：
+对于字符串上的每一个位置$$i$$，如果$$i\lt R$$说明该中心位于已知回文串的内部，那么根据对称性，$$P_i=P_{2*C-i}$$，例如当$$C=11$$，$$i=13$$时，$$P_{11}=P_9=1$$；但当$$i=15$$时，如果用相同的方法，$$P_{15}=P_7=7$$，就会发现$$i$$为中心的子串的右端点$$15+7=22$$超过了$$C$$为中心的子串的右端点$$R=20$$，而$$R$$右侧的情况是未知的，所以最右只能取到$$R$$，之后要逐项判断：
 
 ```
 P[i]=max{min{P[2*C-i], R-i}, 0}
 P[i]=Expand(P[i])
 ```
 
-显然如果`i`本身就在`R`右侧那么就没有对称性可以参考，也必须逐项判断
+显然如果$$i$$本身就在$$R$$右侧那么就没有对称性可以参考，也必须逐项判断
 
-如果扩展结束后的回文串的右端点超过`R`，即`P[i]+i>R`，那么就把`i`作为新的中心，`P[i]+i`作为新的右端点
+如果扩展结束后的回文串的右端点超过$$R$$，即$$P_i+i\gt R$$，那么就把$$i$$作为新的中心，$$P_i+i$$作为新的右端点
 
-最后把`P`数组遍历一遍，找到值最大的，取值和其索引，索引恢复到原始串的索引，值恢复到原始串内的长度（一半）
+最后把$$P$$数组遍历一遍，找到值最大的，取值和其索引，索引恢复到原始串的索引，值恢复到原始串内的长度（一半）
+
+## P11 Container With Most Water
+
+用$$f_{i,j}$$表示左端$$i$$，右端$$j$$可以存多少，$$f_{i,j}=min(h_i,h_j)*(j-i+1)$$。
+
+理论上所有$$(i,j)$$组合都要算一遍但是由于高度是短板决定的，所以
+
+如果短板是$$i$$：
+
+$$
+\begin{align}
+f_{i,j}&\gt min(h_i, h_j)*(k-i+1)\\
+&\ge min(h_i, h_k)*(k-i+1)\\
+&=f_{i,k}
+\end{align}
+$$
+
+即所有以$$i$$为左端点，$$j$$左侧的点为右端点的就不用算了；短板是$$j$$时同理，$$i$$右侧的也不用算了
+
+```
+l = 0, r = n - 1
+while l < r:
+    Update max area
+    if i is shorter:
+        ++i
+    else:
+        --j
+```
 
 ## P28 字符串匹配
 
@@ -156,9 +218,9 @@ return -1;
 不缺的情况下$$A_i=i+1$$，所以只要把每个数放到其应该出现的位置。注意点：
 
 1. 跳过不该出现的数（非正整数，超过数组大小）
-1. 跳过已经在正确位置上的数
-1. 交换过来的数可能依然不在其正确位置上，所以要持续交换直到其应该被跳过
-1. 数组里的数可能重复，所以如果交换的两个数相等也要跳过，防止死循环
+2. 跳过已经在正确位置上的数
+3. 交换过来的数可能依然不在其正确位置上，所以要持续交换直到其应该被跳过
+4. 数组里的数可能重复，所以如果交换的两个数相等也要跳过，防止死循环
 
 ```
 for k, v in A:
@@ -168,6 +230,33 @@ for k, v in A:
     if v != k + 1:
         return k + 1
 ```
+
+## P84 Largest Rectangle in Histogram
+
+用$$f_i$$表示以$$i$$为最短两边扩展的最大面积，所以要在$$i$$左右各找到第一个比$$i$$短的。维护一个栈，顺序遍历每个长条：如果当前$$r$$比栈顶$$i$$长就直接压栈；如果当前比栈顶短：
+
+1. 弹栈得到$$i$$
+    - 新栈顶$$l$$必然是$$i$$左侧第一个比$$i$$短的，因为比$$i$$长的已经弹栈了
+    - 而当前$$r$$必然是$$i$$右侧第一个比$$i$$短的，遍历顺序就是从左往右的
+2. 用$$l$$和$$r$$可以计算$$f_i$$
+3. 挑选所有$$f_i$$里最大的为最终结果
+
+## P85 Maximal Rectangle
+
+逐行做，$$f_i$$代表前$$i$$行的最大面积，每行都能化简成一个P84的子问题：
+
+```
+height = []
+Set hea all to zero
+for each row from top to bottom:
+    for each col in this row:
+        if value at (row, col) is 1:
+            ++height[col]
+        else:
+            height[col] = 0
+    Solve P84 on height
+    Update max area
+``` 
 
 ## P494 求目标和
 
