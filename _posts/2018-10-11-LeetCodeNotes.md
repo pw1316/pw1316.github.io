@@ -2,7 +2,7 @@
 layout: page
 title: Leet Code笔记
 date: 2018-10-11 20:36:30 +0800
-mdate: 2018-11-26 20:32:31 +0800
+mdate: 2018-11-29 20:09:08 +0800
 showbar: false
 ---
 
@@ -18,6 +18,7 @@ showbar: false
 - [P41 First Missing Positive](#p41-first-missing-positive)
 - [P84 Largest Rectangle in Histogram](#p84-largest-rectangle-in-histogram)
 - [P85 Maximal Rectangle](#p85-maximal-rectangle)
+- [123 Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)
 - [P494 求目标和](#p494-%E6%B1%82%E7%9B%AE%E6%A0%87%E5%92%8C)
 - [P673 最长上升子序列个数](#p673-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%E4%B8%AA%E6%95%B0)
 
@@ -257,6 +258,31 @@ for each row from top to bottom:
     Solve P84 on height
     Update max area
 ``` 
+
+## 123 Best Time to Buy and Sell Stock III
+
+顺序的买入卖出买入卖出最多4笔交易
+
+用$$f_{i,j}$$表示$$i$$天共进行$$j$$笔交易后的最大收益，第$$j$$笔交易可能在第$$i$$天进行（$$f_{i-1,j-1}+profit_i$$），也可以不在第$$i$$天进行（$$f_{i-1,j}$$）
+
+1. 无交易无变化，$$profit_0=0$$
+2. 第1笔交易为买入，$$profit_1=-price_0$$
+3. 第2笔交易为卖出，$$profit_2=price_0$$
+4. 第3笔交易为买入，$$profit_3=-price_0$$
+5. 第4笔交易为卖出，$$profit_4=price_0$$
+
+初始条件$$f_0=(0,-\inf,0,-\inf,0)$$
+
+“第0天”以“买入”结束的情况不存在，所以要让其收益最低，而$$f_{0,0}$$代表后续会进行两次买入卖出，$$f_{0,2}$$代表后续进行一次买入卖出，$$f_{0,4}$$代表后续不发生交易
+
+```
+dp = [0, -INT_MAX, 0, -INT_MAX, 0]
+for each price:
+    for j in [4, 3, 2, 1]:
+        profit = price for j = 2, 4, otherwise profit = -price
+        dp[j] = max(dp[j], dp[j-1] + profit)
+return dp[4]
+```
 
 ## P494 求目标和
 
