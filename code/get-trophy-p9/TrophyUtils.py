@@ -56,7 +56,7 @@ def decorate_input_url(input_url):
     """
 
     assert isinstance(input_url, str)
-    return "http://psnine.com/psngame/" + input_url
+    return "https://psnine.com/psngame/" + input_url
 
 
 def delete_white_space(doc):
