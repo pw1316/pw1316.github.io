@@ -18,7 +18,9 @@ showbar: false
 - [P41 First Missing Positive](#p41-first-missing-positive)
 - [P84 Largest Rectangle in Histogram](#p84-largest-rectangle-in-histogram)
 - [P85 Maximal Rectangle](#p85-maximal-rectangle)
-- [123 Best Time to Buy and Sell Stock III](#123-best-time-to-buy-and-sell-stock-iii)
+- [P123 Best Time to Buy and Sell Stock III](#p123-best-time-to-buy-and-sell-stock-iii)
+- [P136 Single Number](#p136-single-number)
+- [P137 Single Number II](#p137-single-number-ii)
 - [P494 求目标和](#p494-%E6%B1%82%E7%9B%AE%E6%A0%87%E5%92%8C)
 - [P673 最长上升子序列个数](#p673-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%E4%B8%AA%E6%95%B0)
 
@@ -259,7 +261,7 @@ for each row from top to bottom:
     Update max area
 ``` 
 
-## 123 Best Time to Buy and Sell Stock III
+## P123 Best Time to Buy and Sell Stock III
 
 顺序的买入卖出买入卖出最多4笔交易
 
@@ -283,6 +285,42 @@ for each price:
         dp[j] = max(dp[j], dp[j-1] + profit)
 return dp[4]
 ```
+
+## P136 Single Number
+
+一个数组，每个数出现两遍，只有一个只出现一遍，找出这个数
+
+因为$$A\oplus A=0$$，$$0\oplus A=A$$，所以把所有数异或起来，出现两遍的都消掉了，最终结果就是只出现一遍的那个数
+
+## P137 Single Number II
+
+一个数组，每个数出现三遍，只有一个只出现一遍，找出这个数
+
+一个数如果出现三遍，那么每一个bit上为1的次数就是3。除外那个单独的数，对所有数进行统计，每一个bit上1出现的次数一定是3的倍数。算上单独的数后，就会使得有些bit上1出现的次数为$$3k+1$$，找到这些bit置为1，其余bit置为0，其表示的数就是剩下单独的数。用2bit的三进制加法器实现：$$C$$表示进位$$S$$表示个位，$$A$$表示加数位
+
+|C|S|A|->|C'|S'|
+|-|-|-|-|-|-|
+|0|0|0|->|0|0|
+|0|0|1|->|0|1|
+|0|1|0|->|0|1|
+|0|1|1|->|1|0|
+|1|0|0|->|1|0|
+|1|0|1|->|0|0|
+|1|1|0|->|X|X|
+|1|1|1|->|X|X|
+
+得到:
+
+$$
+\begin{align}
+S'&=\bar{C}\land(S\oplus A)\\
+C'&=\bar{S'}\land(C\oplus A)
+\end{align}
+$$
+
+最终$$S$$即要求的数
+
+推广到每个数出现$$k$$遍，用$$log_2{k}$$个bit实现$$k$$进制加法器，最后个位数为最终结果。
 
 ## P494 求目标和
 
