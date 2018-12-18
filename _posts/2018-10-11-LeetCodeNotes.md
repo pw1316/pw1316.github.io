@@ -2,13 +2,13 @@
 layout: page
 title: Leet Code笔记
 date: 2018-10-11 20:36:30 +0800
-mdate: 2018-11-29 20:09:08 +0800
+mdate: 2018-12-18 20:46:29 +0800
 showbar: false
 ---
 
 - [Pre](#pre)
-    - [邪道](#%E9%82%AA%E9%81%93)
-    - [浮点转整数](#%E6%B5%AE%E7%82%B9%E8%BD%AC%E6%95%B4%E6%95%B0)
+  - [邪道](#%E9%82%AA%E9%81%93)
+  - [浮点转整数](#%E6%B5%AE%E7%82%B9%E8%BD%AC%E6%95%B4%E6%95%B0)
 - [P1 TwoSum](#p1-twosum)
 - [P3 Longest Substring Without Repeating Characters](#p3-longest-substring-without-repeating-characters)
 - [P4 Median of Two Sorted Arrays](#p4-median-of-two-sorted-arrays)
@@ -21,6 +21,7 @@ showbar: false
 - [P123 Best Time to Buy and Sell Stock III](#p123-best-time-to-buy-and-sell-stock-iii)
 - [P136 Single Number](#p136-single-number)
 - [P137 Single Number II](#p137-single-number-ii)
+- [P169 Majority Element](#p169-majority-element)
 - [P494 求目标和](#p494-%E6%B1%82%E7%9B%AE%E6%A0%87%E5%92%8C)
 - [P673 最长上升子序列个数](#p673-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%E4%B8%AA%E6%95%B0)
 
@@ -321,6 +322,24 @@ $$
 最终$$S$$即要求的数
 
 推广到每个数出现$$k$$遍，用$$log_2{k}$$个bit实现$$k$$进制加法器，最后个位数为最终结果。
+
+## P169 Majority Element
+
+一个数组$$A$$内有且仅有一个数的数量严格超过数组大小的一半，找到这个数
+
+记录一个潜在的众数$$cur\leftarrow A_0$$以及该数被统计的次数$$cnt\leftarrow 1$$
+
+对于数组内的每一个数$$A_i$$：
+
+- 如果$$cur=A_i$$，则$$cur$$可能是最终结果也可能不是，计入统计待定：$$cnt\leftarrow cnt+1$$
+- 如果$$cur\neq A_i$$，则$$cur$$和$$A_i$$当中至多只有一个是最终结果，由于最终结果的数量大于总数的一半，可以直接从数组中删除这两个数，对于剩下的部分
+    1. $$res\gt n/2\gt(n-2)/2$$，两个数都不是结果
+    2. $$res-1\gt n/2-1=(n-2)/2$$，其中有一个是结果
+    3. 因此新数组上的解就是原数组上的解
+- 由于$$cur$$被删除一个，更新统计计数$$cnt\leftarrow cnt-1$$
+- 当$$cnt$$被减到$$0$$时，说明之前统计的数已经被删完了，根据之前的结论，数组剩余部分的解就是原始数组的解，重新开始新一轮求解$$cur\leftarrow {A'}_0$$以及$$cnt\leftarrow 1$$
+
+当所有数处理完之后，剩下的没办法删除的数（$$cur$$）就是最终结果
 
 ## P494 求目标和
 
