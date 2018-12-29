@@ -269,3 +269,36 @@ F-->H[y 512]
 
 1. 原始模型中ReLU的存在阻碍了数据在浅层和深层之间的直接传播，因为所有小于0的部分都被截断，训练初期误差会更难下降，网络越深，ReLU越多，传播越困难，而**V2**模型大大降低了阻碍，使得初期会更快收敛
 2. 原始模型中由于每一层的输入由上一层的直接通路和残差两部分相加组成，虽然残差部分经过了归一化，但是直接通路没有，因而当前层的输入数据是未经过归一化的，将这些数据直接送入当前层的残差分支相当于未进行BN可能会存在过拟合。而**V2**的预激活保证残差分支的数据都是归一化之后的，可以减少过拟合的现象
+
+## **MobileNetV1**
+
+**MobileNet**的目的是缩减网络大小，降低正向用时，从而适用于移动端
+
+### 分离卷积
+
+分离卷积是用来降低卷积的运算量的。假设输入特征图的形状为$$H\times W\times C_1$$，输出的特征图的形状为$$H\times W\times C_2$$，传统的卷积核大小为$$k\times k\times C_1\times C_2$$个参数，并且需要$$k\times k\times C_1\times C_2\times H\times W$$次浮点运算。而分离卷积将卷积层分为两个部分：第一部分使用$$k\times k\times 1\times 1$$的卷积核对输入图像的每一通道独立卷积，然后将特征图按原顺序堆叠，这样的卷积即逐深度卷积；第二部分使用传统的$$1\times 1\times C_1\times C_2$$卷积核，改变通道数。一、二两个部分共同作用使得特征图的大小和传统卷积输出的大小相同。但是对于分离卷积，卷积核的参数数量合计为$$k\times k+C_1\times C_2$$，需要$$k\times k\times C_1\times H\times W+C_1\times C_2\times H\times W$$次浮点运算。分离卷积和传统卷积的计算量之比为：
+
+$$
+\frac{k\times k\times C_1\times H\times W+C_1\times C_2\times H\times W}{k\times k\times C_1\times C_2\times H\times W}=\frac{1}{k^2}+\frac{1}{C_2}
+$$
+
+如果采用$$3\times 3$$的卷积核，通道数在64以上，那么整个分离卷积的效率是传统卷积的7倍以上，但是精度的损失却是十分微小的。
+
+### 分离卷积单元
+
+**MobileNet**采用的卷积单元并非直接连接两个卷积层，然后给输出层增加BN和ReLU，而是在每个卷积层之后都增加BN和ReLU
+
+```mermaid
+graph LR
+subgraph Conv
+A1[x c1]-->B1[conv3x3 c2 BN+ReLU]
+B1-->C1[y c2]
+end
+subgraph DepthwiseConv
+A2[x c1]-->B2[depthwise conv3x3 BN+ReLU]
+B2-->C2[conv1x1 c2 BN+ReLU]
+C2-->D2[y c2]
+end
+```
+
+TODO
