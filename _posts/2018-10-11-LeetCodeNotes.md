@@ -19,9 +19,11 @@ showbar: false
 - [P84 Largest Rectangle in Histogram](#p84-largest-rectangle-in-histogram)
 - [P85 Maximal Rectangle](#p85-maximal-rectangle)
 - [P123 Best Time to Buy and Sell Stock III](#p123-best-time-to-buy-and-sell-stock-iii)
+  - [优化](#%E4%BC%98%E5%8C%96)
 - [P136 Single Number](#p136-single-number)
 - [P137 Single Number II](#p137-single-number-ii)
 - [P169 Majority Element](#p169-majority-element)
+- [P188 Best Time to Buy and Sell Stock IV](#p188-best-time-to-buy-and-sell-stock-iv)
 - [P494 求目标和](#p494-%E6%B1%82%E7%9B%AE%E6%A0%87%E5%92%8C)
 - [P673 最长上升子序列个数](#p673-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%E4%B8%AA%E6%95%B0)
 
@@ -264,27 +266,68 @@ for each row from top to bottom:
 
 ## P123 Best Time to Buy and Sell Stock III
 
-顺序的买入卖出买入卖出最多4笔交易
+给出每天的股价，顺序的买入卖出记为一笔完整交易，最多$$2$$次，求最大收益。
 
-用$$f_{i,j}$$表示$$i$$天共进行$$j$$笔交易后的最大收益，第$$j$$笔交易可能在第$$i$$天进行（$$f_{i-1,j-1}+profit_i$$），也可以不在第$$i$$天进行（$$f_{i-1,j}$$）
+令$$A_{i,j}$$、$$B_{i,j}$$、$$P_i$$分别表示第$$i$$天（$$1$$开始计数）完成$$j$$次（$$1$$开始计数）买入时的最优收益、完成$$j$$次卖出时的最优收益、股价。那么：
 
-1. 无交易无变化，$$profit_0=0$$
-2. 第1笔交易为买入，$$profit_1=-price_0$$
-3. 第2笔交易为卖出，$$profit_2=price_0$$
-4. 第3笔交易为买入，$$profit_3=-price_0$$
-5. 第4笔交易为卖出，$$profit_4=price_0$$
+1. 第$$i$$天可以正好买第$$j$$笔（$$B_{i-1,j-1}-P_i$$），也可以之前就买了第$$j$$笔但一直没卖出（$$A_{i-1,j}$$），所以有$$A_{i,j}=max(B_{i-1,j-1}-P_i,A_{i-1,j})$$
+2. 第$$i$$天可以正好卖第$$j$$笔（$$A_{i-1,j}+P_i$$），也可以之前就卖了第$$j$$笔但一直没进行下一次买入（$$B_{i-1,j}$$），所以有$$B_{i,j}=max(A_{i-1,j}+P_i,B_{i-1,j})$$
 
-初始条件$$f_0=(0,-\inf,0,-\inf,0)$$
+买入收益必为负，所以初始条件$$A_i=(-\inf,-\inf)$$；而卖出收益至少为$$0$$，所以初始条件$$B_i=(0,0)$$。由于条件为“至多”所以诸如$$A_{1,2}$$，$$B_{2,2}$$之类的交易是存在的，假装在第$$0$$天进行了任意次无实际意义的虚交易即可。
 
-“第0天”以“买入”结束的情况不存在，所以要让其收益最低，而$$f_{0,0}$$代表后续会进行两次买入卖出，$$f_{0,2}$$代表后续进行一次买入卖出，$$f_{0,4}$$代表后续不发生交易
+DP方程：
+
+$$
+\begin{align}
+A_{i,j}&=max(B_{i-1,j-1}-P_i,A_{i-1,j})\\
+B_{i,j}&=max(A_{i-1,j}+P_i,B_{i-1,j})\\
+result&=B_{n,k}
+\end{align}
+$$
 
 ```
-dp = [0, -INT_MAX, 0, -INT_MAX, 0]
+A = [-INT_MAX, -INT_MAX, -INT_MAX] * (n + 1)
+B = [0, 0, 0] * (n + 1)
+for each i, price:
+    for j in [1, 2]:
+        A[i][j] = max(A[i - 1][j], B[i - 1][j - 1] - price)
+        B[i][j] = max(B[i - 1][j], A[i - 1][j] + price)
+return B[n][2]
+```
+
+### 优化
+
+1. 虚交易不止可以在第$$0$$天做，任意一天同时进行买入卖出相当于跳过了一次交易
+2. DP结果每一行都只和上一行有关，空间上可以消掉一维
+
+允许当天卖掉同时买进，修改$$A$$的转移方程，第$$i$$天买入第$$j$$笔的时候允许在同一天卖掉第$$j-1$$笔，相当于第$$j-1$$笔的买入就是第$$j$$笔的买入，第$$j-1$$笔交易被跳过。也可以修改$$B$$的转移方程，允许第$$j$$笔买入的同一天卖出第$$j$$笔，相当于跳过了第$$j$$笔。
+
+$$
+\begin{align}
+A_{i,j}=max(B_{i-1,j-1}-P_i,A_{i-1,j})&\rightarrow A_{i,j}=max(B_{i,j-1}-P_i,A_{i-1,j})\\
+B_{i,j}=max(A_{i-1,j}+P_i,B_{i-1,j})&\rightarrow B_{i,j}=max(A_{i,j}+P_i,B_{i-1,j})\\
+result&=B_{n,k}
+\end{align}
+$$
+
+消除行与行之间的空间依赖性，保证每一列的数据在更新前一定会被使用完毕。最终的DP方程：
+
+$$
+\begin{align}
+A_j&=max(B_{j-1}-P_i,A_j)\\
+B_j&=max(A_j+P_i,B_j)\\
+result&=B_{k}
+\end{align}
+$$
+
+```
+A = [-INT_MAX, -INT_MAX, -INT_MAX]
+B = [0, 0, 0]
 for each price:
-    for j in [4, 3, 2, 1]:
-        profit = price for j = 2, 4, otherwise profit = -price
-        dp[j] = max(dp[j], dp[j-1] + profit)
-return dp[4]
+    for j in [1, 2]:
+        A[j] = max(A[j], B[j - 1] - price)
+        B[j] = max(B[j], A[j] + price)
+return B[2]
 ```
 
 ## P136 Single Number
@@ -340,6 +383,36 @@ $$
 - 当$$cnt$$被减到$$0$$时，说明之前统计的数已经被删完了，根据之前的结论，数组剩余部分的解就是原始数组的解，重新开始新一轮求解$$cur\leftarrow {A'}_0$$以及$$cnt\leftarrow 1$$
 
 当所有数处理完之后，剩下的没办法删除的数（$$cur$$）就是最终结果
+
+## P188 Best Time to Buy and Sell Stock IV
+
+是[P123 Best Time to Buy and Sell Stock III](#p123-best-time-to-buy-and-sell-stock-iii)的扩展版，将$$2$$扩展为$$k$$，但是存在以下优化：如果交易数量足够保证每天都可以进行交易，那么就可以不考虑交易次数的限制，问题简化为不限次数的最优解。
+
+令$$A_i$$、$$B_i$$、$$P_i$$分别表示第$$i$$天买入时的最优收益、卖出时的最优收益、股价。那么：
+
+1. 如果第$$i$$天买入，那么可以选择真实买入$$B_{i-1}-P_i$$，也可以虚交易$$A_{i-1}$$：$$A_i=max(A_{i-1}, B_{i-1}-P_i)$$
+2. 如果第$$i$$天卖出，那么可以选择真实卖出$$A_{i-1}+P_i$$，也可以虚交易$$B_{i-1}$$：$$B_i=max(B_{i-1}, A_{i-1}+P_i)$$
+
+同样进行虚交易和空间优化，得到：
+
+$$
+\begin{align}
+A&=max(B-P_i,A)\\
+B&=max(A+P_i,B)\\
+result&=B
+\end{align}
+$$
+
+```
+A = -INT_MAX
+B = 0
+for each price:
+    A = max(A, B - price)
+    B = max(B, A + price)
+return B
+```
+
+剪枝之后$$O(kn)$$的DP就优化成了$$O(n)$$的DP，在$$k$$较大的时候性能提升明显
 
 ## P494 求目标和
 
