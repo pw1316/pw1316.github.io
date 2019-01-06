@@ -2,7 +2,7 @@
 layout: page
 title: 分类CNN
 date: 2018-12-28 14:53:41 +0800
-mdate: 2018-12-29 20:54:57 +0800
+mdate: 2019-01-07 02:34:15 +0800
 showbar: false
 ---
 
@@ -284,21 +284,49 @@ $$
 
 如果采用$$3\times 3$$的卷积核，通道数在64以上，那么整个分离卷积的效率是传统卷积的7倍以上，但是精度的损失却是十分微小的。
 
-### 分离卷积单元
+### 分离卷积单元**DWBlock**
 
 **MobileNet**采用的卷积单元并非直接连接两个卷积层，然后给输出层增加BN和ReLU，而是在每个卷积层之后都增加BN和ReLU
 
 ```mermaid
 graph LR
-subgraph Conv
+subgraph ConvBlock
 A1[x c1]-->B1[conv3x3 c2 BN+ReLU]
 B1-->C1[y c2]
 end
-subgraph DepthwiseConv
+subgraph DWBlock
 A2[x c1]-->B2[depthwise conv3x3 BN+ReLU]
 B2-->C2[conv1x1 c2 BN+ReLU]
 C2-->D2[y c2]
 end
 ```
+
+### **MobileNetV1**网络结构
+
+|层|输出大小|结构|
+|:-:|:-:|:-:|
+|ConvBlock1|112x112|3x3 /2 32|
+|DWBlock1|112x112|3x3 64|
+|DWBlock2|56x56|3x3 /2 128|
+|DWBlock3|56x56|3x3 128|
+|DWBlock4|28x28|3x3 /2 256|
+|DWBlock5|28x28|3x3 256|
+|DWBlock6|14x14|3x3 /2 512|
+|DWBlock7|14x14|[3x3 512]x5|
+|DWBlock8|7x7|3x3 /2 1024|
+|DWBlock9|7x7|3x3 1024|
+|AvgPool|1x1|7x7 /7|
+|FC|1000|-|
+
+### 深度倍乘以及分辨率倍乘
+
+为了更好地测试**MobileNetV1**在不同网络大小的效果，其提供了两个倍率：深度$$\alpha$$，以及分辨率$$\rho$$
+
+1. 深度倍乘降整个网络的卷积通道数缩放为原来的$$\alpha$$倍，那么所需的计算量为：$$k\times k\times\alpha C_1\times H\times W+\alpha C_1\times\alpha C_2\times H\times W$$，在普通网络取$$k=3$$的情况下，$$k^2\ll C_2$$，整个网络的计算量大约缩放为原来的$$\alpha^2$$倍
+2. 分辨率降输入图片给的分辨率为原来的$$\rho$$倍，那么同理所需计算量变为原来的$$\rho^2$$倍
+
+通过调整上述两个倍率，可以轻易获得不同大小水平的网络，并且可以定量分析网络大小与精度的关系，从而找到耗时与精度的平衡点
+
+## **MobileNetV2**
 
 TODO
