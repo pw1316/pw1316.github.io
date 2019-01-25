@@ -73,3 +73,7 @@ showbar: false
 **定理12** 给定$$x\equiv(L,R)$$是一个数，任意取两个“数”集$$Y_L,Y_R$$满足$$Y_L\lt x\lt Y_R$$，则$$z\equiv(x_L\cup Y_L,x_R\cup Y_R)=x$$。其中$$a=b$$表示$$a\leq b\land b\leq a$$
 
 > 证明：根据定理7+，$$x_L\lt x$$，且$$z\lt x_R\cup Y_R$$因而$$x_L\cup Y_L\lt x$$，且$$z\lt x_R$$，根据定义2和定理10，得到$$z\leq x$$。同理可得$$x\leq z$$，因此$$x=z$$
+
+**定理13** 给定“数”集$$N=\{x_1,x_2,...,x_m\}$$，满足$$x_1\lt x_2\lt...\lt x_m$$，则仅使用这$$m$$个数，只能得到$$m+1$$个新的“数”$$x'$$满足$$\forall x\in N:x'\neq x$$，且这些新“数”为：$$(\varnothing,\{x_1\}),(\{x_i\},\{x_{i+1}\}),(\{x_m\},\varnothing)$$
+
+> 证明：根据定理12，$$(\{x_{i_1},x_{i_2},...\},\{x_{j_1},x_{j_2},...\})$$
