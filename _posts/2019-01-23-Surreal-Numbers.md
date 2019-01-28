@@ -2,53 +2,47 @@
 layout: page
 title: 研究之美
 date: 2019-01-23 15:27:39 +0800
-mdate: 2019-01-24 20:50:25 +0800
+mdate: 2019-01-28 20:51:31 +0800
 showbar: false
 ---
 
 ## Before All
 
-**定义1** “数”的定义。“数”构成了集合$$x\in N$$，“数”由两个集合组成$$x\equiv(L,R)$$，这两个集合中的元素也是“数”$$L,R\subset N$$，不存在这样的数$$i,j$$同时满足：$$i\in L$$，$$j\in R$$，$$i\geq j(j\leq i)$$。符合上述定义的元素称为“数”。上述定义简写为$$L\ngeq R$$。
+**约定** 二元关系的其中一端为集合时，为真的条件包括集合为空。即$$A \circ b\Leftrightarrow A=\varnothing\lor(\forall a\in A:a\circ b)$$，$$A\circ B\Leftrightarrow A=\varnothing\lor B=\varnothing\lor(\forall a\in A,b\in B:a\circ b)$$。
 
-**定义2** “小于等于”的定义。给定两个“数”$$i,j$$，如果既不存在“数”$$k$$同时满足：$$k\in i_L$$，$$k\geq j$$，也不存在“数”$$l$$同时满足$$l\in j_R$$，$$l\leq i$$，则称$$i\leq j(j\geq i)$$。上述定义简写为$$i_L\ngeq j\land j_R\nleq i$$。
+**定义1** “数”的定义。“数”$$x$$构成了集合$$\mathcal{S}$$，“数”由两个集合组成$$x\Leftrightarrow(x_L,x_R)$$，这两个集合中的元素也是“数”$$x_L,x_R\subset \mathcal{S}$$，并且满足$$\nexists i,j:i\in x_L\land j\in x_R\land i\geq j$$，即$$x\in \mathcal{S}\Leftrightarrow x_L\ngeq x_R$$。
+
+**定义2** “小于等于”的定义。给定两个“数”$$i,j$$，如果$$(\nexists k\in i_L:k\geq j)\land(\nexists l\in j_R:l\leq i)$$，则称$$i\leq j$$（或$$j\geq i$$），即$$i\leq j\Leftrightarrow i_L\ngeq j\land j_R\nleq i$$。
 
 ## Day 1
 
-**定义3** $$0\equiv(\varnothing,\varnothing)$$。
+**定义3** 初始“数”的定义。$$0\Leftrightarrow(\varnothing,\varnothing)$$。$$0_L\ngeq 0_R$$符合定义1，因此$$0$$是一个数。
 
-**定理1** $$0$$是“数”。
+**定理1** $$0\leq 0$$。
 
-> 证明：$$0_L\equiv\varnothing\ngeq\varnothing\equiv0_R$$，因而$$0_L\ngeq 0_R$$，符合定义1。
-
-**定理2** $$0\leq 0$$。
-
-> 证明：$$0_L\equiv\varnothing\ngeq 0$$，$$0_R\equiv\varnothing\nleq 0$$，符合定义2。
+> 证明：$$0_L\ngeq 0$$，$$0_R\nleq 0$$，根据定义2即可证明。
 
 ## Day 2
 
-**定义4** $$1\equiv(\{0\},\varnothing)$$，$$-1\equiv(\varnothing,\{0\})$$。
+**定义4** 第二日新增“数”的定义。$$1\Leftrightarrow(\{0\},\varnothing)$$，$$-1\Leftrightarrow(\varnothing,\{0\})$$。$$1_L\ngeq 1_R,-1_L\ngeq -1_R$$，符合定义1，因此$$1,-1$$均是数。
 
-**定理3** $$1$$和$$-1$$都是“数”。
+**定理2** 给定$$x\equiv(L,\varnothing),y\equiv(\varnothing,R)$$，则$$x,y\in\mathcal{S}$$，且$$y\leq x$$。
 
-> 证明：对于$$1$$，$$\{0\}\ngeq\varnothing$$；对于$$-1$$，$$\varnothing\ngeq\{0\}$$。两者都符合定义1。
+> 证明：$$x_L\ngeq x_R,y_L\ngeq y_R$$，且$$y_L \ngeq x,x_R\nleq y$$根据定义1和定义2即可证明。
 
-**定理4** $$x\equiv(L,\varnothing)$$和$$y\equiv(\varnothing,R)$$都是“数”，且$$y\leq x$$，其中$$L$$，$$R$$为任意“数”集。
+**定理3** $$-1\lt0,0\lt1,-1\lt1$$。
 
-> 证明：同定理3。
-
-**定理5** $$-1\lt 0$$，$$0\lt 1$$，$$-1\lt 1$$。
-
-> 证明：根据定理4可得$$-1\leq0$$，$$-1\leq1$$，$$0\leq1$$。已知$$-1_R\equiv\{0\}$$，而根据定理2，$$0\geq 0$$，因此$$0\nleq -1$$，即$$-1\lt 0$$。同理可得$$0\lt 1$$。又已知$$1_L\equiv\{0\}$$，而$$0\geq -1$$，因此$$1\nleq-1$$即$$-1\lt 1$$。
+> 证明：根据定理2可得$$-1\leq0,-1\leq1,0\leq1$$。根据定理1，$$0\geq 0$$，而$$0\in -1_R$$，因此$$0\nleq -1$$，因此$$-1\lt 0$$。同理可得$$0\lt 1$$。再根据上述已知结果$$0\geq-1$$，而$$0\in1_L$$，因此$$0\nleq -1$$，因此$$-1\lt1$$。
 
 ## Day 3
 
-**定理6** 如果$$x$$是“数”，则$$x\leq x$$。
+**定理4** $$\forall x\in\mathcal{S}:x\leq x$$。
 
-> 证明：(1.)根据定理2得到$$0\leq 0$$。(2.)已知$$x_L$$非空且$$\forall x_l\in x_L:x_l\leq x_l$$，$$x_R$$非空且$$\forall x_r\in x_R:x_r\leq x_r$$，则$$x_L\ngeq x_l$$不成立，$$x_R\nleq x_r$$不成立；根据定义2得到$$\forall x_l\in x_L:x\nleq x_l$$，$$\forall x_r\in x_R:x_r\nleq x$$，即$$x_L\ngeq x$$，$$x_R\nleq x$$；再根据定义2得到$$x\leq x$$。如果$$x_L$$为空则$$\varnothing\ngeq x$$天然成立，$$x_R$$为空则$$\varnothing\nleq x$$也天然成立。结合(1.)和(2.)归纳可得$$x\leq x$$。
+> 证明：归纳法。(1.)$$0\leq 0$$。(2.)假设$$x\in\mathcal{S}$$满足$$x_L=\varnothing\lor\forall x_l\in x_L:x_l\leq x_l$$且$$x_R=\varnothing\lor\forall x_r\in x_R:x_r\leq x_r$$。如果$$x\nleq x$$，则$$\exists x_l\in x_L:x_l\geq x$$或$$\exists x_r\in x_R:x_r\leq x$$。如果前者成立，则$$x_L\neq\varnothing\land x_L\ngeq x_l$$，与假设矛盾；同理如果后者成立也与假设矛盾，因此$$x\leq x$$。
 
-**定理7** 给定一个“数”$$x$$，如果$$x_L$$非空，则$$\forall x_l\in x_L:x_l\leq x$$；如果$$x_R$$非空，则$$\forall x_r\in x_R:x_r\geq x$$。
+**定理5** $$\forall x\in\mathcal{S}:x_L\leq x\land x_R\geq x$$。
 
-> 证明：(1.)首先证明$$\forall R:0\leq(\{0\}, R)$$。由于不等号右侧需要符合定义1，因此$$R\nleq 0$$；又因为$$0_L\equiv\varnothing\ngeq(\{0\}, R)$$，根据定义2得到$$0\leq(\{0\}, R)$$。(2.)已知$$x_L$$非空，且$$\forall x_l\in x_L,x_{lL}\neq\varnothing,x_{ll}\in x_{lL}:x_{ll}\leq x_l$$，那么首先$$x$$是个“数”，根据定义1得到$$\forall x_l\in x_L:x_R\nleq x_l$$。其次，如果$$x_{lL}$$为空，则$$\varnothing\ngeq x$$，因而根据定义2有$$\forall x_l\in x_L:x_l\leq x$$；如果$$x_{lL}$$非空，假设$$\exists x_l\in x_L:x_l\nleq x$$，那么定义2的两个条件$$x_{lL}\ngeq x$$，$$x_R\nleq x_l$$至少有一个不满足，但是由于第二个条件必然成立，所以可以得到$$\exists x_l\in x_L,x_{ll}\in x_{lL}:x_{ll}\geq x$$，再根据定义2，$$\exists x_l\in x_L,x_{ll}\in x_{lL}:x_L\ngeq x_{ll}$$，这与前提条件$$x_{ll}\leq x_l$$矛盾，假设不成立，因此$$\forall x_l\in x_L:x_l\leq x$$。由(1.)和(2.)归纳可得$$\forall x_l\in x_L:x_l\leq x$$；同理，$$\forall x_r\in x_R:x_r\geq x$$。
+> 证明：归纳法。(1.)$$0_L\leq0\land0_R\geq0$$(2.)假设$$x\in\mathcal{S}$$满足$$x_L=\varnothing\lor\forall x_l\in x_L:({x_l}_L\leq x_l\land{x_l}_R\geq x_l)$$且$$x_R=\varnothing\lor\forall x_r\in x_R:({x_r}_L\leq x_r\land{x_r}_R\geq x_r)$$。TODO已知$$x_L$$非空，且$$\forall x_l\in x_L,x_{lL}\neq\varnothing,x_{ll}\in x_{lL}:x_{ll}\leq x_l$$，那么首先$$x$$是个“数”，根据定义1得到$$\forall x_l\in x_L:x_R\nleq x_l$$。其次，如果$$x_{lL}$$为空，则$$\varnothing\ngeq x$$，因而根据定义2有$$\forall x_l\in x_L:x_l\leq x$$；如果$$x_{lL}$$非空，假设$$\exists x_l\in x_L:x_l\nleq x$$，那么定义2的两个条件$$x_{lL}\ngeq x$$，$$x_R\nleq x_l$$至少有一个不满足，但是由于第二个条件必然成立，所以可以得到$$\exists x_l\in x_L,x_{ll}\in x_{lL}:x_{ll}\geq x$$，再根据定义2，$$\exists x_l\in x_L,x_{ll}\in x_{lL}:x_L\ngeq x_{ll}$$，这与前提条件$$x_{ll}\leq x_l$$矛盾，假设不成立，因此$$\forall x_l\in x_L:x_l\leq x$$。由(1.)和(2.)归纳可得$$\forall x_l\in x_L:x_l\leq x$$；同理，$$\forall x_r\in x_R:x_r\geq x$$。
 
 **定理8** 如果$$x,y,z$$都是“数”，且$$x\leq y$$，$$y\leq z$$，则$$x\leq z$$
 
@@ -70,10 +64,30 @@ showbar: false
 
 > 证明：假设$$z\leq x$$，根据定理8，$$y\leq x$$；但是已知$$x\lt y$$，根据定理10，$$y\nleq x$$，矛盾，假设不成立，因此$$z\nleq x$$，根据定理10得$$x\lt z$$。第二条同理
 
-**定理12** 给定$$x\equiv(L,R)$$是一个数，任意取两个“数”集$$Y_L,Y_R$$满足$$Y_L\lt x\lt Y_R$$，则$$z\equiv(x_L\cup Y_L,x_R\cup Y_R)=x$$。其中$$a=b$$表示$$a\leq b\land b\leq a$$
+**定理12** 给定$$x\equiv(L,R)$$是一个“数”，任意取两个“数”集$$Y_L,Y_R$$满足$$Y_L\lt x\lt Y_R$$，则$$z\equiv(x_L\cup Y_L,x_R\cup Y_R)=x$$。其中$$a=b$$表示$$a\leq b\land b\leq a$$
 
 > 证明：根据定理7+，$$x_L\lt x$$，且$$z\lt x_R\cup Y_R$$因而$$x_L\cup Y_L\lt x$$，且$$z\lt x_R$$，根据定义2和定理10，得到$$z\leq x$$。同理可得$$x\leq z$$，因此$$x=z$$
 
 **定理13** 给定“数”集$$N=\{x_1,x_2,...,x_m\}$$，满足$$x_1\lt x_2\lt...\lt x_m$$，则仅使用这$$m$$个数，只能得到$$m+1$$个新的“数”$$x'$$满足$$\forall x\in N:x'\neq x$$，且这些新“数”为：$$(\varnothing,\{x_1\}),(\{x_i\},\{x_{i+1}\}),(\{x_m\},\varnothing)$$
 
-> 证明：根据定理12，$$(\{x_{i_1},x_{i_2},...\},\{x_{j_1},x_{j_2},...\})$$
+> 证明：(1.)初始集合$$N_1=\{0\}$$，新“数”集合$$\Delta N_0=\{(\varnothing,\{0\}),(\{0\},\varnothing)\}$$，满足条件。(2.)假设“数”集$$N_k=\{x_1,x_2,...,x_m\}$$是由满足条件的方式生成的，且$$x_1\lt x_2\lt...\lt x_m$$。根据定理12，$$(\{x_{i_1},x_{i_2},...\},\{x_{j_1},x_{j_2},...\})=(\{max(x_i)\},\{min(x_j)\})$$因而可以得到$$\Delta N_k=\{(\varnothing,\{x_i\})\}\cup\{(\{x_i\},\{x_j\})\|i\lt j\}\cup\{(x_i,\varnothing)\}$$。为了方便，记$$\varnothing\rightarrow\{x_0\}$$，$$\varnothing\rightarrow\{x_{m+1}\}$$，于是，$$\Delta N_k=\{(\{x_i\},\{x_j\})\|0\leq i\lt j\leq m+1\}$$。当$$j-i\geq2$$时，考虑“数”$$x_{i+1},x_{i+2},...,x_{j-1}$$，根据假设$$\forall x_l,i\lt l\lt j:(\exists!o\lt k:x_l\in \Delta N_o)$$（$$\Delta N_0=N_1$$）。结合定理8的证明，有$$d(x_l)=o+1$$。取$$x_l\equiv argmin(d(x_{i+1}),d(x_{i+2}),...,d(x_{j-1}))$$，根据假设，如果$$d(x_i)\leq d(x_j)$$，那么$$x_i$$的左右集都不会递归地包含$$x_j$$，因此$$x_{i+1},x_{i+2},...,x_{l-1}\notin{x_l}_L$$。又因为$${x_l}_L\ngeq x_l$$，因此$${x_l}_L\ngtr x_i$$。同理$${x_l}_R\nless x_j$$。根据定理12，$$(\{x_i\},\{x_j\})=(\{x_i\}\cup {x_l}_L,\{x_j\}\cup {x_l}_R)=({x_l}_L,{x_l}_R)\equiv x_l$$。注意到当$$i=0$$或者$$j=m+1$$时，$$x_l\ngtr\varnothing$$以及$$x_l\nless\varnothing$$依然成立。上述证明还说明了符合条件的$$x_l$$是唯一的，否则就有$$(\{x_i\},\{x_j\})\lt(\{x_i\},\{x_j\})$$，而这是不成立的。因此$$\Delta N_k=\{(\{x_i\},\{x_{i+1}\})\|i\in[0..m]\}$$。由(1.)和(2.)归纳即可证明定理13。
+
+**定义5** 加法定义。给定“数”$$x,y$$，$$x+y\equiv((x_L+y)\cup (y_L+x),(x_R+y)\cup (y_R+x))$$
+
+**定理14** 给定“数”$$x$$，$$x+0=x$$
+
+> 证明：(1.)$$0+0\equiv(\varnothing,\varnothing)\equiv 0$$，(2.)$$x+0\equiv(x_L+0,x_R+0)$$。归纳得$$x+0\equiv x$$
+
+## Day 4
+
+**定义5** 相反数定义。给定“数”$$x$$，$$-x\equiv(-x_L,-x_R)$$
+
+**定义6** 减法定义。给定“数”$$x,y$$，$$x-y\equiv x+(-y)$$
+
+**定理15** 给定“数”$$x,y,z$$，若$$x+y=z$$则$$z-y=x$$
+
+> 证明：TODO
+
+**定理12+** 给定“数”$$x\equiv(L,R)$$，取“数”$$x\equiv argmin(\forall x_i,y_L\ngeq x_i\ngeq y_R:d(x_i))$$，则$$x=y$$
+
+> 证明：根据定理7+，$$x_L\lt x$$，且$$z\lt x_R\cup Y_R$$因而$$x_L\cup Y_L\lt x$$，且$$z\lt x_R$$，根据定义2和定理10，得到$$z\leq x$$。同理可得$$x\leq z$$，因此$$x=z$$
