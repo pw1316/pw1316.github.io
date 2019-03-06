@@ -1,0 +1,9 @@
+{
+  "files.eol": "\n",
+  "[json]": {
+    "editor.tabSize": 2
+  },
+  "[html]": {
+    "editor.tabSize": 2
+  }
+}

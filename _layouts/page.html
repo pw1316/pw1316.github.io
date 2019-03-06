@@ -26,33 +26,33 @@ layout: default
 
 <div class="inner mt20">
 <div class="main">
-    <div class="box">
-        <div class="pd10">
-            <h1>{{ page.title }}</h1>
-            {% if page.date %}
-            <div class="meta"><span>创建日期{{ page.date | date: "%Y-%m-%d %H:%M" }}</span></div>
-            <div class="meta"><span>最后修改{{ page.mdate | date: "%Y-%m-%d %H:%M" }}</span></div>
-            {% endif %}
-        </div>
-        <div class="content pd10">
-            {{ content }}
-        </div>
+  <div class="box">
+    <div class="pd10">
+      <h1>{{ page.title }}</h1>
+      {% if page.date %}
+      <div class="meta"><span>创建日期{{ page.date | date: "%Y-%m-%d %H:%M" }}</span></div>
+      <div class="meta"><span>最后修改{{ page.mdate | date: "%Y-%m-%d %H:%M" }}</span></div>
+      {% endif %}
     </div>
+    <div class="content pd10">
+      {{ content }}
+    </div>
+  </div>
 </div>
 <div class="side">
-    {% if site.sidebar-about-description %}
-    <p class="hd3">{{site.sidebar-about-description}}</p>
-    {% endif %}
-    <!-- SNS Link -->
-    <ul class="darklist pd10">
-    <li>
-        <a target="_blank" href="https://my.playstation.com/profile/PW__1316"><i class="fab fa-playstation fa-3x"></i></a>
-        <a target="_blank" href="https://github.com/pw1316"><i class="fab fa-github fa-3x"></i></a>
-    </li>
-    </ul>
-    {% if site.email %}
-    <p class="hd3">{{site.email}}</p>
-    {% endif %}
+  {% if site.sidebar-about-description %}
+  <p class="hd3">{{site.sidebar-about-description}}</p>
+  {% endif %}
+  <!-- SNS Link -->
+  <ul class="darklist pd10">
+  <li>
+    <a target="_blank" href="https://my.playstation.com/profile/PW__1316"><i class="fab fa-playstation fa-3x"></i></a>
+    <a target="_blank" href="https://github.com/pw1316"><i class="fab fa-github fa-3x"></i></a>
+  </li>
+  </ul>
+  {% if site.email %}
+  <p class="hd3">{{site.email}}</p>
+  {% endif %}
 </div>
 </div>
 

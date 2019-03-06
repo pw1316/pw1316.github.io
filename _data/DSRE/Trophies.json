@@ -1,1 +1,30 @@
-{"name":"DARK SOULS™ REMASTERED","trophy":[{"id":1,"type":"text-platinum","name":"黑暗靈魂","desc":"恭喜得到所有獎盃！"},{"id":2,"type":"text-gold","name":"火的繼承者","desc":"完成「火的繼承者」的結局"},{"id":3,"type":"text-gold","name":"黑暗之王","desc":"完成「黑暗之王」的結局"},{"id":4,"type":"text-silver","name":"騎士的榮譽","desc":"取得所有稀有武器"},{"id":5,"type":"text-silver","name":"賢者的智慧","desc":"取得所有的魔法"},{"id":6,"type":"text-silver","name":"咒術師的連結","desc":"取得所有的咒術"},{"id":7,"type":"text-silver","name":"聖女的祈禱","desc":"取得所有的奇蹟"},{"id":11,"type":"text-silver","name":"誓約「太陽戰士」","desc":"發現誓約「太陽戰士」"},{"id":12,"type":"text-silver","name":"誓約「森林的狩獵者」","desc":"發現誓約「森林的狩獵者」"},{"id":13,"type":"text-silver","name":"誓約「吸魂鬼」","desc":"發現誓約「吸魂鬼」"},{"id":14,"type":"text-silver","name":"誓約「古龍之路」","desc":"發現誓約「古龍之路」"},{"id":17,"type":"text-bronze","name":"最強武器","desc":"取得普通強化後的最強武器"},{"id":18,"type":"text-bronze","name":"結晶武器","desc":"取得結晶強化後的最強武器"},{"id":19,"type":"text-bronze","name":"雷電武器","desc":"取得雷電強化後的最強武器"},{"id":20,"type":"text-bronze","name":"粗製武器","desc":"取得粗製強化後的最強武器"},{"id":21,"type":"text-bronze","name":"法術武器","desc":"取得法術強化後的最強武器"},{"id":22,"type":"text-bronze","name":"魔力武器","desc":"取得魔力強化後的最強武器"},{"id":23,"type":"text-bronze","name":"神聖武器","desc":"取得神聖強化後的最強武器"},{"id":24,"type":"text-bronze","name":"邪教武器","desc":"取得邪教強化後的最強武器"},{"id":25,"type":"text-bronze","name":"火焰武器","desc":"取得火焰強化後的最強武器"},{"id":26,"type":"text-bronze","name":"渾沌武器","desc":"取得渾沌強化後的最強武器"},{"id":33,"type":"text-bronze","name":"漫步深淵技藝","desc":"取得漫步深淵技藝"},{"id":38,"type":"text-silver","name":"擊敗王「小隆德四王」","desc":"擊敗分得靈魂之王「小隆德四王」"},{"id":40,"type":"text-silver","name":"擊敗神「黯影太陽葛溫德林」","desc":"擊敗暗月之神「黯影太陽葛溫德林」"},{"id":41,"type":"text-silver","name":"擊敗神「半龍普利希拉」","desc":"擊敗獵命「半龍普利希拉」"}]}
+{
+  "name":"DARK SOULS™ REMASTERED",
+  "trophy":[
+    {"id":1,"type":"text-platinum","name":"黑暗靈魂","desc":"恭喜得到所有獎盃！"},
+    {"id":2,"type":"text-gold","name":"火的繼承者","desc":"完成「火的繼承者」的結局"},
+    {"id":3,"type":"text-gold","name":"黑暗之王","desc":"完成「黑暗之王」的結局"},
+    {"id":4,"type":"text-silver","name":"騎士的榮譽","desc":"取得所有稀有武器"},
+    {"id":5,"type":"text-silver","name":"賢者的智慧","desc":"取得所有的魔法"},
+    {"id":6,"type":"text-silver","name":"咒術師的連結","desc":"取得所有的咒術"},
+    {"id":7,"type":"text-silver","name":"聖女的祈禱","desc":"取得所有的奇蹟"},
+    {"id":11,"type":"text-silver","name":"誓約「太陽戰士」","desc":"發現誓約「太陽戰士」"},
+    {"id":12,"type":"text-silver","name":"誓約「森林的狩獵者」","desc":"發現誓約「森林的狩獵者」"},
+    {"id":13,"type":"text-silver","name":"誓約「吸魂鬼」","desc":"發現誓約「吸魂鬼」"},
+    {"id":14,"type":"text-silver","name":"誓約「古龍之路」","desc":"發現誓約「古龍之路」"},
+    {"id":17,"type":"text-bronze","name":"最強武器","desc":"取得普通強化後的最強武器"},
+    {"id":18,"type":"text-bronze","name":"結晶武器","desc":"取得結晶強化後的最強武器"},
+    {"id":19,"type":"text-bronze","name":"雷電武器","desc":"取得雷電強化後的最強武器"},
+    {"id":20,"type":"text-bronze","name":"粗製武器","desc":"取得粗製強化後的最強武器"},
+    {"id":21,"type":"text-bronze","name":"法術武器","desc":"取得法術強化後的最強武器"},
+    {"id":22,"type":"text-bronze","name":"魔力武器","desc":"取得魔力強化後的最強武器"},
+    {"id":23,"type":"text-bronze","name":"神聖武器","desc":"取得神聖強化後的最強武器"},
+    {"id":24,"type":"text-bronze","name":"邪教武器","desc":"取得邪教強化後的最強武器"},
+    {"id":25,"type":"text-bronze","name":"火焰武器","desc":"取得火焰強化後的最強武器"},
+    {"id":26,"type":"text-bronze","name":"渾沌武器","desc":"取得渾沌強化後的最強武器"},
+    {"id":33,"type":"text-bronze","name":"漫步深淵技藝","desc":"取得漫步深淵技藝"},
+    {"id":38,"type":"text-silver","name":"擊敗王「小隆德四王」","desc":"擊敗分得靈魂之王「小隆德四王」"},
+    {"id":40,"type":"text-silver","name":"擊敗神「黯影太陽葛溫德林」","desc":"擊敗暗月之神「黯影太陽葛溫德林」"},
+    {"id":41,"type":"text-silver","name":"擊敗神「半龍普利希拉」","desc":"擊敗獵命「半龍普利希拉」"}
+  ]
+}

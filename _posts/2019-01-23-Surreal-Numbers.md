@@ -2,7 +2,7 @@
 layout: page
 title: 研究之美
 date: 2019-01-23 15:27:39 +0800
-mdate: 2019-01-29 00:03:05 +0800
+mdate: 2019-03-06 12:11:29 +0800
 showbar: false
 ---
 
@@ -88,14 +88,23 @@ showbar: false
 
 ## Day 4
 
-**定义7** 相反数定义。给定$$x\in\mathcal{S}$$，$$-x\Leftrightarrow(-x_L,-x_R)$$。
+**定义7** 相反数定义。给定$$x\in\mathcal{S}$$，$$-x\Leftrightarrow(-x_R,-x_L)$$。
 
 **定义8** 减法定义。给定$$x,y\in\mathcal{S}$$，$$x-y\Leftrightarrow x+(-y)$$。
 
-**定理11** 加减互逆。$$\forall x,y\in\mathcal{S},x+y=z:z-y=x$$。
+**定理11** 加减互逆。$$\forall x,y,z\in\mathcal{S},x+y=z:z-y=x$$。
 
 > 证明：TODO
 
-**推论8.1** 给定“数”$$x\equiv(L,R)$$，取“数”$$x\equiv argmin(\forall x_i,y_L\ngeq x_i\ngeq y_R:d(x_i))$$，则$$x=y$$
+**推论8.1** $$\forall y\in\mathcal{S}:y=argmin_x(\forall x_i,y_L\lt x_i\lt y_R:d(x_i))$$。
 
-> 证明：TODO
+> 证明：令$$argmin_x(\forall x_i,y_L\lt x_i\lt y_R:d(x_i))\equiv x$$，由于$$d(x_L)\lt d(x)$$，因此$$x_L=\varnothing\lor\forall x_l\in x_L:(\exists y_l\in y_L:y_l \geq x_l\lor\exists y_r\in y_R:x_l\geq y_r)$$，而根据已知条件，$$x_L\lt x\lt y_R$$，因此$$x_L=\varnothing\lor\forall x_l\in x_L:(\exists y_l\in y_L:y_l \geq x_l)\Rightarrow\exists y_l\in y_L:y_l \geq x_L\Rightarrow x_L\lt y$$。同理可得$$x_R\gt y$$。因此有$$y=(y_L\cup x_L,y_R\cup x_R)=x$$。
+
+**定理12** $$\forall x\in\mathcal{S},x\gt 0:x+1=(x_L+1,x_R+1)$$。
+
+- **引理12.1** $$\forall x\in\mathcal{S}:x\lt x+1$$。
+- > 证明：假设原命题不成立，那么$$\exists x\in\mathcal{S}:x\geq x+1$$，根据定义2，$$\exists x\in\mathcal{S}:{(x+1)}_L\ngeq x$$，根据定义6，$$\exists x\in\mathcal{S}:x\ngeq x$$，这与定理4矛盾，因此假设不成立，原命题成立。
+- **引理12.2** $$\forall x\in\mathcal{S},x_L\neq\varnothing:\exists x_l\in x_L:x\leq x_l+1$$
+- > 证明：TODO
+
+> 证明：DOTO

@@ -1,11 +1,14 @@
-{"name":"Marvel's Spider-Man","trophy":[
-{"id":52,"type":"text-bronze","name":"再來一次","desc":"完成一次新遊戲+"},
-{"id":53,"type":"text-silver","name":"力量與責任","desc":"以終極難度完成一次遊戲"},
-{"id":61,"type":"text-gold","name":"紐約家園","desc":"〈The City that Never Sleeps: Turf Wars〉100%完成"},
-{"id":62,"type":"text-silver","name":"修正怪咖","desc":"在一項怪咖女挑戰中獲得「驚人」以上的成績"},
-{"id":63,"type":"text-bronze","name":"扣下板機","desc":"完成「出其不意」任務"},
-{"id":64,"type":"text-bronze","name":"人民保姆越線","desc":"完成「全面封鎖」任務"},
-{"id":65,"type":"text-bronze","name":"擊破鐵頭功","desc":"完成「鐵鎚殞落」任務"},
-{"id":66,"type":"text-bronze","name":"禁酒令頒佈","desc":"掃蕩所有鐵鎚頭的假店面"},
-{"id":67,"type":"text-bronze","name":"幫派戰爭","desc":"完成一區中所有犯罪任務"}
-]}
+{
+  "name":"Marvel's Spider-Man",
+  "trophy":[
+    {"id":52,"type":"text-bronze","name":"再來一次","desc":"完成一次新遊戲+"},
+    {"id":53,"type":"text-silver","name":"力量與責任","desc":"以終極難度完成一次遊戲"},
+    {"id":61,"type":"text-gold","name":"紐約家園","desc":"〈The City that Never Sleeps: Turf Wars〉100%完成"},
+    {"id":62,"type":"text-silver","name":"修正怪咖","desc":"在一項怪咖女挑戰中獲得「驚人」以上的成績"},
+    {"id":63,"type":"text-bronze","name":"扣下板機","desc":"完成「出其不意」任務"},
+    {"id":64,"type":"text-bronze","name":"人民保姆越線","desc":"完成「全面封鎖」任務"},
+    {"id":65,"type":"text-bronze","name":"擊破鐵頭功","desc":"完成「鐵鎚殞落」任務"},
+    {"id":66,"type":"text-bronze","name":"禁酒令頒佈","desc":"掃蕩所有鐵鎚頭的假店面"},
+    {"id":67,"type":"text-bronze","name":"幫派戰爭","desc":"完成一區中所有犯罪任務"}
+  ]
+}
