@@ -11,7 +11,7 @@ code {background:#EEF0F4; color:#58544B; font-family: 'Courier New', Courier, mo
 pre code {display:block;}/* 对应md语法```code``` */
 a {text-decoration:none; color:#3498db;}
 a:hover {text-decoration:underline; color:#333;}
-em {font-size:12px; font-style:normal; color:#CB1B45; font-family: 'Courier New', Courier, monospace;}
+em {font-style:normal; color:#CB1B45; font-family: 'Courier New', Courier, monospace;}
 small {font-size:10px; color:#AAA;}
 strong {color:#000; font-weight: bold;}
 p {padding-bottom:10px;}
