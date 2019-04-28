@@ -20,10 +20,11 @@ title: 码海无涯，回头是岸
 {% for item in site.data.Ferrari.Record.items %}
 <tr>
 <td>
-距离<span class="pf_ps3">Scuderia Ferrari</span>的上一个
-<span class="pf_ps4" display="block">{{ item.name }}</span>
-已经过去了{% assign t_then = item.when | date: "%s" %}<span class="pf_psv sf_date">{{ t_then | date: "%Y-%m-%dT%H:%M:%S%z" }}</span>天，上一次发生在
-<span class="pf_psp" display="block">{{ item.where }}</span>由<strong>{{ item.who }}</strong>取得
+<span class="pf_ps3">Scuderia Ferrari</span>'s previous
+<span class="pf_ps4" display="block">{{ item.name }}</span>was
+<span class="pf_psv sf_date">{% assign t_then = item.when | date: "%s" %}{{ t_then | date: "%Y-%m-%dT%H:%M:%S%z" }}</span>days ago, achieved in
+<span class="pf_psp" display="block">{{ item.where }}</span>by
+<strong>{{ item.who }}</strong>
 </td>
 </tr>
 {% endfor %}
@@ -33,7 +34,7 @@ title: 码海无涯，回头是岸
 $(".sf_date").each(function(){
     then = new Date($(this).html());
     diff = (now.getTime() - then.getTime()) / (1000 * 60 * 60 * 24);
-    $(this).html(diff.toFixed(5));
+    $(this).html(Math.floor(diff));
 });
 </script>
 
