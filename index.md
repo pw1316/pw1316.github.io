@@ -34,6 +34,7 @@ $(".sf_date").each(function(){
     then = new Date($(this).html());
     diff = (now.getTime() - then.getTime()) / (1000 * 60 * 60 * 24);
     $(this).html(diff.toFixed(5));
+    $(this).html(String(then));
 });
 </script>
 
