@@ -22,11 +22,19 @@ title: 码海无涯，回头是岸
 <td>
 距离<span class="pf_ps3">Scuderia Ferrari</span>的上一个
 <span class="pf_ps4" display="block">{{ item.name }}</span>
-已经过去了{% assign t_then = item.when | date: "%s" %}<span class="pf_psv">{{ "now" | date: "%s" | minus: t_then | divided_by: 86400 }}</span>天，上一次发生在
+已经过去了{% assign t_then = item.when | date: "%s" %}<span class="pf_psv sf_date">{{ t_then | date: "%Y-%m-%dT%H:%M:%S" }}</span>天，上一次发生在
 <span class="pf_psp" display="block">{{ item.where }}</span>由<strong>{{ item.who }}</strong>取得
 </td>
 </tr>
 {% endfor %}
 </table>
+
+<script>
+$(".sf_date").each(function(){
+    then = new Date($(this).html());
+    diff = (now.getTime() - then.getTime()) / (1000 * 60 * 60 * 24);
+    $(this).html(diff.toFixed(5));
+});
+</script>
 
 <!-- ![My Trophy Card](https://card.psnprofiles.com/2/PW__1316.png) -->

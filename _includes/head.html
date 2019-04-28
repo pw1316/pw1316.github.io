@@ -10,6 +10,7 @@
 <!-- Mermaid flowchart support -->
 <script src="{{ site.baseurl }}/code/mermaid-8.0.0.min.js"></script>
 <script>
+  var now = new Date;
   mermaid.initialize({startOnLoad: true, theme: 'neutral'});
   $(function(){
     var elements = document.getElementsByClassName("language-mermaid");
