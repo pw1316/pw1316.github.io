@@ -31,6 +31,7 @@ title: 码海无涯，回头是岸
 
 <script>
 $(".sf_date").each(function(){
+    return;
     then = new Date($(this).html());
     diff = (now.getTime() - then.getTime()) / (1000 * 60 * 60 * 24);
     $(this).html(diff.toFixed(5));
