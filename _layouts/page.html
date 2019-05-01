@@ -52,7 +52,15 @@ layout: default
   <ul class="darklist pd10">
   {% for item in site.data.Ferrari.Record.items %}
   <li>
-    <span class="l pf_ps3">{{ item.name }}</span>
+    <p class="l"><span class="pf_ps3">{{ item.name }}</span>
+      {% if item.position %}
+      {% if item.position == "DNF" %}
+        <br>未完成
+      {% else %}
+        <br>第{{ item.position }}完赛
+      {% endif %}
+      {% endif %}
+    </p>
     <div class="ml64">
       <p><span class="sf_date">{{ item.when | date: "%Y-%m-%dT%H:%M:%S%z" }}</span>天前发生</p>
       <p>{{ item.where }}大奖赛</p>
@@ -60,9 +68,6 @@ layout: default
     </div>
   </li>
   {% endfor %}
-  </ul>
-  <!-- SNS Link -->
-  <ul class="darklist pd10">
   </ul>
 </div>
 </div>
