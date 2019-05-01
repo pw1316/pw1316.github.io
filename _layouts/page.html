@@ -40,21 +40,30 @@ layout: default
   </div>
 </div>
 <div class="side">
-  {% if site.sidebar-about-description %}
-  <p class="hd3">{{site.sidebar-about-description}}</p>
-  <p id="side_curdate" class="hd3">{{ "now" | date: "%Y-%m-%d %A %H:%M" }}</p>
-  <script>$("#side_curdate").html(String(now))</script>
-  {% endif %}
+  <div class="hd3">{{site.email}}</div>
+  <ul class="darklist pd10">
+    <li><a class="btn" href="{{ site.baseurl }}2019/03/08/CV.html">CV</a><li>
+    <li>
+      <a target="_blank" href="https://my.playstation.com/profile/PW__1316"><i class="fab fa-playstation fa-3x"></i></a>
+      <a target="_blank" href="https://github.com/pw1316"><i class="fab fa-github fa-3x"></i></a>
+    </li>
+  </ul>
+  <div class="hd3">{{ site.data.Ferrari.Record.name }}</div>
+  <ul class="darklist pd10">
+  {% for item in site.data.Ferrari.Record.items %}
+  <li>
+    <span class="l pf_ps3">{{ item.name }}</span>
+    <div class="ml64">
+      <p><span class="sf_date">{{ item.when | date: "%Y-%m-%dT%H:%M:%S%z" }}</span>天前发生</p>
+      <p>{{ item.where }}大奖赛</p>
+      <a>{{ item.who }}</a>
+    </div>
+  </li>
+  {% endfor %}
+  </ul>
   <!-- SNS Link -->
   <ul class="darklist pd10">
-  <li>
-    <a target="_blank" href="https://my.playstation.com/profile/PW__1316"><i class="fab fa-playstation fa-3x"></i></a>
-    <a target="_blank" href="https://github.com/pw1316"><i class="fab fa-github fa-3x"></i></a>
-  </li>
   </ul>
-  {% if site.email %}
-  <p class="hd3">{{site.email}}</p>
-  {% endif %}
 </div>
 </div>
 
@@ -66,3 +75,13 @@ layout: default
 <label class="footinfo"><a href="https://www.easycounter.com/"><img src="https://www.easycounter.com/counter.php?pw1316" border="0" alt="Web Site Hit Counters"></a>unique visitors since 2018.11.08</label>
 </div>
 </div>
+
+<script>
+$(function(){
+  $(".sf_date").each(function(){
+    then = new Date($(this).html());
+    diff = (now.getTime() - then.getTime()) / (1000 * 60 * 60 * 24);
+    $(this).html(Math.floor(diff));
+  });
+});
+</script>

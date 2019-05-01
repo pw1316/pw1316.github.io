@@ -1,11 +1,11 @@
 {
-  "name":"Does SF get C2H6 today?",
+  "name":"窝法乙烷",
   "items":[
-    {"name":"WCC","when":"2008-11-02 00:00:00 +0000","who":"Kimi Räikkönen & Felipe Massa","where":"Brazil"},
-    {"name":"WDC","when":"2007-10-21 00:00:00 +0000","who":"Kimi Räikkönen","where":"Brazil"},
-    {"name":"Race Win","when":"2018-10-21 00:00:00 +0000","who":"Kimi Räikkönen","where":"United States"},
-    {"name":"Rece Podium","when":"2019-04-28 00:00:00 +0000","who":"Sebastian Vettel","where":"Azerbaijan","position":3},
-    {"name":"Fastest Lap","when":"2019-04-28 00:00:00 +0000","who":"Charles Leclerc","where":"Azerbaijan","position":5},
-    {"name":"Pole Position","when":"2019-03-30 00:00:00 +0000","who":"Charles Leclerc","where":"Barain"}
+    {"name":"车手总冠","when":"2008-11-02 00:00:00 +0000","who":"Kimi Räikkönen & Felipe Massa","where":"巴西"},
+    {"name":"车队总冠","when":"2007-10-21 00:00:00 +0000","who":"Kimi Räikkönen","where":"巴西"},
+    {"name":"分站冠军","when":"2018-10-21 00:00:00 +0000","who":"Kimi Räikkönen","where":"美国"},
+    {"name":"分站前三","when":"2019-04-28 00:00:00 +0000","who":"Sebastian Vettel","where":"阿塞拜疆","position":3},
+    {"name":"最快单圈","when":"2019-04-28 00:00:00 +0000","who":"Charles Leclerc","where":"阿塞拜疆","position":5},
+    {"name":"排位杆位","when":"2019-03-30 00:00:00 +0000","who":"Charles Leclerc","where":"巴林"}
   ]
 }

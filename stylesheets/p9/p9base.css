@@ -225,7 +225,7 @@ h1 {font-size:20px; padding:0 0 12px;}
 .footer .footlogo {display:block; background:url('aimage/logo.png') no-repeat left center; overflow:hidden; float:left; padding-left:60px; color:#6b7989; font-size:12px;}
 .footer .footlogo h2 {font-size:18px; color:#b2bfc9;}
 .footer .footlogo span {display:block; line-height:180%; margin-top:5px;}
-.footer .footinfo {text-align:right; height:52px; line-height:52px;}
+.footer .footinfo {text-align:right; height:36px; line-height:36px;}
 .footer .footinfo a {text-decoration:underline; color:#6b7989; margin:0 10px; line-height:180%;}
 .footer .footinfo a:hover {color:#b2bfc9;}
 
