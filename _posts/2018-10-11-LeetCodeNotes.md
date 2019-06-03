@@ -2,7 +2,7 @@
 layout: page
 title: Leet Code笔记
 date: 2018-10-11 20:36:30 +0800
-mdate: 2019-05-29 18:08:47 +0800
+mdate: 2019-06-03 21:13:18 +0800
 showbar: false
 ---
 
@@ -25,6 +25,7 @@ showbar: false
 - [P169 Majority Element](#p169-majority-element)
 - [P188 Best Time to Buy and Sell Stock IV](#p188-best-time-to-buy-and-sell-stock-iv)
 - [P218 The Skyline Problem](#p218-the-skyline-problem)
+- [P279 Perfect Squares](#p279-perfect-squares)
 - [P494 求目标和](#p494-%E6%B1%82%E7%9B%AE%E6%A0%87%E5%92%8C)
 - [P673 最长上升子序列个数](#p673-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%E4%B8%AA%E6%95%B0)
 
@@ -441,6 +442,16 @@ return B
 > 如果左顶点用$$\geq$$，(2, 2)就会成为一个目标点\\
 > 如果右顶点用$$\geq$$，(3, 2)就会被切割为一个目标点\\
 > 最终结果就会变成[(1, 2), (2, 2), (3, 2), (4, 0)]，而不是[(1, 2), (4, 0)]
+
+## P279 Perfect Squares
+
+一个正整数，分解成完全平方数的和，求最少能分解成几个。
+
+参考[拉格朗日四平方定理](https://en.wikipedia.org/wiki/Lagrange%27s_four-square_theorem)，每一个正整数都可以表示为四个整数的平方和。所以解只有4种：$$1,2,3,4$$
+
+参考[勒让德三平方定理](https://en.wikipedia.org/wiki/Legendre%27s_three-square_theorem)，形如$$4^p(8q+7)$$的正整数，其解必然是4，其余的正整数，其解之多为3。
+
+所以先除以因数$$4^p$$，剩余部分模8，余数为7的其解就是4。剩下的判断能否由2个完全平方数表示（一个可以表示为$$0^2+a^2$$，所以只剩下2和3两种情况）。如果能就是2（或1），如果不能就是3。
 
 ## P494 求目标和
 
