@@ -464,15 +464,19 @@ return B
 
 新的数正好当作索引，建立BIT。对于每个数$$x$$，首先获取编号$$i=f(x)$$，然后BIT查找$$BITSum(i)$$，随后把这个数插入树中$$BITAdd(i+1)$$
 
-> BITSum(i):\\
->     while(i):\\
->         sum += BIT[i]\\
->         i = i - (i & -i)
+```python
+def BITSum(i):
+    while i > 0:
+        sum += BIT[i]
+        i = i - (i & -i)
+```
 
-> BITAdd(i, v):\\
->     while(i < n):\\
->         BIT[i] += v\\
->         i = i + (i & -i)\\
+```python
+def BITAdd(i, v):
+    while i < n:
+        BIT[i] += v
+        i = i + (i & -i)
+```
 
 ## P494 求目标和
 
