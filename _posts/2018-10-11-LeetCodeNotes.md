@@ -2,7 +2,7 @@
 layout: page
 title: Leet Code笔记
 date: 2018-10-11 20:36:30 +0800
-mdate: 2019-06-03 21:13:18 +0800
+mdate: 2019-06-17 01:36:29 +0800
 showbar: false
 ---
 
@@ -26,6 +26,7 @@ showbar: false
 - [P188 Best Time to Buy and Sell Stock IV](#p188-best-time-to-buy-and-sell-stock-iv)
 - [P218 The Skyline Problem](#p218-the-skyline-problem)
 - [P279 Perfect Squares](#p279-perfect-squares)
+- [P315 Count of Smaller Numbers After Self](#p315-count-of-smaller-numbers-after-self)
 - [P494 求目标和](#p494-%E6%B1%82%E7%9B%AE%E6%A0%87%E5%92%8C)
 - [P673 最长上升子序列个数](#p673-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%E4%B8%AA%E6%95%B0)
 
@@ -452,6 +453,26 @@ return B
 参考[勒让德三平方定理](https://en.wikipedia.org/wiki/Legendre%27s_three-square_theorem)，形如$$4^p(8q+7)$$的正整数，其解必然是4，其余的正整数，其解之多为3。
 
 所以先除以因数$$4^p$$，剩余部分模8，余数为7的其解就是4。剩下的判断能否由2个完全平方数表示（一个可以表示为$$0^2+a^2$$，所以只剩下2和3两种情况）。如果能就是2（或1），如果不能就是3。
+
+## P315 Count of Smaller Numbers After Self
+
+给定一个序列，求每个数右边所有小于它的数的个数。
+
+先遍历一遍确认所有数的范围。建立线段树，每个节点记录该区间内的数的数量。
+
+上面的线段树很稀疏，所以可以压缩：先排序，然后按从小到大编号，相同数字编号相同（如$$5,2,6,1$$编号为$$2,1,3,0$$），这样就可以把原数列压缩成0开始的连续整数。
+
+新的数正好当作索引，建立BIT。对于每个数$$x$$，首先获取编号$$i=f(x)$$，然后BIT查找$$BITSum(i)$$，随后把这个数插入树中$$BITAdd(i+1)$$
+
+> BITSum(i):\\
+>     while(i):\\
+>         sum += BIT[i]\\
+>         i = i - (i & -i)
+
+> BITAdd(i, v):\\
+>     while(i < n):\\
+>         BIT[i] += v\\
+>         i = i + (i & -i)\\
 
 ## P494 求目标和
 
