@@ -8,5 +8,5 @@ alt: "DJMAX RESPECT"
 <tr><td colspan="4"><p>{{ site.data.DMR.Trophies.name }}</p></td></tr>
 
 {% for item in site.data.DMR.Trophies.trophy %}
-{% include trophy_item.html %}
+{% include trophy/trophy_item.html %}
 {% endfor %}

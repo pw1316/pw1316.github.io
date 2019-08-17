@@ -15,4 +15,4 @@ title: 码海无涯，回头是岸
 {% endfor %}
 </table>
 
-![My Trophy Card](https://card.psnprofiles.com/2/PW__1316.png)
+<!-- ![My Trophy Card](https://card.psnprofiles.com/2/PW__1316.png) -->

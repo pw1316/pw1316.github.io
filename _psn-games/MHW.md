@@ -8,5 +8,5 @@ alt: " Monster Hunter World"
 <tr><td colspan="4"><p>{{ site.data.MHW.Trophies.name }}</p></td></tr>
 
 {% for item in site.data.MHW.Trophies.trophy %}
-{% include trophy_item.html %}
+{% include trophy/trophy_item.html %}
 {% endfor %}
