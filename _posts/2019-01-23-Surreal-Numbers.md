@@ -3,7 +3,6 @@ layout: page
 title: 研究之美
 date: 2019-01-23 15:27:39 +0800
 mdate: 2019-03-06 12:11:29 +0800
-showbar: false
 ---
 
 ## Before All

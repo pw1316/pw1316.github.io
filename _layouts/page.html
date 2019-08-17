@@ -2,76 +2,13 @@
 layout: core/default
 ---
 
-<!-- Read showbar data -->
-{% if page.showbar != false %}
-<div class="showbar">
-<div class="inner">
-{% for item in site.psn-games %}
-{% unless item.hide %}
-<a href="{{ site.baseurl }}{{ item.url }}"><img src="{{ item.image }}" alt="{{ item.alt }}" title="{{ item.alt }}"></a>
-{% endunless %}
-{% endfor %}
+<div class="pd10">
+  <h1>{{ page.title }}</h1>
+  {% if page.date %}
+  <div class="meta"><span>创建日期{{ page.date | date: "%Y-%m-%d %H:%M" }}</span></div>
+  <div class="meta"><span>最后修改{{ page.mdate | date: "%Y-%m-%d %H:%M" }}</span></div>
+  {% endif %}
 </div>
+<div class="content pd10">
+  {{ content }}
 </div>
-{% endif %}
-
-<div class="inner mt20">
-<div class="main">
-  <div class="box">
-    <div class="pd10">
-      <h1>{{ page.title }}</h1>
-      {% if page.date %}
-      <div class="meta"><span>创建日期{{ page.date | date: "%Y-%m-%d %H:%M" }}</span></div>
-      <div class="meta"><span>最后修改{{ page.mdate | date: "%Y-%m-%d %H:%M" }}</span></div>
-      {% endif %}
-    </div>
-    <div class="content pd10">
-      {{ content }}
-    </div>
-  </div>
-</div>
-<div class="side">
-  <div class="hd3">{{site.email}}</div>
-  <ul class="darklist pd10">
-    <li><a class="btn" href="{{ site.baseurl }}2019/03/08/CV.html">CV</a><li>
-    <li>
-      <a target="_blank" href="https://my.playstation.com/profile/PW__1316"><i class="fab fa-playstation fa-3x"></i></a>
-      <a target="_blank" href="https://github.com/pw1316"><i class="fab fa-github fa-3x"></i></a>
-    </li>
-  </ul>
-  <div class="hd3">{{ site.data.Ferrari.Record.name }}</div>
-  <ul class="darklist pd10">
-  {% for item in site.data.Ferrari.Record.items %}
-  <li>
-    <p class="l"><span class="pf_ps3">{{ item.name }}</span>
-      {% if item.position %}
-      {% if item.position == "DNF" %}
-        <br>未完成
-      {% else %}
-        <br>第{{ item.position }}完赛
-      {% endif %}
-      {% endif %}
-      {% if item.count %}
-        <br>第{{ item.count }}个
-      {% endif %}
-    </p>
-    <div class="ml64">
-      <p><span class="sf_date">{{ item.when | date: "%Y-%m-%dT%H:%M:%S%z" }}</span>天前发生</p>
-      <p>{{ item.where }}大奖赛</p>
-      <a>{{ item.who }}</a>
-    </div>
-  </li>
-  {% endfor %}
-  </ul>
-</div>
-</div>
-
-<script>
-$(function(){
-  $(".sf_date").each(function(){
-    then = new Date($(this).html());
-    diff = (now.getTime() - then.getTime()) / (1000 * 60 * 60 * 24);
-    $(this).html(Math.floor(diff));
-  });
-});
-</script>

@@ -16,8 +16,28 @@
   </div>
 </div>
 
-<!-- 正文 -->
-{{ content }}
+<!-- Showbar，需要在实际页面中手动开启 -->
+{% if page.showbar %}
+<div class="showbar">
+<div class="inner">
+{% for item in site.psn-games %}
+{% unless item.hide %}
+<a href="{{ site.baseurl }}{{ item.url }}"><img src="{{ item.image }}" alt="{{ item.alt }}" title="{{ item.alt }}"></a>
+{% endunless %}
+{% endfor %}
+</div>
+</div>
+{% endif %}
+
+<!-- 中间部分 -->
+<div class="inner mt20">
+  <!-- 正文 -->
+  <div class="main box">
+  {{ content }}
+  </div>
+  <!-- 侧边栏 -->
+  {% include core/sidebar.html %}
+</div>
 
 <!-- 底部banner -->
 <div class="footer">

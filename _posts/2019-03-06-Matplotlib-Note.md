@@ -3,7 +3,6 @@ layout: page
 title: matplotlib笔记
 date: 2019-03-06 12:11:58 +0800
 mdate: 2019-03-06 12:11:58 +0800
-showbar: false
 ---
 
 ## 2D坐标轴单位相同

@@ -1,6 +1,7 @@
 ---
 layout: page
 title: 码海无涯，回头是岸
+showbar: true
 ---
 
 {% assign sorted_posts = site.posts | sort: 'mdate' | reverse | slice: 0, 2 %}

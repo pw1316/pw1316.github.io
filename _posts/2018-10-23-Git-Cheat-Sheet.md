@@ -3,7 +3,6 @@ layout: page
 title: Git Cheat Sheet
 date: 2018-10-23 11:35:53 +0800
 mdate: 2018-10-30 10:38:27 +0800
-showbar: false
 ---
 
 ### CREATE

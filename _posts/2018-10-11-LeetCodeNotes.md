@@ -3,7 +3,6 @@ layout: page
 title: Leet Code笔记
 date: 2018-10-11 20:36:30 +0800
 mdate: 2019-07-09 10:47:36 +0800
-showbar: false
 ---
 
 - [Pre](#pre)
