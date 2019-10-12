@@ -2,8 +2,28 @@
 layout: page
 title: Git Cheat Sheet
 date: 2018-10-23 11:35:53 +0800
-mdate: 2018-10-30 10:38:27 +0800
+mdate: 2019-10-12 15:32:40 +0800
 ---
+
+- [CREATE](#create)
+- [LOCAL CHANGES](#local-changes)
+- [COMMIT HISTORY](#commit-history)
+- [BRANCHES & TAGS](#branches--tags)
+- [UPDATE & PUBLISH](#update--publish)
+- [MERGE & REBASE](#merge--rebase)
+- [UNDO](#undo)
+- [COMMIT RELATED CHANGES](#commit-related-changes)
+- [COMMIT OFTEN](#commit-often)
+- [DON'T COMMIT HALF-DONE WORK](#dont-commit-half-done-work)
+- [TEST CODE BEFORE YOU COMMIT](#test-code-before-you-commit)
+- [WRITE GOOD COMMIT MESSAGES](#write-good-commit-messages)
+- [VERSION CONTROL IS NOT A BACKUP SYSTEM](#version-control-is-not-a-backup-system)
+- [USE BRANCHES](#use-branches)
+- [AGREE ON A WORKFLOW](#agree-on-a-workflow)
+- [HELP & DOCUMENTATION](#help--documentation)
+- [FREE ONLINE RESOURCES](#free-online-resources)
+- [REMOVE HISTORY](#remove-history)
+- [GARBAGE COLLECTION](#garbage-collection)
 
 ### CREATE
 
@@ -278,7 +298,7 @@ Resist the temptation to commit something that you <<think>> is completed. Test 
 Begin your message with a short summary of your changes (up to 50 characters as a guideline). Separate it from the following body by including a blank line. The body of your message should provide detailed answers to the following questions:
 
 1. What was the motivation for the change?
-1. How does it differ from the previous implementation?
+2. How does it differ from the previous implementation?
 
 Use the imperative, present tense (<<change>>, not <<changed>> or <<changes>>) to be consistent with generated messages from commands like git merge.
 
@@ -308,9 +328,9 @@ $ git help <command>
 > http://rogerdudler.github.io/git-guide/  
 > http://www.git-scm.org/
 
-### 清除提交历史
+### REMOVE HISTORY
 
-本地删除
+Local
 
 ```
 $ git filter-branch --force --index-filter ^
@@ -320,22 +340,22 @@ More? --prune-empty --tag-name-filter cat -- --all
 
 > Windows命令换行使用 `^`，而unix命令换行使用 `\`
 
-提交到远端
+Push
 
 ```
 $ git push <origin> --force --all
 ```
 
-垃圾回收
+Pull
+
+```
+$ git pull --rebase
+```
+
+### GARBAGE COLLECTION
 
 ```
 $ git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
 $ git reflog expire --expire=now --all
 $ git gc --prune=now
-```
-
-其它客户端拉取
-
-```
-$ git pull --rebase
 ```
