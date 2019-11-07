@@ -4,7 +4,7 @@
     {"name":"车队总冠","when":"2008-11-02 00:00:00 +0000","who":"Kimi Räikkönen & Felipe Massa","where":"巴西"},
     {"name":"车手总冠","when":"2007-10-21 00:00:00 +0000","who":"Kimi Räikkönen","where":"巴西"},
     {"name":"分站冠军","when":"2019-09-22 00:00:00 +0000","who":"Sebastian Vettel","where":"新加坡"},
-    {"name":"最快单圈","when":"2019-09-01 00:00:00 +0000","who":"Sebastian Vettel","where":"比利时","position":4},
-    {"name":"排位杆位","when":"2019-09-21 00:00:00 +0000","who":"Charles Leclerc","where":"新加坡"}
+    {"name":"最快单圈","when":"2019-11-04 00:00:00 +0000","who":"Charles Leclerc","where":"美国","position":4},
+    {"name":"排位杆位","when":"2019-10-27 00:00:00 +0000","who":"Charles Leclerc","where":"墨西哥"}
   ]
 }
