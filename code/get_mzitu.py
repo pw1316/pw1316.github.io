@@ -16,15 +16,23 @@ import urllib.request
 import urllib.parse
 import urllib.error
 
+HOST_NAME = 'https://www.mzitu.com/'
+
+# Like human
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; WOW64) ' \
+    'AppleWebKit/537.36 (KHTML, like Gecko) ' \
+    'Chrome/45.0.2454.101 ' \
+    'Safari/537.36 '
+
 
 def doc_delete_white_space(doc):
     """
     Delete the white space.
 
     Args:
-      doc(bytes): Document to be processed.
+        doc(bytes): Document to be processed.
     Returns:
-      Document without white spaces.
+        Document without white spaces.
 
     """
     assert isinstance(doc, bytes)
@@ -33,7 +41,48 @@ def doc_delete_white_space(doc):
     return doc
 
 
-def get_image_gen(start, end, page_index, page_index_max):
+def get_max_index_and_next(doc):
+    """
+    Find the max index of current page, and next page.
+
+    Args:
+        doc(bytes): Document to be processed.
+    Returns:
+        Max index of this page.
+        Number of next page.
+
+    """
+    pattern_pagenavi = re.compile(br'<div class="pagenavi">.*?</div>', re.S)
+    pattern_pagenum = re.compile(br'<a href=(.*?)>.*?</a>', re.S)
+    page_navi = pattern_pagenavi.search(doc).group(0)
+
+    num_next = pattern_pagenum.search(page_navi).group(1)[1:-1]
+    # If there is next, begin with "http", "/" otherwise
+    if num_next[:4] == b'http':
+        num_next = re.sub(HOST_NAME.encode(), b'', num_next)
+        num_next = int(num_next)
+    else:
+        num_next = None
+    page_navi = pattern_pagenum.sub(b'', page_navi, 1)
+
+    # Find max index
+    idx_max = 0
+    match = pattern_pagenum.search(page_navi)
+    while match:
+        idx = match.group(1)[1:-1]
+        idx = re.sub(br'.*?/', b'', idx, flags=re.S)
+        if idx == b'':
+            idx = 1
+        else:
+            idx = int(idx)
+        if idx > idx_max:
+            idx_max = idx
+        page_navi = pattern_pagenum.sub(b'', page_navi, 1)
+        match = pattern_pagenum.search(page_navi)
+    return idx_max, num_next
+
+
+def get_image_gen(start, end, page_index, page_index_max, out_dir):
     """
     MZITU image generator.
 
@@ -46,32 +95,23 @@ def get_image_gen(start, end, page_index, page_index_max):
         A generator
 
     """
-    host_name = 'https://www.mzitu.com/'
-    # Like human
-    user_agent = 'Mozilla/5.0 (Windows NT 10.0; WOW64) ' \
-                 'AppleWebKit/537.36 (KHTML, like Gecko) ' \
-                 'Chrome/45.0.2454.101 ' \
-                 'Safari/537.36 '
-
     # Page number
     page_number = start
     page_number_next = None
 
     # Regex
-    page_number_part_pattern = re.compile(br'<div class="pagenavi">.*?</div>', re.S)  # Where is page number
-    page_number_pattern = re.compile(br'<a href=(.*?)>.*?</a>', re.S)  # Page number
     img_pattern = re.compile(br'<img src="(.*?)".*?/>', re.S)  # Image URL
 
     while page_number is not None:
         if page_index != 1:
-            url_in = '{}{:d}/{:d}'.format(host_name, page_number, page_index)
+            url_in = '{}{:d}/{:d}'.format(HOST_NAME, page_number, page_index)
         else:
-            url_in = '{}{:d}'.format(host_name, page_number)
+            url_in = '{}{:d}'.format(HOST_NAME, page_number)
 
         # Get main page
         try:
             req = urllib.request.Request(url_in)
-            req.add_header('User-Agent', user_agent)
+            req.add_header('User-Agent', USER_AGENT)
             req = urllib.request.urlopen(req)
             doc = req.read()
             # Gzip
@@ -86,83 +126,58 @@ def get_image_gen(start, end, page_index, page_index_max):
 
         # When first page, get next page and max index
         if page_index == 1:
-            page_navi = re.search(page_number_part_pattern, doc).group(0)
-            page_number_next = re.search(page_number_pattern, page_navi).group(1)[1:-1]
-            # If there is next, begin with "http", "/" otherwise
-            if page_number_next[:4] == b'http':
-                page_number_next = re.sub(host_name.encode(), b'', page_number_next)
-                page_number_next = int(page_number_next)
-            else:
-                page_number_next = None
-            page_navi = re.sub(page_number_pattern, b'', page_navi, 1)
-            # Find max index
-            page_index_max = 0
-            while True:
-                m = re.search(page_number_pattern, page_navi)
-                if m is None:
-                    break
-                max_pattern = m.group(1)[1:-1]
-                max_pattern = re.sub(br'.*?/', b'', max_pattern, flags=re.S)
-                if max_pattern == b'':
-                    max_pattern = 1
-                else:
-                    max_pattern = int(max_pattern)
-                if max_pattern > page_index_max:
-                    page_index_max = max_pattern
-                page_navi = re.sub(page_number_pattern, b'', page_navi, 1)
-        
+            page_index_max, page_number_next = get_max_index_and_next(doc)
+
         # Get first image's URL
-        image_url_in = re.search(img_pattern, doc).group(1).decode()
+        image_url_in = img_pattern.search(doc).group(1).decode()
         try:
             req = urllib.request.Request(image_url_in)
-            req.add_header('User-Agent', user_agent)
+            req.add_header('User-Agent', USER_AGENT)
             req.add_header('Referer', url_in)  # Need referer
             req = urllib.request.urlopen(req)
-            img = req.read()
+            image = req.read()
             req.close()
         except BaseException as e:
             print('image {:d}:{:d} not found...'.format(page_number, page_index))
             print(e)
             return False
-        assert isinstance(img, bytes)
+        assert isinstance(image, bytes)
 
         # Create directory and image
-        if not os.path.exists('E:\\mzitu\\{:d}'.format(page_number)):
-            os.mkdir('E:\\mzitu\\{:d}'.format(page_number))
-        file = open('E:\\mzitu\\{:d}\\{:d}.jpg'.format(page_number, page_index), 'wb')
-        file.write(img)
-        file.close()
+        image_dir = os.path.join(out_dir, '{:d}'.format(page_number))
+        os.makedirs(image_dir, exist_ok=True)
+        image_path = os.path.join(image_dir, '{:d}.jpg'.format(page_index))
+        with open(image_path, 'wb') as ofs:
+            ofs.write(image)
 
         # One page could have multiple images
         sub_number = 1
-        doc = re.sub(img_pattern, b'', doc, 1)
-        while True:
-            m = re.search(img_pattern, doc)
-            if m is None:
-                break
-            else:
-                sub_number = sub_number + 1
-                image_url_in = m.group(1).decode()
-                try:
-                    req = urllib.request.Request(image_url_in)
-                    req.add_header('User-Agent', user_agent)
-                    req.add_header('Referer', url_in)  # Need referer
-                    req = urllib.request.urlopen(req)
-                    img = req.read()
-                    req.close()
-                except BaseException as e:
-                    print('image {:d}:{:d}:{:d} not found...'.format(page_number, page_index, sub_number))
-                    print(e)
-                    return False
-                file = open('E:\\mzitu\\{:d}\\{:d}({:d}).jpg'.format(page_number, page_index, sub_number), 'wb')
-                file.write(img)
-                file.close()
-                doc = re.sub(img_pattern, b'', doc, 1)
-        
+        doc = img_pattern.sub(b'', doc, 1)
+        match = img_pattern.search(doc)
+        while match:
+            sub_number = sub_number + 1
+            image_url_in = match.group(1).decode()
+            try:
+                req = urllib.request.Request(image_url_in)
+                req.add_header('User-Agent', USER_AGENT)
+                req.add_header('Referer', url_in)  # Need referer
+                req = urllib.request.urlopen(req)
+                image = req.read()
+                req.close()
+            except BaseException as e:
+                print('image {:d}:{:d}:{:d} not found...'.format(page_number, page_index, sub_number))
+                print(e)
+                return False
+            image_path = os.path.join(
+                image_dir, '{:d}({:d}).jpg'.format(page_index, sub_number))
+            with open(image_path, 'wb') as ofs:
+                ofs.write(image)
+            doc = img_pattern.sub(b'', doc, 1)
+            match = img_pattern.search(doc)
+
         # Yield a message when one iteration done
-        s = 'page {0} {1}/{2}({4}) | next page {3}'
-        s = s.format(page_number, page_index, page_index_max, page_number_next, sub_number)
-        yield s
+        yield 'page {0} {1}/{2}({4}) | next page {3}'.format(
+            page_number, page_index, page_index_max, page_number_next, sub_number)
 
         # Next iteration
         page_index = page_index + 1
@@ -179,10 +194,10 @@ def get_image_gen(start, end, page_index, page_index_max):
     return True
 
 
-def _call(start):
+def _call(start, out_dir):
     # 0.1s per image, 10s per 10 images
     cnt = 0
-    for i in get_image_gen(start, 0, 1, None):
+    for i in get_image_gen(start, 0, 1, None, out_dir):
         print(i)
         cnt += 1
         time.sleep(0.1)
@@ -198,9 +213,14 @@ def _parse_arguments():
         required=True,
         help='Start Number'
     )
+    parser.add_argument(
+        '-out', type=str,
+        required=True,
+        help='Output Directory'
+    )
     return parser.parse_args()
 
 
 if __name__ == '__main__':
     FLXG = _parse_arguments()
-    _call(FLXG.start)
+    _call(FLXG.start, FLXG.out)
