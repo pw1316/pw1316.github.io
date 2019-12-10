@@ -103,9 +103,9 @@ def http_get_main_page(url_in):
             doc = gzip.decompress(doc)
         doc = doc_delete_white_space(doc)
         req.close()
-    except BaseException as error:
+    except urllib.error.HTTPError as error:
         doc = None
-        print(error, 'page {} not found...'.format(url_in))
+        print('[{}] page {} not found...'.format(error.code, url_in))
     return doc
 
 
@@ -126,10 +126,9 @@ def http_get_image(url_in):
         req = urllib.request.urlopen(req)
         image = req.read()
         req.close()
-    except BaseException as error:
+    except urllib.error.HTTPError as error:
         image = None
-        print('image request {} failed...'.format(url_in))
-        print(error)
+        print('[{}] image request {} failed...'.format(error.code, url_in))
     return image
 
 
