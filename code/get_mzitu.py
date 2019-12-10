@@ -82,15 +82,13 @@ def get_max_index_and_next(doc):
     return idx_max, num_next
 
 
-def get_image_gen(start, end, page_index, page_index_max, out_dir):
+def get_image_gen(start, out_dir):
     """
     MZITU image generator.
 
     Args:
         start(int): Start page number.
-        end(int): Upper bound of end page number
-        page_index(int): Index of the first page
-        page_index_max(int): If "page_index" is not 1, should specify the max index of the first page, otherwise None
+        out_dir(str): Output Directory.
     Returns:
         A generator
 
@@ -98,6 +96,8 @@ def get_image_gen(start, end, page_index, page_index_max, out_dir):
     # Page number
     page_number = start
     page_number_next = None
+    page_index = 1
+    page_index_max = None
 
     # Regex
     img_pattern = re.compile(br'<img src="(.*?)".*?/>', re.S)  # Image URL
@@ -186,8 +186,6 @@ def get_image_gen(start, end, page_index, page_index_max, out_dir):
             page_index_max = None
             page_number = page_number_next
             page_number_next = None
-        if page_number is not None and end != 0 and page_number > end:
-            page_number = None
 
     # End generator
     print('done...')
@@ -197,7 +195,7 @@ def get_image_gen(start, end, page_index, page_index_max, out_dir):
 def _call(start, out_dir):
     # 0.1s per image, 10s per 10 images
     cnt = 0
-    for i in get_image_gen(start, 0, 1, None, out_dir):
+    for i in get_image_gen(start, out_dir):
         print(i)
         cnt += 1
         time.sleep(0.1)
