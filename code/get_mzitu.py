@@ -82,6 +82,30 @@ def get_max_index_and_next(doc):
     return idx_max, num_next
 
 
+def http_get_image(url_in):
+    """
+    Request image through URL.
+
+    Args:
+        url_in(str): Requested URL.
+    Returns:
+        Image bytes.
+
+    """
+    try:
+        req = urllib.request.Request(url_in)
+        req.add_header('User-Agent', USER_AGENT)
+        req.add_header('Referer', url_in)  # Need referer
+        req = urllib.request.urlopen(req)
+        image = req.read()
+        req.close()
+    except BaseException as error:
+        image = None
+        print('image request {} failed...'.format(url_in))
+        print(error)
+    return image
+
+
 def get_image_gen(start, out_dir):
     """
     MZITU image generator.
@@ -130,16 +154,8 @@ def get_image_gen(start, out_dir):
 
         # Get first image's URL
         image_url_in = img_pattern.search(doc).group(1).decode()
-        try:
-            req = urllib.request.Request(image_url_in)
-            req.add_header('User-Agent', USER_AGENT)
-            req.add_header('Referer', url_in)  # Need referer
-            req = urllib.request.urlopen(req)
-            image = req.read()
-            req.close()
-        except BaseException as e:
-            print('image {:d}:{:d} not found...'.format(page_number, page_index))
-            print(e)
+        image = http_get_image(image_url_in)
+        if image is None:
             return False
         assert isinstance(image, bytes)
 
@@ -157,16 +173,8 @@ def get_image_gen(start, out_dir):
         while match:
             sub_number = sub_number + 1
             image_url_in = match.group(1).decode()
-            try:
-                req = urllib.request.Request(image_url_in)
-                req.add_header('User-Agent', USER_AGENT)
-                req.add_header('Referer', url_in)  # Need referer
-                req = urllib.request.urlopen(req)
-                image = req.read()
-                req.close()
-            except BaseException as e:
-                print('image {:d}:{:d}:{:d} not found...'.format(page_number, page_index, sub_number))
-                print(e)
+            image = http_get_image(image_url_in)
+            if image is None:
                 return False
             image_path = os.path.join(
                 image_dir, '{:d}({:d}).jpg'.format(page_index, sub_number))
