@@ -1,14 +1,12 @@
-# Target Host: http://www.mzitu.com/
+"""
+Target Host: http://www.mzitu.com/ .
 
-# Updates:
-# 2018-11-23 Protocol http->https, and some sites are gzipped
-# 2018-10-23 Add http referer
+Updates:
+2018-11-23 Protocol http->https, and some sites are gzipped
+2018-10-23 Add http referer
 
-# issues:
-# 57773/40 not exists
-# 57773/41 need manual download
-# 150343/41 not exists
-
+Issues:
+"""
 import gzip
 import os
 import re
