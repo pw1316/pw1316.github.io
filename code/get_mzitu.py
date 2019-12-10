@@ -7,34 +7,36 @@ Updates:
 
 Issues:
 """
+import argparse
 import gzip
 import os
 import re
-import sys
 import time
 import urllib.request
 import urllib.parse
 import urllib.error
 
-pageHeadHint = '1'
-pageTailHint = '200000'
-
 
 def doc_delete_white_space(doc):
-    """Delete the white space
+    """
+    Delete the white space.
+
     Args:
       doc(bytes): Document to be processed.
     Returns:
       Document without white spaces.
+
     """
-    assert(isinstance(doc, bytes))
+    assert isinstance(doc, bytes)
     doc = re.sub(br'\r?\n\s*|\t*', b'', doc)  # CRLF, Line-front, tab
     doc = re.sub(br'>\s+?<', br'><', doc)  # Between tags
     return doc
 
 
-def get_image_gen(start=1, end=0, page_index=1, page_index_max=None):
-    """Delete the white space.
+def get_image_gen(start, end, page_index, page_index_max):
+    """
+    MZITU image generator.
+
     Args:
         start(int): Start page number.
         end(int): Upper bound of end page number
@@ -42,6 +44,7 @@ def get_image_gen(start=1, end=0, page_index=1, page_index_max=None):
         page_index_max(int): If "page_index" is not 1, should specify the max index of the first page, otherwise None
     Returns:
         A generator
+
     """
     host_name = 'https://www.mzitu.com/'
     # Like human
@@ -176,18 +179,10 @@ def get_image_gen(start=1, end=0, page_index=1, page_index_max=None):
     return True
 
 
-def main():
-    args = sys.argv
-    argc = len(args)
-    start = argc < 2 and int(input('Enter begin number({}):'.format(pageHeadHint)) or pageHeadHint) or int(args[1])
-    end = argc < 3 and int(input('Enter end number({}):'.format(pageTailHint)) or pageTailHint) or int(args[2])
-    index = int(input('Enter page index(1):') or '1')
-    index_max = input('Enter page max index:')
-    index_max = index_max and int(index_max) or None
-
+def _call(start):
     # 0.1s per image, 10s per 10 images
     cnt = 0
-    for i in get_image_gen(start, end, index, index_max):
+    for i in get_image_gen(start, 0, 1, None):
         print(i)
         cnt += 1
         time.sleep(0.1)
@@ -196,5 +191,16 @@ def main():
     return True
 
 
+def _parse_arguments():
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        '-start', type=int,
+        required=True,
+        help='Start Number'
+    )
+    return parser.parse_args()
+
+
 if __name__ == '__main__':
-    main()
+    FLXG = _parse_arguments()
+    _call(FLXG.start)
