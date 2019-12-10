@@ -52,6 +52,7 @@ def get_max_index_and_next(doc):
         Number of next page.
 
     """
+    assert isinstance(doc, bytes)
     pattern_pagenavi = re.compile(br'<div class="pagenavi">.*?</div>', re.S)
     pattern_pagenum = re.compile(br'<a href=(.*?)>.*?</a>', re.S)
     page_navi = pattern_pagenavi.search(doc).group(0)
@@ -80,6 +81,32 @@ def get_max_index_and_next(doc):
         page_navi = pattern_pagenum.sub(b'', page_navi, 1)
         match = pattern_pagenum.search(page_navi)
     return idx_max, num_next
+
+
+def http_get_main_page(url_in):
+    """
+    Request page through URL.
+
+    Args:
+        url_in(str): Requested URL.
+    Returns:
+        Page bytes.
+
+    """
+    try:
+        req = urllib.request.Request(url_in)
+        req.add_header('User-Agent', USER_AGENT)
+        req = urllib.request.urlopen(req)
+        doc = req.read()
+        # GZip
+        if req.getheader('Content-Encoding') == 'gzip':
+            doc = gzip.decompress(doc)
+        doc = doc_delete_white_space(doc)
+        req.close()
+    except BaseException as error:
+        doc = None
+        print(error, 'page {} not found...'.format(url_in))
+    return doc
 
 
 def http_get_image(url_in):
@@ -118,51 +145,39 @@ def get_image_gen(start, out_dir):
 
     """
     # Page number
-    page_number = start
-    page_number_next = None
-    page_index = 1
-    page_index_max = None
+    num_current = start
+    num_next = None
+    idx_current = 1
+    idx_max = None
 
     # Regex
     img_pattern = re.compile(br'<img src="(.*?)".*?/>', re.S)  # Image URL
 
-    while page_number is not None:
-        if page_index != 1:
-            url_in = '{}{:d}/{:d}'.format(HOST_NAME, page_number, page_index)
+    while num_current is not None:
+        if idx_current != 1:
+            url_in = '{}{:d}/{:d}'.format(HOST_NAME, num_current, idx_current)
         else:
-            url_in = '{}{:d}'.format(HOST_NAME, page_number)
+            url_in = '{}{:d}'.format(HOST_NAME, num_current)
 
         # Get main page
-        try:
-            req = urllib.request.Request(url_in)
-            req.add_header('User-Agent', USER_AGENT)
-            req = urllib.request.urlopen(req)
-            doc = req.read()
-            # Gzip
-            if req.getheader('Content-Encoding') == 'gzip':
-                doc = gzip.decompress(doc)
-            req.close()
-        except BaseException as e:
-            print(e, 'page {} not found...'.format(url_in))
+        doc = http_get_main_page(url_in)
+        if doc is None:
             return False
-        assert isinstance(doc, bytes)
-        doc = doc_delete_white_space(doc)
 
         # When first page, get next page and max index
-        if page_index == 1:
-            page_index_max, page_number_next = get_max_index_and_next(doc)
+        if idx_current == 1:
+            idx_max, num_next = get_max_index_and_next(doc)
 
         # Get first image's URL
         image_url_in = img_pattern.search(doc).group(1).decode()
         image = http_get_image(image_url_in)
         if image is None:
             return False
-        assert isinstance(image, bytes)
 
         # Create directory and image
-        image_dir = os.path.join(out_dir, '{:d}'.format(page_number))
+        image_dir = os.path.join(out_dir, '{:d}'.format(num_current))
         os.makedirs(image_dir, exist_ok=True)
-        image_path = os.path.join(image_dir, '{:d}.jpg'.format(page_index))
+        image_path = os.path.join(image_dir, '{:d}.jpg'.format(idx_current))
         with open(image_path, 'wb') as ofs:
             ofs.write(image)
 
@@ -177,7 +192,7 @@ def get_image_gen(start, out_dir):
             if image is None:
                 return False
             image_path = os.path.join(
-                image_dir, '{:d}({:d}).jpg'.format(page_index, sub_number))
+                image_dir, '{:d}({:d}).jpg'.format(idx_current, sub_number))
             with open(image_path, 'wb') as ofs:
                 ofs.write(image)
             doc = img_pattern.sub(b'', doc, 1)
@@ -185,15 +200,15 @@ def get_image_gen(start, out_dir):
 
         # Yield a message when one iteration done
         yield 'page {0} {1}/{2}({4}) | next page {3}'.format(
-            page_number, page_index, page_index_max, page_number_next, sub_number)
+            num_current, idx_current, idx_max, num_next, sub_number)
 
         # Next iteration
-        page_index = page_index + 1
-        if page_index > page_index_max:
-            page_index = 1
-            page_index_max = None
-            page_number = page_number_next
-            page_number_next = None
+        idx_current = idx_current + 1
+        if idx_current > idx_max:
+            idx_current = 1
+            idx_max = None
+            num_current = num_next
+            num_next = None
 
     # End generator
     print('done...')
