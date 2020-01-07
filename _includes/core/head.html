@@ -1,37 +1,39 @@
 <head>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width">
-<link rel="stylesheet" href="{{ site.baseurl }}/stylesheets/p9/p9base.css">
-<link rel="stylesheet" href="{{ site.baseurl }}/stylesheets/p9/p9layer.css" id="layui_layer_p9layercss">
-<link rel="stylesheet" href="{{ site.baseurl }}/stylesheets/pw_custom.css">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-<link rel="Shortcut Icon" href="{{ site.baseurl }}/src/keyaki.png">
-<script src="{{ site.baseurl }}/code/jquery-3.3.1.min.js"></script>
-<!-- Mermaid flowchart support -->
-<script src="{{ site.baseurl }}/code/mermaid-8.0.0.min.js"></script>
-<script>
-  var now = new Date;
-  mermaid.initialize({startOnLoad: true, theme: 'neutral'});
-  $(function(){
-    var elements = document.getElementsByClassName("language-mermaid");
-    for (var i = elements.length; i--;) {
-      element = elements[i];
-      var graphDefinition = element.innerText;
-      if (graphDefinition) {
-        var svg = mermaid.render('ha_mermaid_' + i, graphDefinition, function(svg){});
-        if (svg) {
-          var svgElement = document.createElement('div');
-          preNode = element.parentNode;
-          svgElement.innerHTML = svg;
-          svgElement.setAttribute('class', 'mermaid');
-          svgElement.setAttribute('data-processed', 'true');
-          preNode.parentNode.replaceChild(svgElement, preNode);
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="/public/style/p9/p9base100801.css">
+  <link rel="stylesheet" href="/public/style/p9/p9icon111001.css">
+  <link rel="stylesheet" href="/public/style/p9/layer111201.css">
+  <link rel="stylesheet" href="/public/style/custom.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+  <link rel="Shortcut Icon" href="/public/src/keyaki.png">
+  <script src="/public/script/jquery-3.4.1.min.js"></script>
+  <!-- Mermaid flowchart support -->
+  <script src="/public/script/mermaid-8.4.4.min.js"></script>
+  <script>
+    var now = new Date;
+    mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+    $(function () {
+      var elements = document.getElementsByClassName("language-mermaid");
+      for (var i = elements.length; i--;) {
+        element = elements[i];
+        var graphDefinition = element.innerText;
+        if (graphDefinition) {
+          var svg = mermaid.render('ha_mermaid_' + i, graphDefinition, function (svg) { });
+          if (svg) {
+            var svgElement = document.createElement('div');
+            preNode = element.parentNode;
+            svgElement.innerHTML = svg;
+            svgElement.setAttribute('class', 'mermaid');
+            svgElement.setAttribute('data-processed', 'true');
+            preNode.parentNode.replaceChild(svgElement, preNode);
+          }
         }
       }
-    }
-  });
-</script>
-<!-- MathJax math support -->
-<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<title>{{ page.title }}</title>
+    });
+  </script>
+  <!-- MathJax math support -->
+  <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  <title>{{ page.title }}</title>
 </head>

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 码海无涯，回头是岸
+title: Zheqi Yu's Blog
 showbar: true
 ---
 
@@ -11,7 +11,8 @@ showbar: true
 {% for post in site.posts %}
 <tr>
 <td>{% if sorted_posts contains post %}<i class="fas fa-hammer"></i>{% endif %}</td>
-<td>{{ post.date | date: "%Y-%m-%d %H:%M" }}<a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></td>
+<td>{{ post.date | date: "%Y-%m-%d %H:%M" }}</td>
+<td><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></td>
 </tr>
 {% endfor %}
 </table>

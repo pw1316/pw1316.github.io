@@ -8,6 +8,19 @@ layout: core/default
   <div class="meta"><span>创建日期{{ page.date | date: "%Y-%m-%d %H:%M" }}</span></div>
   <div class="meta"><span>最后修改{{ page.mdate | date: "%Y-%m-%d %H:%M" }}</span></div>
   {% endif %}
+
+  {% if page.tags %}
+  <div class="meta mt10">
+    <em class="nodes">
+      {% for item in page.tags %}
+      <a class="node">{{ item }}</a>
+      {% endfor %}
+    </em>
+  </div>
+  {% endif %}
+</div>
+<div class="alert-info pd10">
+  <div class="meta"></div>
 </div>
 <div class="content pd10">
   {{ content }}

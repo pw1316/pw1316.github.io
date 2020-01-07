@@ -1,47 +1,257 @@
 {
-  "name":"DEAD OR ALIVE Xtreme 3 Fortune",
-  "trophy":[
-    {"id":1,"type":"text-platinum","name":"DOAX3大師","desc":"獲得所有獎盃"},
-    {"id":2,"type":"text-bronze","name":"霞的回憶","desc":"選擇「霞」遊玩假期模式至最後一天"},
-    {"id":3,"type":"text-bronze","name":"霞的收藏","desc":"選擇「霞」獲得20種泳裝"},
-    {"id":4,"type":"text-silver","name":"霞的頂級假期","desc":"選擇「霞」觀看結局寫真"},
-    {"id":5,"type":"text-bronze","name":"紅葉的回憶","desc":"選擇「紅葉」遊玩假期模式至最後一天"},
-    {"id":6,"type":"text-bronze","name":"紅葉的收藏","desc":"選擇「紅葉」獲得20種泳裝"},
-    {"id":7,"type":"text-silver","name":"紅葉的頂級假期","desc":"選擇「紅葉」觀看結局寫真"},
-    {"id":8,"type":"text-bronze","name":"瞳的回憶","desc":"選擇「瞳」遊玩假期模式至最後一天"},
-    {"id":9,"type":"text-bronze","name":"瞳的收藏","desc":"選擇「瞳」獲得20種泳裝"},
-    {"id":10,"type":"text-silver","name":"瞳的頂級假期","desc":"選擇「瞳」觀看結局寫真"},
-    {"id":11,"type":"text-bronze","name":"海蓮娜的回憶","desc":"選擇「海蓮娜」遊玩假期模式至最後一天"},
-    {"id":12,"type":"text-bronze","name":"海蓮娜的收藏","desc":"選擇「海蓮娜」獲得20種泳裝"},
-    {"id":13,"type":"text-silver","name":"海蓮娜的頂級假期","desc":"選擇「海蓮娜」觀看結局寫真"},
-    {"id":14,"type":"text-bronze","name":"瑪莉的回憶","desc":"選擇「瑪莉蘿絲」遊玩假期模式至最後一天"},
-    {"id":15,"type":"text-bronze","name":"瑪莉的收藏","desc":"選擇「瑪莉蘿絲」獲得20種泳裝"},
-    {"id":16,"type":"text-silver","name":"瑪莉的頂級假期","desc":"選擇「瑪莉蘿絲」觀看結局寫真"},
-    {"id":18,"type":"text-bronze","name":"穗香的收藏","desc":"選擇「穗香」獲得20種泳裝"},
-    {"id":19,"type":"text-silver","name":"穗香的頂級假期","desc":"選擇「穗香」觀看結局寫真"},
-    {"id":20,"type":"text-bronze","name":"女天狗的回憶","desc":"選擇「女天狗」遊玩假期模式至最後一天"},
-    {"id":21,"type":"text-bronze","name":"女天狗的收藏","desc":"選擇「女天狗」獲得20種泳裝"},
-    {"id":22,"type":"text-silver","name":"女天狗的頂級假期","desc":"選擇「女天狗」觀看結局寫真"},
-    {"id":23,"type":"text-bronze","name":"心的回憶","desc":"選擇「心」遊玩假期模式至最後一天"},
-    {"id":24,"type":"text-bronze","name":"心的收藏","desc":"選擇「心」獲得20種泳裝"},
-    {"id":25,"type":"text-silver","name":"心的頂級假期","desc":"選擇「心」觀看結局寫真"},
-    {"id":26,"type":"text-bronze","name":"綾音的回憶","desc":"選擇「綾音」遊玩假期模式至最後一天"},
-    {"id":27,"type":"text-bronze","name":"綾音的收藏","desc":"選擇「綾音」獲得20種泳裝"},
-    {"id":28,"type":"text-silver","name":"綾音的頂級假期","desc":"選擇「綾音」觀看結局寫真"},
-    {"id":30,"type":"text-silver","name":"你真猛啊！","desc":"以S級評價以上完成假期模式"},
-    {"id":31,"type":"text-bronze","name":"一起玩吧","desc":"成功邀請女孩組成搭檔10次"},
-    {"id":32,"type":"text-bronze","name":"請收下","desc":"操作女孩成功贈送其他女孩禮物10次"},
-    {"id":33,"type":"text-bronze","name":"開放的感覺！","desc":"觀賞10種女孩的寫真"},
-    {"id":38,"type":"text-bronze","name":"喜歡嗎？","desc":"操作島主成功贈送女孩禮物10次"},
-    {"id":41,"type":"text-bronze","name":"初學者畢業","desc":"島主等級達到10"},
-    {"id":42,"type":"text-silver","name":"大家的島主","desc":"島主等級達到30"},
-    {"id":43,"type":"text-bronze","name":"泳池跳方塊大師","desc":"在泳池跳方塊遊戲中獲得10勝"},
-    {"id":44,"type":"text-bronze","name":"頂屁屁大師","desc":"在頂屁屁遊戲中獲得10勝"},
-    {"id":45,"type":"text-bronze","name":"拔河大師","desc":"在拔河中獲得10勝"},
-    {"id":46,"type":"text-bronze","name":"沙灘排球大師","desc":"在沙灘排球中獲得10勝"},
-    {"id":47,"type":"text-bronze","name":"沙灘搶旗大師","desc":"在沙灘搶旗中獲得10勝"},
-    {"id":48,"type":"text-bronze","name":"攀岩大師","desc":"在攀岩中抵達目的地10次"},
-    {"id":49,"type":"text-gold","name":"隨時隨地置身天堂！","desc":"播放寫真天堂的內容"},
-    {"id":50,"type":"text-gold","name":"重溫那份回憶……","desc":"播放事件天堂的內容"}
+  "name": "DEAD OR ALIVE Xtreme 3 Fortune",
+  "trophy": [
+    {
+      "id": 1,
+      "type": "text-platinum",
+      "name": "DOAX3大師",
+      "desc": "獲得所有獎盃"
+    },
+    {
+      "id": 2,
+      "type": "text-bronze",
+      "name": "霞的回憶",
+      "desc": "選擇「霞」遊玩假期模式至最後一天"
+    },
+    {
+      "id": 3,
+      "type": "text-bronze",
+      "name": "霞的收藏",
+      "desc": "選擇「霞」獲得20種泳裝"
+    },
+    {
+      "id": 4,
+      "type": "text-silver",
+      "name": "霞的頂級假期",
+      "desc": "選擇「霞」觀看結局寫真"
+    },
+    {
+      "id": 5,
+      "type": "text-bronze",
+      "name": "紅葉的回憶",
+      "desc": "選擇「紅葉」遊玩假期模式至最後一天"
+    },
+    {
+      "id": 6,
+      "type": "text-bronze",
+      "name": "紅葉的收藏",
+      "desc": "選擇「紅葉」獲得20種泳裝"
+    },
+    {
+      "id": 7,
+      "type": "text-silver",
+      "name": "紅葉的頂級假期",
+      "desc": "選擇「紅葉」觀看結局寫真"
+    },
+    {
+      "id": 8,
+      "type": "text-bronze",
+      "name": "瞳的回憶",
+      "desc": "選擇「瞳」遊玩假期模式至最後一天"
+    },
+    {
+      "id": 9,
+      "type": "text-bronze",
+      "name": "瞳的收藏",
+      "desc": "選擇「瞳」獲得20種泳裝"
+    },
+    {
+      "id": 10,
+      "type": "text-silver",
+      "name": "瞳的頂級假期",
+      "desc": "選擇「瞳」觀看結局寫真"
+    },
+    {
+      "id": 11,
+      "type": "text-bronze",
+      "name": "海蓮娜的回憶",
+      "desc": "選擇「海蓮娜」遊玩假期模式至最後一天"
+    },
+    {
+      "id": 12,
+      "type": "text-bronze",
+      "name": "海蓮娜的收藏",
+      "desc": "選擇「海蓮娜」獲得20種泳裝"
+    },
+    {
+      "id": 13,
+      "type": "text-silver",
+      "name": "海蓮娜的頂級假期",
+      "desc": "選擇「海蓮娜」觀看結局寫真"
+    },
+    {
+      "id": 14,
+      "type": "text-bronze",
+      "name": "瑪莉的回憶",
+      "desc": "選擇「瑪莉蘿絲」遊玩假期模式至最後一天"
+    },
+    {
+      "id": 15,
+      "type": "text-bronze",
+      "name": "瑪莉的收藏",
+      "desc": "選擇「瑪莉蘿絲」獲得20種泳裝"
+    },
+    {
+      "id": 16,
+      "type": "text-silver",
+      "name": "瑪莉的頂級假期",
+      "desc": "選擇「瑪莉蘿絲」觀看結局寫真"
+    },
+    {
+      "id": 18,
+      "type": "text-bronze",
+      "name": "穗香的收藏",
+      "desc": "選擇「穗香」獲得20種泳裝"
+    },
+    {
+      "id": 19,
+      "type": "text-silver",
+      "name": "穗香的頂級假期",
+      "desc": "選擇「穗香」觀看結局寫真"
+    },
+    {
+      "id": 20,
+      "type": "text-bronze",
+      "name": "女天狗的回憶",
+      "desc": "選擇「女天狗」遊玩假期模式至最後一天"
+    },
+    {
+      "id": 21,
+      "type": "text-bronze",
+      "name": "女天狗的收藏",
+      "desc": "選擇「女天狗」獲得20種泳裝"
+    },
+    {
+      "id": 22,
+      "type": "text-silver",
+      "name": "女天狗的頂級假期",
+      "desc": "選擇「女天狗」觀看結局寫真"
+    },
+    {
+      "id": 23,
+      "type": "text-bronze",
+      "name": "心的回憶",
+      "desc": "選擇「心」遊玩假期模式至最後一天"
+    },
+    {
+      "id": 24,
+      "type": "text-bronze",
+      "name": "心的收藏",
+      "desc": "選擇「心」獲得20種泳裝"
+    },
+    {
+      "id": 25,
+      "type": "text-silver",
+      "name": "心的頂級假期",
+      "desc": "選擇「心」觀看結局寫真"
+    },
+    {
+      "id": 26,
+      "type": "text-bronze",
+      "name": "綾音的回憶",
+      "desc": "選擇「綾音」遊玩假期模式至最後一天"
+    },
+    {
+      "id": 27,
+      "type": "text-bronze",
+      "name": "綾音的收藏",
+      "desc": "選擇「綾音」獲得20種泳裝"
+    },
+    {
+      "id": 28,
+      "type": "text-silver",
+      "name": "綾音的頂級假期",
+      "desc": "選擇「綾音」觀看結局寫真"
+    },
+    {
+      "id": 30,
+      "type": "text-silver",
+      "name": "你真猛啊！",
+      "desc": "以S級評價以上完成假期模式"
+    },
+    {
+      "id": 31,
+      "type": "text-bronze",
+      "name": "一起玩吧",
+      "desc": "成功邀請女孩組成搭檔10次"
+    },
+    {
+      "id": 32,
+      "type": "text-bronze",
+      "name": "請收下",
+      "desc": "操作女孩成功贈送其他女孩禮物10次"
+    },
+    {
+      "id": 33,
+      "type": "text-bronze",
+      "name": "開放的感覺！",
+      "desc": "觀賞10種女孩的寫真"
+    },
+    {
+      "id": 38,
+      "type": "text-bronze",
+      "name": "喜歡嗎？",
+      "desc": "操作島主成功贈送女孩禮物10次"
+    },
+    {
+      "id": 41,
+      "type": "text-bronze",
+      "name": "初學者畢業",
+      "desc": "島主等級達到10"
+    },
+    {
+      "id": 42,
+      "type": "text-silver",
+      "name": "大家的島主",
+      "desc": "島主等級達到30"
+    },
+    {
+      "id": 43,
+      "type": "text-bronze",
+      "name": "泳池跳方塊大師",
+      "desc": "在泳池跳方塊遊戲中獲得10勝"
+    },
+    {
+      "id": 44,
+      "type": "text-bronze",
+      "name": "頂屁屁大師",
+      "desc": "在頂屁屁遊戲中獲得10勝"
+    },
+    {
+      "id": 45,
+      "type": "text-bronze",
+      "name": "拔河大師",
+      "desc": "在拔河中獲得10勝"
+    },
+    {
+      "id": 46,
+      "type": "text-bronze",
+      "name": "沙灘排球大師",
+      "desc": "在沙灘排球中獲得10勝"
+    },
+    {
+      "id": 47,
+      "type": "text-bronze",
+      "name": "沙灘搶旗大師",
+      "desc": "在沙灘搶旗中獲得10勝"
+    },
+    {
+      "id": 48,
+      "type": "text-bronze",
+      "name": "攀岩大師",
+      "desc": "在攀岩中抵達目的地10次"
+    },
+    {
+      "id": 49,
+      "type": "text-gold",
+      "name": "隨時隨地置身天堂！",
+      "desc": "播放寫真天堂的內容"
+    },
+    {
+      "id": 50,
+      "type": "text-gold",
+      "name": "重溫那份回憶……",
+      "desc": "播放事件天堂的內容"
+    }
   ]
 }

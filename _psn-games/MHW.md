@@ -1,7 +1,7 @@
 ---
 layout: trophy
 title: " Monster Hunter World"
-image: http://wx1.sinaimg.cn/thumb150/bfae17b6ly1fgjip3ptakj21hc0u01gt
+image: http://tva2.sinaimg.cn/thumb150/bfae17b6ly1fgjip3ptakj21hc0u01gt
 alt: " Monster Hunter World"
 ---
 

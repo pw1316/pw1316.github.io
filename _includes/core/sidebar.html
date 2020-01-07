@@ -1,48 +1,51 @@
 <div class="side">
+  <div class="hd3">样式来自:<a target="_blank" href="https://psnine.com">psnine.com</a></div>
+  <div class="hd3">Github:<a target="_blank" href="https://github.com/pw1316">github.com/pw1316</a></div>
+  <div class="hd3">E-Mail:<a>pw1316@outlook.com</a></div>
+  <div class="hd3">CopyRight(C) Joker Yough 2016-2020</div>
+  <div class="hd3">
+    <img src="https://www.easycounter.com/counter.php?pw1316" alt="Web Site Hit Counters">
+    Unique Visitors 2018.11.08
+  </div>
+  <ul class="darklist pd15">
+    <li><a class="btn" href="/2019/03/08/CV.html">CV</a></li>
+    <li><a class="btn" target="_blank" href="https://github.com/pw1316"><i class="fab fa-github fa-3x"></i></a></li>
+  </ul>
 
-<!-- 邮箱 -->
-<div class="hd3">{{site.email}}</div>
-
-<!-- 简历 -->
-<ul class="darklist pd10">
-<li><a class="btn" href="{{ site.baseurl }}2019/03/08/CV.html">CV</a><li>
-<li><a target="_blank" href="https://github.com/pw1316"><i class="fab fa-github fa-3x"></i></a></li>
-</ul>
-
-<!-- 法拉利 -->
-<div class="hd3">{{ site.data.Ferrari.Record.name }}</div>
-<ul class="darklist pd10">
-{% for item in site.data.Ferrari.Record.items %}
-<li>
-<p class="l"><span class="pf_ps3">{{ item.name }}</span>
-  {% if item.position %}
-  {% if item.position == "DNF" %}
-    <br>未完成
-  {% else %}
-    <br>第{{ item.position }}完赛
-  {% endif %}
-  {% endif %}
-  {% if item.count %}
-    <br>第{{ item.count }}个
-  {% endif %}
-</p>
-<div class="ml64">
-  <p><span class="sf_date">{{ item.when | date: "%Y-%m-%dT%H:%M:%S%z" }}</span>天前发生</p>
-  <p>{{ item.where }}大奖赛</p>
-  <a>{{ item.who }}</a>
-</div>
-</li>
-{% endfor %}
-</ul>
+  <!-- 法拉利 -->
+  <div class="hd3">{{ site.data.Ferrari.Record.name }}</div>
+  <ul class="darklist pd10">
+    {% for item in site.data.Ferrari.Record.items %}
+    <li>
+      <p class="l"><span class="pf_ps3">{{ item.name }}</span>
+        {% if item.position %}
+        {% if item.position == "DNF" %}
+        <br>未完成
+        {% else %}
+        <br>第{{ item.position }}完赛
+        {% endif %}
+        {% endif %}
+        {% if item.count %}
+        <br>第{{ item.count }}个
+        {% endif %}
+      </p>
+      <div class="ml64">
+        <p><span class="sf_date">{{ item.when | date: "%Y-%m-%dT%H:%M:%S%z" }}</span>天前发生</p>
+        <p>{{ item.where }}大奖赛</p>
+        <a>{{ item.who }}</a>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
 
 </div>
 
 <script>
-$(function(){
-  $(".sf_date").each(function(){
-    then = new Date($(this).html());
-    diff = (now.getTime() - then.getTime()) / (1000 * 60 * 60 * 24);
-    $(this).html(Math.floor(diff));
+  $(function () {
+    $(".sf_date").each(function () {
+      then = new Date($(this).html());
+      diff = (now.getTime() - then.getTime()) / (1000 * 60 * 60 * 24);
+      $(this).html(Math.floor(diff));
+    });
   });
-});
 </script>

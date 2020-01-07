@@ -1,7 +1,7 @@
 ---
 layout: trophy
 title: "初音未來 Project DIVA Future Tone"
-image: http://wx1.sinaimg.cn/thumb150/bfae17b6ly1ffzoo6ehj3j20sg0sg4qp
+image: http://tva2.sinaimg.cn/thumb150/bfae17b6ly1ffzoo6ehj3j20sg0sg4qp
 alt: "初音未來 Project DIVA Future Tone"
 ---
 

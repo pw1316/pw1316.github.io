@@ -1,7 +1,7 @@
 ---
 layout: trophy
 title: "DJMAX RESPECT"
-image: http://wx1.sinaimg.cn/thumb150/bfae17b6ly1fgve8edseqj21kw0u00uw
+image: http://tva2.sinaimg.cn/thumb150/bfae17b6ly1fgve8edseqj21kw0u00uw
 alt: "DJMAX RESPECT"
 ---
 
