@@ -330,6 +330,66 @@
       "type": "text-bronze",
       "name": "不要舍不得用FEVER！",
       "desc": "發動3次FEVER後闖關了新的TB PATTERN。"
+    },
+    {
+      "id": 84,
+      "type": "text-gold",
+      "name": "CREW CHALLENGE",
+      "desc": "以S評級闖關了所有TECHNIKA 3系列的歌曲。"
+    },
+    {
+      "id": 85,
+      "type": "text-silver",
+      "name": "暴風前夕",
+      "desc": "以MAX COMBO闖關了TECHNIKA 3系列的10個譜面。"
+    },
+    {
+      "id": 86,
+      "type": "text-bronze",
+      "name": "哇！新曲！",
+      "desc": "以S評級闖關了ALiCE。"
+    },
+    {
+      "id": 87,
+      "type": "text-bronze",
+      "name": "惺惺惜惺惺",
+      "desc": "獲得了10種TECHNIKA 3的圖像。"
+    },
+    {
+      "id": 88,
+      "type": "text-bronze",
+      "name": "PLATE惡棍",
+      "desc": "獲得了5種TECHNIKA 3的Plate。"
+    },
+    {
+      "id": 89,
+      "type": "text-bronze",
+      "name": "探訪美食",
+      "desc": "以MAX COMBO闖關了TECHNIKA 3系列歌曲的MAXIMUM難度。"
+    },
+    {
+      "id": 90,
+      "type": "text-bronze",
+      "name": "Absolutely, Do Missions",
+      "desc": "完成了所有POP MIXING任務。"
+    },
+    {
+      "id": 91,
+      "type": "text-gold",
+      "name": "Deemo",
+      "desc": "闖關了DEEMO系列的42個譜面。"
+    },
+    {
+      "id": 92,
+      "type": "text-gold",
+      "name": "戴假面具的女孩",
+      "desc": "獲得了10種DEEMO的Plate。"
+    },
+    {
+      "id": 93,
+      "type": "text-bronze",
+      "name": "少女",
+      "desc": "在DEEMO的歌曲中第一次失敗了。"
     }
   ]
 }

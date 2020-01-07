@@ -25,12 +25,9 @@
         <br>第{{ item.position }}完赛
         {% endif %}
         {% endif %}
-        {% if item.count %}
-        <br>第{{ item.count }}个
-        {% endif %}
       </p>
       <div class="ml64">
-        <p><span class="sf_date">{{ item.when | date: "%Y-%m-%dT%H:%M:%S%z" }}</span>天前发生</p>
+        <p><span class="sf_date">{{ item.when | date: "%Y-%m-%dT%H:%M:%S%z" }}</span>天前</p>
         <p>{{ item.where }}大奖赛</p>
         <a>{{ item.who }}</a>
       </div>
