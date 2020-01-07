@@ -6,19 +6,19 @@ mdate: 2019-07-09 10:47:36 +0800
 ---
 
 - [Pre](#pre)
-  - [邪道](#%E9%82%AA%E9%81%93)
-  - [浮点转整数](#%E6%B5%AE%E7%82%B9%E8%BD%AC%E6%95%B4%E6%95%B0)
+  - [邪道](#%e9%82%aa%e9%81%93)
+  - [浮点转整数](#%e6%b5%ae%e7%82%b9%e8%bd%ac%e6%95%b4%e6%95%b0)
 - [P1 TwoSum](#p1-twosum)
 - [P3 Longest Substring Without Repeating Characters](#p3-longest-substring-without-repeating-characters)
 - [P4 Median of Two Sorted Arrays](#p4-median-of-two-sorted-arrays)
-- [P5 最长回文子串](#p5-%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2)
+- [P5 最长回文子串](#p5-%e6%9c%80%e9%95%bf%e5%9b%9e%e6%96%87%e5%ad%90%e4%b8%b2)
 - [P11 Container With Most Water](#p11-container-with-most-water)
-- [P28 字符串匹配](#p28-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D)
+- [P28 字符串匹配](#p28-%e5%ad%97%e7%ac%a6%e4%b8%b2%e5%8c%b9%e9%85%8d)
 - [P41 First Missing Positive](#p41-first-missing-positive)
 - [P84 Largest Rectangle in Histogram](#p84-largest-rectangle-in-histogram)
 - [P85 Maximal Rectangle](#p85-maximal-rectangle)
 - [P123 Best Time to Buy and Sell Stock III](#p123-best-time-to-buy-and-sell-stock-iii)
-  - [优化](#%E4%BC%98%E5%8C%96)
+  - [优化](#%e4%bc%98%e5%8c%96)
 - [P136 Single Number](#p136-single-number)
 - [P137 Single Number II](#p137-single-number-ii)
 - [P169 Majority Element](#p169-majority-element)
@@ -28,8 +28,8 @@ mdate: 2019-07-09 10:47:36 +0800
 - [P315 Count of Smaller Numbers After Self](#p315-count-of-smaller-numbers-after-self)
 - [P316 Remove Duplicate Letters](#p316-remove-duplicate-letters)
 - [P321 Create Maximum Number](#p321-create-maximum-number)
-- [P494 求目标和](#p494-%E6%B1%82%E7%9B%AE%E6%A0%87%E5%92%8C)
-- [P673 最长上升子序列个数](#p673-%E6%9C%80%E9%95%BF%E4%B8%8A%E5%8D%87%E5%AD%90%E5%BA%8F%E5%88%97%E4%B8%AA%E6%95%B0)
+- [P494 求目标和](#p494-%e6%b1%82%e7%9b%ae%e6%a0%87%e5%92%8c)
+- [P673 最长上升子序列个数](#p673-%e6%9c%80%e9%95%bf%e4%b8%8a%e5%8d%87%e5%ad%90%e5%ba%8f%e5%88%97%e4%b8%aa%e6%95%b0)
 
 ## Pre
 
@@ -510,36 +510,36 @@ def BITAdd(i, v):
 
 该情况下，我们有两种选择方案，仅从单一数组取（下图左，由于选$$a$$还是选$$b$$是一样的，不妨选$$b$$），以及从两个数组取（下图右）。
 
-![p321-01](/../src/leetcode/P321-01.png)
+![p321-01](/public/src/leetcode/P321-01.png)
 
 为了区分这两种情况，引入一个分割点$$sp$$（下图左）。同时为了进一步确认应该选择哪种情况，需要记录两个数组的起始位置$$ii$$和$$jj$$，然后处理下一组数据（下图右）。有了上述描述，就可以具体表示两个分支：
 
 1. 起始$$b_{jj}$$，中止$$b_{j}$$
 2. 起始$$b_{jj}$$，中止$$b_{sp}$$；接上起始$$a_{ii}$$，中止$$a_{j-1-sp+ii}$$
 
-![p321-02](/src/leetcode/P321-02.png)
+![p321-02](/public/src/leetcode/P321-02.png)
 
 根据两个分支的中止值$$b_{j}$$以及$$a_{j-1-sp+ii}$$的大小关系可以分成三种情况：
 
 情况5-1：$$b_{j}\lt a_{j-1-sp+ii}$$
 
-![p321-03](/src/leetcode/P321-03.png)
+![p321-03](/public/src/leetcode/P321-03.png)
 
 如上图所示，最优解是$$2，2$$，所以任意取走一个，问题退化为情况1（或2）。
 
 情况5-2：$$b_{j}\gt a_{j-1-sp+ii}$$
 
-![p321-04](/src/leetcode/P321-04.png)
+![p321-04](/public/src/leetcode/P321-04.png)
 
 如上图所示，最优解是$$2，3$$，但无法确认是取数组$$a$$还是数组$$b$$，问题退化为情况3或4或5
 
 情况5-3：$$b_{j}=a_{j-1-sp+ii}$$
 
-![p321-05](/src/leetcode/P321-05.png)
+![p321-05](/public/src/leetcode/P321-05.png)
 
 例子：
 
-![p321-06](/src/leetcode/P321-06.png)
+![p321-06](/public/src/leetcode/P321-06.png)
 
 ## P494 求目标和
 
