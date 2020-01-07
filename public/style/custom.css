@@ -44,7 +44,7 @@ div.to_top div.stick {
 
 .header .mylogo {
     display:block;
-    background:url('/src/32.png') no-repeat center;
+    background:url("/public/src/32.png") no-repeat center;
     background-size: 50px, 50px;
     width:60px;
     height:58px;

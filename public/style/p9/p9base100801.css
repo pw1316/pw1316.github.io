@@ -7,7 +7,8 @@ body	{font-size:14px; background-color:#E5E9EF; font-family:"Helvetica Neue", "L
 }
 body.bg		{background:radial-gradient(at center,#F2F3F9,#89A7BF); background-size:cover; background-attachment:fixed; height:100%; background-position:left center;}
 img			{border:none; vertical-align:middle;}
-code		{background:#1D2031; color:#FFF; padding:8px; display:block;}
+code		{background:#EEF0F4; color:#58544B} /* Modified */
+pre code	{display:block;} /* Modified */
 a			{text-decoration:none; color:#3498db;}
 a:hover		{text-decoration:underline;}
 em			{font-size:12px; font-style:normal; color:#B8C4CE;}
