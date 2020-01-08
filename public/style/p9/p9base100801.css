@@ -9,6 +9,7 @@ body.bg		{background:radial-gradient(at center,#F2F3F9,#89A7BF); background-size
 img			{border:none; vertical-align:middle;}
 code		{background:#EEF0F4; color:#58544B} /* Modified */
 pre code	{display:block;} /* Modified */
+blockquote code	{background: none;} /* Modified */
 a			{text-decoration:none; color:#3498db;}
 a:hover		{text-decoration:underline;}
 em			{font-size:12px; font-style:normal; color:#B8C4CE;}
