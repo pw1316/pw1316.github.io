@@ -32,14 +32,31 @@ mdate: 2020-01-08 16:15:10 +0800
     - [5.2.1. VkPipelineVertexInputStateCreateInfo](#521-vkpipelinevertexinputstatecreateinfo)
     - [5.2.2. VkPipelineInputAssemblyStateCreateInfo](#522-vkpipelineinputassemblystatecreateinfo)
     - [5.2.3. VkPipelineTessellationStateCreateInfo](#523-vkpipelinetessellationstatecreateinfo)
-    - [5.2.3. VkPipelineViewportStateCreateInfo](#523-vkpipelineviewportstatecreateinfo)
-    - [5.2.4. VkPipelineRasterizationStateCreateInfo](#524-vkpipelinerasterizationstatecreateinfo)
-    - [5.2.5. VkPipelineMultisampleStateCreateInfo](#525-vkpipelinemultisamplestatecreateinfo)
-    - [5.2.6. VkPipelineDepthStencilStateCreateInfo](#526-vkpipelinedepthstencilstatecreateinfo)
-    - [5.2.7. VkPipelineColorBlendStateCreateInfo](#527-vkpipelinecolorblendstatecreateinfo)
-    - [5.2.8. VkPipelineDynamicStateCreateInfo](#528-vkpipelinedynamicstatecreateinfo)
+    - [5.2.4. VkPipelineViewportStateCreateInfo](#524-vkpipelineviewportstatecreateinfo)
+    - [5.2.5. VkPipelineRasterizationStateCreateInfo](#525-vkpipelinerasterizationstatecreateinfo)
+    - [5.2.6. VkPipelineMultisampleStateCreateInfo](#526-vkpipelinemultisamplestatecreateinfo)
+    - [5.2.7. VkPipelineDepthStencilStateCreateInfo](#527-vkpipelinedepthstencilstatecreateinfo)
+    - [5.2.8. VkPipelineColorBlendStateCreateInfo](#528-vkpipelinecolorblendstatecreateinfo)
+    - [5.2.9. VkPipelineDynamicStateCreateInfo](#529-vkpipelinedynamicstatecreateinfo)
   - [5.3. 流水线布局](#53-%e6%b5%81%e6%b0%b4%e7%ba%bf%e5%b8%83%e5%b1%80)
+    - [5.3.1. 描述集布局](#531-%e6%8f%8f%e8%bf%b0%e9%9b%86%e5%b8%83%e5%b1%80)
+    - [5.3.2. Push Constant Range](#532-push-constant-range)
   - [5.4. 渲染流程](#54-%e6%b8%b2%e6%9f%93%e6%b5%81%e7%a8%8b)
+    - [5.4.1. VkAttachmentDescription](#541-vkattachmentdescription)
+    - [5.4.2. VkSubpassDescription](#542-vksubpassdescription)
+    - [5.4.3. VkSubpassDependency](#543-vksubpassdependency)
+  - [5.5. 管线](#55-%e7%ae%a1%e7%ba%bf)
+- [6. 缓存](#6-%e7%bc%93%e5%ad%98)
+  - [6.1. VkSemaphore](#61-vksemaphore)
+  - [6.2. VkFence](#62-vkfence)
+  - [6.3. VkFramebuffer](#63-vkframebuffer)
+  - [6.4. VkCommandBuffer](#64-vkcommandbuffer)
+  - [6.5. VkBuffer &amp; VkDeviceMemory](#65-vkbuffer-amp-vkdevicememory)
+  - [6.6. VkDescriptorPool &amp; VkDescriptorSet](#66-vkdescriptorpool-amp-vkdescriptorset)
+    - [6.6.1. VkDescriptorSet](#661-vkdescriptorset)
+    - [6.6.2. VkDescriptorPool](#662-vkdescriptorpool)
+- [7. 渲染循环](#7-%e6%b8%b2%e6%9f%93%e5%be%aa%e7%8e%af)
+  - [7.1. 获取图像](#71-%e8%8e%b7%e5%8f%96%e5%9b%be%e5%83%8f)
 
 ## 1. 实例
 
@@ -177,9 +194,9 @@ mdate: 2020-01-08 16:15:10 +0800
 
 句柄`VkImageView`，对应结构体`VkImageViewCreateInfo`。`VkImage`中的内容不能直接访问，需要通过相应的`VkImageView`才能进行读写。
 
-`VkImageView`有自己的像素格式，需要与对应`VkImage`的格式兼容。类似DX11中`ID3D11ShaderResourceView`的格式需要与对应的`ID3D11Texture2D`格式兼容。
+`VkImageView`有自己的**像素格式**{:.text-error}，需要与对应`VkImage`的格式兼容。类似DX11中`ID3D11ShaderResourceView`的格式需要与对应的`ID3D11Texture2D`格式兼容。
 
-`VkImageView`可进行通道映射，其每个通道都可以指定`VkImage`的任意一个通道。
+`VkImageView`可进行**通道映射**{:.text-error}，其每个通道都可以指定`VkImage`的任意一个通道。
 
 `VkImageView`可只访问`VkImage`的一部分。包括部分连续的MipMap，部分连续层。
 
@@ -207,7 +224,7 @@ Vulkan使用`SPIR-V`字节码作为SL。可以由HLSL、GLSL等直接编译而�
 
 #### 5.1.2. VkPipelineShaderStageCreateInfo
 
-结构体`VkPipelineShaderStageCreateInfo`列表，描述`VkPipeline`中每个着色器阶段的`VkShaderModule`绑定信息，。
+结构体`VkPipelineShaderStageCreateInfo`列表，描述`VkPipeline`中每个着色器阶段的`VkShaderModule`绑定信息。
 
 ### 5.2. 固定状态
 
@@ -221,7 +238,7 @@ Vulkan使用`SPIR-V`字节码作为SL。可以由HLSL、GLSL等直接编译而�
 
 流水线通过绑定槽（Bind）读取顶点数据，每个Bind用一个`VkVertexInputBindingDescription`描述，包括槽位号、每个顶点所占的空间以及该槽是逐顶点数据还是逐实例数据。
 
-着色器通过`layout(location=xxx)`访问顶点数据，每个layout用一个`VkVertexInputAttributeDescription`描述，包括着色器内的位置、顶点所处的Bind、访问格式以及数据所在顶点结构体的偏移值。
+着色器通过`layout(location=xxx)`访问顶点数据，每个layout用一个`VkVertexInputAttributeDescription`描述，包括着色器内的位置location、顶点所处的Bind、访问格式以及数据所在顶点结构体的偏移值。
 
 #### 5.2.2. VkPipelineInputAssemblyStateCreateInfo
 
@@ -231,7 +248,7 @@ Vulkan使用`SPIR-V`字节码作为SL。可以由HLSL、GLSL等直接编译而�
 
 TODO
 
-#### 5.2.3. VkPipelineViewportStateCreateInfo
+#### 5.2.4. VkPipelineViewportStateCreateInfo
 
 结构体`VkPipelineViewportStateCreateInfo`，描述视口以及剪刀。
 
@@ -241,7 +258,7 @@ TODO
 
 视口描述如何从NDC映射到Frame Buffer，而剪刀描述了Frame Buffer的可见区域。
 
-#### 5.2.4. VkPipelineRasterizationStateCreateInfo
+#### 5.2.5. VkPipelineRasterizationStateCreateInfo
 
 结构体`VkPipelineRasterizationStateCreateInfo`，描述光栅化的配置：
 
@@ -252,22 +269,201 @@ TODO
 | cullMode | 剔除方案 |
 | frontFace | 正面规则 |
 
-#### 5.2.5. VkPipelineMultisampleStateCreateInfo
+#### 5.2.6. VkPipelineMultisampleStateCreateInfo
 
 TODO
 
-#### 5.2.6. VkPipelineDepthStencilStateCreateInfo
+#### 5.2.7. VkPipelineDepthStencilStateCreateInfo
 
 TODO
 
-#### 5.2.7. VkPipelineColorBlendStateCreateInfo
+#### 5.2.8. VkPipelineColorBlendStateCreateInfo
 
 TODO
 
-#### 5.2.8. VkPipelineDynamicStateCreateInfo
+#### 5.2.9. VkPipelineDynamicStateCreateInfo
 
 TODO
 
 ### 5.3. 流水线布局
 
+句柄`VkPipelineLayout`，对应结构体`VkPipelineLayoutCreateInfo`，描述着色器资源（Shader Resource）的布局
+
+结构体内要提供**描述集布局（Descriptor Set Layout）列表**{:.text-error}以及**Push Constant Range列表**{:.text-error}。每个描述集布局代表了一种着色器资源组织形式。
+
+#### 5.3.1. 描述集布局
+
+句柄`VkDescriptorSetLayout`，对应结构体`VkDescriptorSetLayoutCreateInfo`。
+
+着色器通过`layout(binding=XXX)`访问着色器资源，每个layout用一个`VkDescriptorSetLayoutBinding`描述，包括着色器内的位置binding、资源类型以及能被那几个着色器阶段访问。此外，如果资源是一个列表，还需要提供列表长度。
+
+#### 5.3.2. Push Constant Range
+
+TODO
+
 ### 5.4. 渲染流程
+
+句柄`VkRenderPass`，对应结构体`VkRenderPassCreateInfo`。包括：
+
+{:.tbl style="background-color:#EEC"}
+| 图像附件描述列表 | std::vector&lt;VkAttachmentDescription&gt; |
+| 子流程描述列表 | std::vector&lt;VkSubpassDescription&gt; |
+| 子流程依赖列表 | std::vector&lt;VkSubpassDependency&gt; |
+
+#### 5.4.1. VkAttachmentDescription
+
+结构体`VkAttachmentDescription`，描述渲染流程中用到的图像属性：
+
+{:.tbl style="background-color:#EEC"}
+| format | 图像每个像素的格式 |
+| samples | 采样数量 |
+| loadOp/storeOp | 读写时的操作 |
+| stencilLoadOp/stencilStoreOp | 模板读写时的操作 |
+| initialLayout/finalLayout | 图像进入/完成流程时的布局 |
+
+#### 5.4.2. VkSubpassDescription
+
+结构体`VkSubpassDescription`，描述渲染流程中的每一个子流程所使用的图像：
+
+{:.tbl style="background-color:#EEC"}
+| InputAttachment[] | 用于着色器读入 |
+| ColorAttachment[] | 用于着色器输出 |
+| ResolveAttachment | 用于多采样 |
+| DepthStencilAttachment | 用于深度/模板 |
+| PreserveAttachment[] | 子流程不会修改这些图像里的数据 |
+
+#### 5.4.3. VkSubpassDependency
+
+结构体`VkSubpassDependency`，描述子流程之间的依赖关系（资源内存依赖），后一子流程中指定阶段的指定访问需要等待前一子流程中指定阶段的指定访问全部完成：
+
+{:.tbl style="background-color:#EEC"}
+| srcSubpass/dstSubpass | 前后相关的子流程 |
+| srcStageMask/srcAccessMask | 需要等待的资源所在的流水线阶段以及访问操作类型 |
+| dstStageMask/dstAccessMask | 需要被等待的资源所在的流水线阶段以及访问操作类型 |
+
+### 5.5. 管线
+
+```mermaid
+graph TD
+A[InputAssembler]-->B(VertexShader)
+B-->C(Tesselator)
+C-->D(GeometryShader)
+D-->E[Rasterizer]
+E-->F(PixelShader)
+F-->G[OutputMerger]
+style A fill:#F596AA;
+style B fill:#66BAB7;
+style C fill:#66BAB7;
+style D fill:#66BAB7;
+style E fill:#F596AA;
+style F fill:#66BAB7;
+style G fill:#F596AA;
+```
+
+{:.tbl style="background-color:#EEC"}
+|管线阶段|对应VkPipeline部分|
+|-|-|
+| InputAssembler | 5.2.1.解析顶点 |
+| XXXShader | 5.1.着色器，5.2.1.顶点绑定，5.3.着色器资源绑定 |
+| Rasterizer | 5.2.2.图元解析，5.2.4.视口绑定，5.2.5.光栅化 |
+| OutputMerger | 5.2.7.深度，5.2.8.混合，5.4.FrameBuffer绑定 |
+
+## 6. 缓存
+
+### 6.1. VkSemaphore
+
+句柄`VkSemaphore`，对应结构体`VkSemaphoreCreateInfo`。实现GPU-GPU同步（先获得图像句柄才能渲染，渲染完才能显示）。
+
+### 6.2. VkFence
+
+句柄`VkFence`，对应结构体`VkFenceCreateInfo`。实现CPU-GPU同步（当GPU忙碌时，禁止CPU提交指令，防止指令无限提交导致内存泄漏）。
+
+> `VkFence`创建时需要默认设置为触发状态，否则CPU会无限等待。
+
+### 6.3. VkFramebuffer
+
+句柄`VkFramebuffer`，对应结构体`VkFramebufferCreateInfo`。关联渲染流程中定义的**图像附件描述列表**{:.text-error}以及交换链中的**VkImageView**{:.text-error}。
+
+传入的**VkImageView**{:.text-error}为一个列表，其顺序与**图像附件描述列表**{:.text-error}一一对应，因此流水线可以正确访问所有图像数据。
+
+### 6.4. VkCommandBuffer
+
+句柄`VkCommandBuffer`，对应结构体`VkCommandBufferAllocateInfo`。表示需要提交到队列的指令序列。
+
+结构体内需要提供**指令池**{:.text-error}。任何指令缓存都需要通过指令池来分配空间。
+
+Vulkan指令为形如`vkCmdXXX()`的接口，使用时在以下两个接口之间任意调用Vulkan指令，完成指令记录：
+
+{:.tbl style="background-color:#EEC"}
+| vkBeginCommandBuffer() |
+| vkEndCommandBuffer() |
+
+提交到队列后会按照记录的顺序逐一执行指令，由于指令是预先录制的，因此尽管只修改一条指令也需要重新录制。
+
+### 6.5. VkBuffer & VkDeviceMemory
+
+句柄`VkBuffer`，对应结构体`VkBufferCreateInfo`。可以表示任意的Vulkan缓存。
+
+结构体内要提供**缓存实际字节数**{:.text-error}、**缓存用途**{:.text-error}以及**在不同队列族之间的共享模式**{:.text-error}。
+
+{:.tbl style="background-color:#EEC"}
+| 缓存实际字节数 | 数据所占的实际大小 |
+| 缓存用途 | VK_BUFFER_USAGE_XXX，用于传输、或顶点、或索引、或着色器资源 |
+| 共享模式 | 能否被属于不同队列族的指令共享 |
+
+句柄`VkDeviceMemory`，对应结构体`VkMemoryAllocateInfo`。描述缓存在GPU上的显存，因为缓存本身不带任何存储空间，因此需要与`VkDeviceMemory`绑定。
+
+结构体要提供**存储分配字节数**{:.text-error}以及**存储类型索引**{:.text-error}。
+
+{:.tbl style="background-color:#EEC"}
+| 存储分配字节数 | 在GPU上，考虑对齐问题后为缓存分配的空间大小 |
+| 存储类型索引 | 物理设备提供了可用的存储类型，通过索引指定要使用的类型 |
+
+接口`vkGetPhysicalDeviceMemoryProperties`可以获得物理设备支持的存储类型。由于存储类型是一个固定的列表，因此**存储类型索引**{:.text-error}代表的是存储类型在该列表中的索引。
+
+接口`vkGetBufferMemoryRequirements()`可以获得缓存支持的存储类型以及**存储分配字节数**{:.text-error}。存储类型以位掩码的形式给出，`(1 << i) & type_bit == 1`等价于缓存支持`type[i]`对应的存储类型。
+
+除了存储类型需要缓存支持外，还需要存储属性支持缓存的访问形式。每种存储类型都有对应的属性，以位掩码的形式给出，每种属性对应了一个`VK_MEMORY_PROPERTY_XXX`枚举。
+
+> 例：\\
+> 如果是GPU专有存储需要`VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT`属性\\
+> 如果需要能够被CPU访问则需要`VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT`属性与`VK_MEMORY_PROPERTY_HOST_COHERENT_BIT`属性。
+
+接口`vkBindBufferMemory()`可以将缓存与存储绑定。
+
+### 6.6. VkDescriptorPool & VkDescriptorSet
+
+#### 6.6.1. VkDescriptorSet
+
+句柄`VkDescriptorSet`，对应结构体`VkDescriptorSetAllocateInfo`。用于关联流水线布局中定义的**描述集布局**{:.text-error}以及对应的**VkBuffer**{:.text-error}。
+
+每个`VkDescriptorSet`对应了一个`VkDescriptorSetLayout`，表示着色器会通过后者的布局来解析前者提供的数据。
+
+而为了向`VkDescriptorSet`提供数据，需要通过结构体`VkWriteDescriptorSet`与接口`vkUpdateDescriptorSets()`来将`VkBuffer`内的数据打包：
+
+{:.tbl style="background-color:#EEC"}
+| dstSet | 目标VkDescriptorSet |
+| dstBinding | 缓存对应的着色器位置 |
+| dstArrayElement/descriptorCount | 如果缓存是个列表，则指定首元素以及元素数量 |
+| descriptorType | 缓存类型（与VkBuffer中的缓存用途对应） |
+| pXXXInfo | 数据种类Image/Buffer/TexelBuffer |
+
+#### 6.6.2. VkDescriptorPool
+
+句柄`VkDescriptorPool`，对应结构体`VkDescriptorPoolCreateInfo`。用于分配`VkDescriptorSet`。
+
+结构体需要提供如下内容：
+
+{:.tbl style="background-color:#EEC"}
+| 最多分配的VkDescriptorSet数量 | uint32_t |
+| 每种Descriptor的可分配数量 | std::vector&lt;VkDescriptorPoolSize&gt; |
+
+前者规定了`VkDescriptorSet`（对应`VkDescriptorSetLayout`）的数量上限；后者规定了每一种Descriptor（对应`VkDescriptorSetLayout`中binding）的数量上限。
+
+`VkDescriptorSet`不能直接创建，必须通过对应的池来进行分配。
+
+## 7. 渲染循环
+
+### 7.1. 获取图像
+
+尽管`VkFramebuffer`将
