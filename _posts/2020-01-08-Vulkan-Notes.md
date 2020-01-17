@@ -6,15 +6,15 @@ mdate: 2020-01-08 16:15:10 +0800
 ---
 
 - [1. 实例](#1-%e5%ae%9e%e4%be%8b)
-  - [1.1. 实例层 &amp; 实例扩展](#11-%e5%ae%9e%e4%be%8b%e5%b1%82-amp-%e5%ae%9e%e4%be%8b%e6%89%a9%e5%b1%95)
+  - [1.1. 实例层 & 实例扩展](#11-%e5%ae%9e%e4%be%8b%e5%b1%82--%e5%ae%9e%e4%be%8b%e6%89%a9%e5%b1%95)
   - [1.2. VkInstance](#12-vkinstance)
   - [1.3. VkDebugUtilsMessengerEXT](#13-vkdebugutilsmessengerext)
 - [2. 窗口](#2-%e7%aa%97%e5%8f%a3)
 - [3. 设备](#3-%e8%ae%be%e5%a4%87)
   - [3.1. 物理设备](#31-%e7%89%a9%e7%90%86%e8%ae%be%e5%a4%87)
     - [3.1.1. VkPhysicalDevice](#311-vkphysicaldevice)
-    - [3.1.2. 设备属性 &amp; 设备特性](#312-%e8%ae%be%e5%a4%87%e5%b1%9e%e6%80%a7-amp-%e8%ae%be%e5%a4%87%e7%89%b9%e6%80%a7)
-    - [3.1.3. 设备层 &amp; 设备扩展](#313-%e8%ae%be%e5%a4%87%e5%b1%82-amp-%e8%ae%be%e5%a4%87%e6%89%a9%e5%b1%95)
+    - [3.1.2. 设备属性 & 设备特性](#312-%e8%ae%be%e5%a4%87%e5%b1%9e%e6%80%a7--%e8%ae%be%e5%a4%87%e7%89%b9%e6%80%a7)
+    - [3.1.3. 设备层 & 设备扩展](#313-%e8%ae%be%e5%a4%87%e5%b1%82--%e8%ae%be%e5%a4%87%e6%89%a9%e5%b1%95)
     - [3.1.4. 与窗口的兼容性](#314-%e4%b8%8e%e7%aa%97%e5%8f%a3%e7%9a%84%e5%85%bc%e5%ae%b9%e6%80%a7)
     - [3.1.5. 队列族](#315-%e9%98%9f%e5%88%97%e6%97%8f)
   - [3.2. 逻辑设备](#32-%e9%80%bb%e8%be%91%e8%ae%be%e5%a4%87)
@@ -51,12 +51,16 @@ mdate: 2020-01-08 16:15:10 +0800
   - [6.2. VkFence](#62-vkfence)
   - [6.3. VkFramebuffer](#63-vkframebuffer)
   - [6.4. VkCommandBuffer](#64-vkcommandbuffer)
-  - [6.5. VkBuffer &amp; VkDeviceMemory](#65-vkbuffer-amp-vkdevicememory)
-  - [6.6. VkDescriptorPool &amp; VkDescriptorSet](#66-vkdescriptorpool-amp-vkdescriptorset)
+  - [6.5. VkBuffer & VkDeviceMemory](#65-vkbuffer--vkdevicememory)
+  - [6.6. VkDescriptorPool & VkDescriptorSet](#66-vkdescriptorpool--vkdescriptorset)
     - [6.6.1. VkDescriptorSet](#661-vkdescriptorset)
     - [6.6.2. VkDescriptorPool](#662-vkdescriptorpool)
 - [7. 渲染循环](#7-%e6%b8%b2%e6%9f%93%e5%be%aa%e7%8e%af)
-  - [7.1. 获取图像](#71-%e8%8e%b7%e5%8f%96%e5%9b%be%e5%83%8f)
+  - [7.1. 宿主-设备同步](#71-%e5%ae%bf%e4%b8%bb-%e8%ae%be%e5%a4%87%e5%90%8c%e6%ad%a5)
+  - [7.2. 获取图像](#72-%e8%8e%b7%e5%8f%96%e5%9b%be%e5%83%8f)
+  - [7.3. 提交指令](#73-%e6%8f%90%e4%ba%a4%e6%8c%87%e4%bb%a4)
+  - [7.4. 显示](#74-%e6%98%be%e7%a4%ba)
+  - [7.5. 设备-设备同步](#75-%e8%ae%be%e5%a4%87-%e8%ae%be%e5%a4%87%e5%90%8c%e6%ad%a5)
 
 ## 1. 实例
 
@@ -464,6 +468,22 @@ Vulkan指令为形如`vkCmdXXX()`的接口，使用时在以下两个接口之�
 
 ## 7. 渲染循环
 
-### 7.1. 获取图像
+### 7.1. 宿主-设备同步
 
-尽管`VkFramebuffer`将
+通过`VkFence`来实现，接口`vkWaitForFences()`可以让当前线程等待，直到相应的`VkFence`被触发。当`VkCommandBuffer`中的指令执行完成时，会触发`VkFence`。因此，CPU线程会与GPU上的渲染流程同步，防止CPU提交过量指令来不及处理导致内存泄漏。
+
+### 7.2. 获取图像
+
+`VkSwapchainKHR`中的图像除了被流水线使用之外，还要被用于显示。因此为了正确地让流水线往图像上渲染，需要使用空闲的图像。接口`vkAcquireNextImageKHR()`可以取到下一张空闲图像的索引。
+
+### 7.3. 提交指令
+
+接口`vkQueueSubmit()`，对应结构体`VkSubmitInfo`。用于将`VkCommandBuffer`提交到对应的图形队列，供GPU执行。
+
+### 7.4. 显示
+
+接口`vkQueuePresentKHR()`，对应结构体`VkPresentInfoKHR`。用于将渲染完成的图像提交到窗口上显示。
+
+### 7.5. 设备-设备同步
+
+**获取图像**{:.text-error}、**提交指令**{:.text-error}以及**显示**{:.text-error}必须按照顺序执行，为此，用`VkSemaphore`来进行同步。
