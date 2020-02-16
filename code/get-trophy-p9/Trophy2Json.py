@@ -1,5 +1,7 @@
 # coding=utf-8
+"""Save to json."""
 import re
+
 import trophy_utils
 
 
@@ -57,7 +59,7 @@ def table_filter(table):
 
         trophy_desc = re.search(br'<em class="text-gray">(.*?)</em>', trophy_tr, re.S).group(1).replace(b"\"", b"'")
 
-        table_res += b'{"id":%d,"type":"%s","name":"%s","desc":"%s"},'\
+        table_res += b'{"id":%d,"type":"%s","name":"%s","desc":"%s","done":0},'\
                      % (trophy_id, trophy_type, trophy_name, trophy_desc)
 
     return table_res
