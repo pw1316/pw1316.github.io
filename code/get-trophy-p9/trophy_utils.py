@@ -1,6 +1,7 @@
-#! usr/bin/python
 # coding=utf-8
 """
+Main Structure.
+
 # <table cellpadding="12" cellspacing="0" border="0" width="100%" class="list">
 #   <tr><td colspan="4">
 #     <img src="???" width="100" height="55" class="imgbgnb l">

@@ -1,7 +1,6 @@
-#! usr/bin/python
 # coding=utf-8
 import re
-import TrophyUtils
+import trophy_utils
 
 
 def decorate_output_file(output_file_name, title, table_res):
@@ -65,4 +64,4 @@ def table_filter(table):
 
 
 if __name__ == "__main__":
-    TrophyUtils.parse(table_filter, decorate_output_file)
+    trophy_utils.parse(table_filter, decorate_output_file)
