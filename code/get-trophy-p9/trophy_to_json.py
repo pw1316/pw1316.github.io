@@ -63,7 +63,7 @@ def table_filter(doc_table):
             doc_tr, re.S
         ).group(1).replace(b"\"", b"'")
 
-        res += b'{"id":%d,"type":"%s","name":"%s","desc":"%s","done":0},'\
+        res += b'{"id":%d,"type":"%s","name":"%s","desc":"%s","done":1},'\
             % (trophy_id, trophy_type, trophy_name, trophy_desc)
         match = re.search(br'<tr id="(.*?)">(.*?)</tr>', doc_table)
     return res
