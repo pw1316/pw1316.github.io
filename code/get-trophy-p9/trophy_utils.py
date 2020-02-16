@@ -1,39 +1,5 @@
 # coding=utf-8
-"""
-Main Structure.
-
-# <table cellpadding="12" cellspacing="0" border="0" width="100%" class="list">
-#   <tr><td colspan="4">
-#     <img src="???" width="100" height="55" class="imgbgnb l">
-#     <div class="ml110">
-#     <p>???</p>
-#     <em>
-#     <span class="text-platinum">???</span>
-#     <span class="text-gold">???</span>
-#     <span class="text-silver">???</span>
-#     <span class="text-bronze">???</span>
-#     <span class="text-strong">???</span>
-#     </em>
-#     </div>
-#   </td></tr>
-#   <tr id="ID">
-#   <td class="t???" width="54" valign="top" align="center">
-#     <a href="???"><img src="???" width="54" height="54" class="imgbg" /></a>
-#   </td>
-#   <td>
-#   <p>
-#   <em class="h-p r">#???</em>
-#   <a href="???" class="text-platinum">TROPHY NAME</a>
-#   <em>TROPHY TRANSLATION</em>
-#   <em class="alert-success pd5"><b>TIP NUM</b> Tips</em>
-#   </p>
-#   <em class="text-gray">TROPHY DESCRIPTION</em>
-#   <div class="text-strong mt10">TROPHY DESCRIPTION TRANSLATION</div>
-#   </td>
-#   <td width="12%" class="twoge t? h-p">???<em>珍贵度</em></td>
-#   </tr>
-# </table>
-"""
+"""Utils for both to html and to json."""
 import argparse
 import re
 import urllib.request
@@ -42,7 +8,8 @@ import urllib.error
 from logger import LOGGER as logger
 
 
-def _dump_doc(doc):
+def dump_doc(doc):
+    """Dump doc to a file and exit."""
     assert isinstance(doc, bytes)
     with open("dump.html", "wb") as ifs:
         ifs.write(doc)
@@ -144,7 +111,6 @@ def parse(table_filter, output_writer):
                 br"<tr.*?>.*?<p>(.*?)</p>.*?</tr>", table
             ).group(1)
             name = re.sub(br"[/\\:*?\"<>|]", br"", name)
-            name = re.sub(br"[ ]", br"_", name)
         table = table_filter(table)
         table_res = table_res + table
         match_res = re.search(br"<table.*?>.*?</table>", doc)
