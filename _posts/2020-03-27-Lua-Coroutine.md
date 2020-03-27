@@ -1,10 +1,17 @@
-## thread 类型
+---
+layout: page
+title: Lua-Coroutine
+date: 2020-03-27 20:25:45 +0800
+mdate: 2020-03-27 20:25:45 +0800
+---
+
+## 0. thread 类型
 
 存在四种状态：
 
 S(uspended)，R(unning)，D(ead)，N(ormal)
 
-## coroutine.create(f)
+## 1. coroutine.create(f)
 
 创建一个coroutine
 
@@ -16,7 +23,7 @@ S(uspended)，R(unning)，D(ead)，N(ormal)
 
 返回一个`thread`类型的值
 
-## coroutine.status(co)
+## 2. coroutine.status(co)
 
 获取coroutine的状态
 
@@ -28,7 +35,7 @@ S(uspended)，R(unning)，D(ead)，N(ormal)
 
 返回一个字符串表示该coroutine当前的状态
 
-## coroutine.resume(co, ...)
+## 3. coroutine.resume(co, ...)
 
 唤醒一个coroutine，目标进入R状态，自己进入N状态
 
@@ -44,7 +51,7 @@ S(uspended)，R(unning)，D(ead)，N(ormal)
 
 后面的所有值为目标coroutine挂起时传入`yield`的参数，或者为目标coroutine结束时的返回值
 
-## coroutine.yield(...)
+## 4. coroutine.yield(...)
 
 使当前coroutine挂起，自己进入S状态
 
