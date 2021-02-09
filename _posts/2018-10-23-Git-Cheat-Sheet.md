@@ -2,7 +2,7 @@
 layout: page
 title: Git Cheat Sheet
 date: 2018-10-23 11:35:53 +0800
-mdate: 2019-10-12 15:32:40 +0800
+mdate: 2020-04-30 10:20:32 +0800
 ---
 
 - [CREATE](#create)
@@ -358,4 +358,21 @@ $ git pull --rebase
 $ git for-each-ref --format='delete %(refname)' refs/original | git update-ref --stdin
 $ git reflog expire --expire=now --all
 $ git gc --prune=now
+```
+
+### SUBMODULE
+
+Add
+
+```
+git submodule add <repo-url> <path-relative-to-workspace>
+```
+
+Remove
+
+```
+<update .gitmodules>
+<update .git/config>
+git rm --cached <path-relative-to-workspace>
+rm -rf .git/modules/<path-relative-to-workspace>
 ```

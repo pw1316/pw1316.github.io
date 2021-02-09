@@ -1,7 +1,6 @@
 exclude:
 - code/*
 - docs/*
-- paper/*
 
 collections:
     psn-games:
