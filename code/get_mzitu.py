@@ -59,12 +59,12 @@ def get_max_index_and_next(doc):
     page_navi = pattern_pagenavi.search(doc).group(0)
 
     num_next = pattern_pagenum.search(page_navi).group(1)[1:-1]
-    # If there is next, begin with "http", "/" otherwise
-    if num_next[:4] == b'http':
-        num_next = re.sub(HOST_NAME.encode(), b'', num_next)
-        num_next = int(num_next)
-    else:
+    num_next = re.sub(HOST_NAME.encode(), b'', num_next)
+    # If there is next, page num is number, "hot/" otherwise
+    if num_next == b"hot/":
         num_next = None
+    else:
+        num_next = int(num_next)
     page_navi = pattern_pagenum.sub(b'', page_navi, 1)
 
     # Find max index
