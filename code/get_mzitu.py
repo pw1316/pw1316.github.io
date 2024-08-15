@@ -2,6 +2,7 @@
 Target Host: http://www.mzitu.com/ .
 
 Updates:
+2021-02-10 Referer set to HOST_NAME, image pattern updated
 2018-11-23 Protocol http->https, and some sites are gzipped
 2018-10-23 Add http referer
 
@@ -58,12 +59,12 @@ def get_max_index_and_next(doc):
     page_navi = pattern_pagenavi.search(doc).group(0)
 
     num_next = pattern_pagenum.search(page_navi).group(1)[1:-1]
-    # If there is next, begin with "http", "/" otherwise
-    if num_next[:4] == b'http':
-        num_next = re.sub(HOST_NAME.encode(), b'', num_next)
-        num_next = int(num_next)
-    else:
+    num_next = re.sub(HOST_NAME.encode(), b'', num_next)
+    # If there is next, page num is number, "hot/" otherwise
+    if num_next == b"hot/":
         num_next = None
+    else:
+        num_next = int(num_next)
     page_navi = pattern_pagenum.sub(b'', page_navi, 1)
 
     # Find max index
@@ -122,7 +123,7 @@ def http_get_image(url_in):
     try:
         req = urllib.request.Request(url_in)
         req.add_header('User-Agent', USER_AGENT)
-        req.add_header('Referer', url_in)  # Need referer
+        req.add_header('Referer', HOST_NAME)  # Need referer
         req = urllib.request.urlopen(req)
         image = req.read()
         req.close()
@@ -150,7 +151,7 @@ def get_image_gen(start, out_dir):
     idx_max = None
 
     # Regex
-    img_pattern = re.compile(br'<img src="(.*?)".*?/>', re.S)  # Image URL
+    img_pattern = re.compile(br'<img class="blur" src="(.*?)".*?/>', re.S)  # Image URL
 
     while num_current is not None:
         if idx_current != 1:
