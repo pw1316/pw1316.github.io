@@ -117,6 +117,7 @@ h1			{font-size:20px; padding:0 0 12px;}
 .videocover span	{display:block; width:40px; height:34px; background:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAhCAMAAACcLxmXAAAAnFBMVEVRUVFPT09ISEhSUlJRUVFDQ0OkpKRHcEz///9RUVFLS0tFRUVCQkJRUVGrq6tRUVFRUVFRUVGAgIDT09Pq6upQUFBRUVFRUVFRUVFRUVFRUVF0dHRRUVGOjo5RUVFRUVFeXl719fVRUVFRUVG5ublPT0+bm5vh4eFpaWlVVVVQUFDHx8fGxsb8/PxBQUFRUVHk5ORRUVFRUVFwcHCG9IN1AAAANHRSTlPm5ubmyubmAObA5ubms+Z6x9jm5uYh42yc0jTmguaUy+bmpgXmAubm5uYJ5ubm5i3m2z3mPEi8rgAAAP9JREFUOMuNlNlWwzAMRGWbMCKOs29NEyikBVp2+P9/4zVN40Z6snzukXWkGRMAVIm784brKwAgAE1a05Wo0+YAEA4trcbTCEJDgkhA1UYCZh3dn10o7+OUTjITautBa3qYZOG2GLT11LyZnKOYudhGoVkDg1tm5v3uU4lAfnxWVgQyv+RWi0Dm99d5qx6QP+JjoCQgczlobSQgc/EXykAutRKBZS6rGB+tpMe32YA84OXIF8GlJS6B+12kBLv2CG2ux3LQelG4U4Xr/Ds2gccM555RVhmPFYQudPSVSXz980tIJGAPwujWOXcCAWOy8qts+hNAANC1VxrN2g4A/gH65RLJMduzNwAAAABJRU5ErkJggg==') no-repeat; position:absolute; top:50%; left:50%; margin:-17px 0px 0px -20px;}
 .content	{line-height:180%; overflow:hidden;}
 .content img	{max-width:100%;}
+.content li {list-style: square;}
 .post	{padding:12px; border-bottom:1px solid #EEE; word-break:break-all;}
 .psngame	{width:100px; padding:10px;}
 .photo 		{width:70px; height:70px; margin:0 10px 10px 0; float:left; background-position:center; background-color:#000; cursor:pointer;}
