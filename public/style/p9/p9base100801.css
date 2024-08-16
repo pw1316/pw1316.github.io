@@ -118,6 +118,7 @@ h1			{font-size:20px; padding:0 0 12px;}
 .content	{line-height:180%; overflow:hidden;}
 .content img	{max-width:100%;}
 .content li {list-style: square;}
+.content strong {font-weight:bold;}
 .post	{padding:12px; border-bottom:1px solid #EEE; word-break:break-all;}
 .psngame	{width:100px; padding:10px;}
 .photo 		{width:70px; height:70px; margin:0 10px 10px 0; float:left; background-position:center; background-color:#000; cursor:pointer;}
