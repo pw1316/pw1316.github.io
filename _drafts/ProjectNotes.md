@@ -1,0 +1,13 @@
+- 用Job来读二进制文件的时候，第一次如果是异步的会崩溃，目前问题未知，但是第一次同步就好了
+- GameObjectConversionSystem需要注意是全局生效的
+- JIT下Table数组直读，防止触发ReHash导致C#的地址失效，创建Table的时候需要预留数组部分的大小
+- 建造区域里的快速Overlap检查，原本是for全部；做了个trick，单独创建PxScene，然后创建boxCollider，用Px来物理查询。
+  - PhysX 对于有一条轴为 0 的 Box 的相交检查有点误差，如果物件的有一条边长度是 0
+  - 那么检测的时候把 Box 稍微放大一点，相对的检测可能不准，需要再用传统手段筛一下
+- AsyncGPUReadback不支持GLES，注意自己实现的时候Crop是否正确
+- 安卓11往后(targetSdkLevel>=30)，64位系统的地址高位会打标记，导致这个地址不能被Lua直接使用，allowNativeHeapPointerTagging=false可以取消这个标记，也可以只保留低48位再给Lua用
+- 物件选中的时候 z-fighting active 的物件有一个额外的 offset = 0.01
+- C# 保证各个子系统的创建和销毁顺序严格反向，防止后续上层开发的时候出现依赖
+- 尽量使用静态委托：delegate = (obj, xxx) => ((T)obj.func(xxx))
+- 地形编辑依赖Streaming，需要预留相关生命周期回调
+- 定制的require，loadfile之后先setfenv创建一个独立环境，再执行loadfile返回的module；注意和原本require混用的情况，尽量在原生require结束前不要使用定制require，防止有些全局函数不存在
