@@ -11,3 +11,7 @@
 - 尽量使用静态委托：delegate = (obj, xxx) => ((T)obj.func(xxx))
 - 地形编辑依赖Streaming，需要预留相关生命周期回调
 - 定制的require，loadfile之后先setfenv创建一个独立环境，再执行loadfile返回的module；注意和原本require混用的情况，尽量在原生require结束前不要使用定制require，防止有些全局函数不存在
+- 图片一定要支持内存上传
+- 功能相似的代码尽量不要复制，复制了要多检查
+- 公共生命周期函数里少抛异常，没把握的pcall，不然流程打断会有资源泄露
+- 
