@@ -247,8 +247,30 @@ XML格式
     - <TargetName>/
       - Log/
       - AppRes/ 基础包信息在这里
+        - Build.info 这个是 ProtoBuf 序列化的 ResManifestVO，打 Patch 的时候需要读
+        - StreamingAssets/
+          - Build.info 这个是 MicroFile 序列化的 ResManifestVO，带进包里
+          - version.bin 记录 gamerVersion
       - Patch/ Patch信息在这里，打Patch的时候需要用AppRes里的信息来比对
+        - versionPatch/version.json 这里是所有 Patch 的版本信息
+        - respatch/
+          - Build.info 这个是 ProtoBuf 序列化的 ResManifestVO，打 MinorPatch 的时候需要读
+          - <patchVersion>p<minorVersion>/
+            - Patch.info 这个是 FileFile 序列化的 ResManifestVO，带进包里（普通Patch部分）NotPatched
+            - SoPatch.info 这个是 MicroFile 序列化的 ResManifestVO，带进包里（普通SoPatch部分）Unknown
+            - XDeltaPatch.info 这里只记录有修改的文件(只包括内容变动)
+            - CloudList.info 云游戏记录的是 dlc0 分包对应的 patch 合包索引
+            - mergefiles/ 存放合并后的文件
+              - patch_<i>.data
+        - minpatch/
+          - Build.info 这个是 ProtoBuf 序列化的 ResManifestVO
+          - <patchVersion>p<minorVersion>/
+            - Patch.info
+            - SoPatch.info
+            - mergefiles/ 存放合并后的文件
+              - patch_<i>.data
       - Version.info 版本信息，gameVersion/patchVersion/minorVersion
+      - game.json
   - Assets/ 这里是输出的打包好的资源，必定全量
     - <Platform>/
       - Bundles/
@@ -452,15 +474,31 @@ IOS下 shaderBundle 分包的高配资源也算主包资源
 - streamingRawFiles
 - syncBundles
 - syncRawFiles
-- dlcsDict 只有 app 且 dlcType 固定 None
 
-保存的 ABFileInfo 和 RawFileInfo 里的 dlcTypes 固定为 EnumDlcType.High | EnumDlcType.Low 比较特殊
+### Manifest
 
-ProtoBuf序列化的路径 `Build/Output/<TargetName>/AppRes/Build.info` 给打包用的
+DLCVO:
 
-MicroInfo序列化的路径 `Build/Output/<TargetName>/AppRes/StreamingAssets/Build.info` 带进包里的
+- app: EnumDlcType.None,EnumDlcPatchStatus.Patched
+- other: 没意义
 
-gameversion单独保存到路径 `Build/Output/<TargetName>/AppRes/StreamingAssets/version.bin`
+FileInfo:
+
+- app: EnumDlcType.ALL,ResAssetClassify.StreamingAssets
+- other: 没意义
+
+```
+IOS 高配 Shader 也进基准包
+```
+
+本地留一份完整的 Manifest (FileInfo的记录是dict)，进包的是自定义Writer/Reader的，FileInfo会被拍成数组
+
+### File
+
+全量的 app
+
+- VFS Package: app only
+- Bundles/Rawfiles
 
 ## 构建 Patch
 
@@ -474,4 +512,62 @@ Extra 分包下的资源，放进 patchBundles/patchRawFiles
 - streamingBundles/streamingRawFiles
 - syncBundles/syncRawFiles
 - patchBundles/patchRawFiles
-- dlcsDict app 的 status 是 NotPatched，其余是 Idle。app和binaryPatch的dlcType是None，其余High/Low各一份
+
+文件合并，分成以下三类：binaryPatch分包；dlc0分包；其它。顺序是 dlc0 > 其它 > binaryPatch
+
+### Manifest
+
+DLCVO:
+
+- app: EnumDlcType.None,EnumDlcPatchStatus.NotPatched
+- binaryPatch: EnumDlcType.None,EnumDlcPatchStatus.Idle
+- other: EnumDlcType.High/Low,EnumDlcPatchStatus.Idle
+
+FileInfo:
+
+- app: EnumDlcType.ALL,ResAssetClassify.Patch
+- other: EnumDlcType.Any,ResAssetClassify.Patch
+
+```
+binaryPatch 分离
+SoPatch.info 里只包括 binaryPatch 分包的 RawFiles
+Patch.info 里只包括剩下的
+```
+
+### File
+
+全量的 app + dlc
+
+## MinorPatch
+
+是和主 Patch 相比的，不是和上一个 Patch 相比的
+
+和 Patch 基本一致，但是实际合并后的文件只包含和主 Patch 相比有改动的部分
+
+ResManifestVO 这里的结构
+
+### Manifest
+
+DLCVO:
+
+- app: EnumDlcType.None,EnumDlcPatchStatus.NotPatched
+- binaryPatch: EnumDlcType.None,EnumDlcPatchStatus.Idle
+- other: EnumDlcType.High/Low,EnumDlcPatchStatus.Idle
+
+FileInfo:
+
+- app: EnumDlcType.ALL,ResAssetClassify.Patch
+- other: EnumDlcType.Any,ResAssetClassify.Patch
+
+### File
+
+和 Patch 比对
+
+- 新增
+- 新增High/Low
+- 归属DLC变动
+- 文件本身变动
+
+删除不管
+
+是相对于 Patch 的增量文件(如果有merge信息，Manifest里，没变动的，是Patch的merge信息，变动的是MinorPatch的merge信息)
